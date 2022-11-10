@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
 import Image from 'next/image';
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import axios from 'axios';
