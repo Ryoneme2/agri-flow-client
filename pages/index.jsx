@@ -8,15 +8,9 @@ export default function Home() {
   };
   return (
     <>
-      <div className='p-5'>
-        <InputBox
-          value={value}
-          onChange={handle}
-          // color='secondary'
-          css={`w-full max-w-[10rem] h-[2.4rem]`}
-        />
+      <div className='flex justify-center items-center w-[100vw] h-[100vh]'>
+        <div className='loading'></div>
       </div>
-      <h1 className='text-xl text-red-500'>Hello world</h1>
     </>
   );
 }
