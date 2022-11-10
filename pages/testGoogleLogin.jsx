@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import Image from 'next/image';
 
 const TestGoogleLogin = () => {
   // Provide a custom `fetch` implementation as an option
@@ -40,7 +41,7 @@ const TestGoogleLogin = () => {
       <br />
       {profile ? (
         <div>
-          <img src={profile.imageUrl} alt='user image' />
+          <Image src={profile.imageUrl} alt='user image' />
           <h3>User Logged in</h3>
           <p>Name: {profile.name}</p>
           <p>Email Address: {profile.email}</p>
