@@ -14,7 +14,7 @@ const LoginButton = ({ color = 'primary', context, css = '', icon }) => {
   return (
     <button
       className={clsx(
-        `flex transition ease-in-out ${css} rounded-full px-5 py-[0.8rem] my-2 border shadow w-9/12`,
+        `flex items-center transition ease-in-out ${css} rounded-full px-5 py-[0.8rem] my-2 border shadow w-[18rem]`,
         {
           'text-[#1C658C] opacity-[74%] bg-white hover:bg-gray-100 ':
             color === 'primary',
@@ -24,8 +24,8 @@ const LoginButton = ({ color = 'primary', context, css = '', icon }) => {
       {icon && (
         <Image
           src={icon}
-          width={20}
-          height={20}
+          width={25}
+          height={25}
           alt={'login-icon'}
           className={'mr-3'}
         />
