@@ -10,18 +10,26 @@ import Image from 'next/image';
  * @param css - string
  * @param icon - string
  */
-const LoginButton = ({ color = 'primary', context, css="py-2 px-4 border rounded-full shadow", icon }) => {
+const LoginButton = ({ color = 'primary', context, css = '', icon }) => {
   return (
     <button
       className={clsx(
-        `flex transition ease-in-out ${css} rounded-full px-5 py-[0.4rem] my-2 lg:w-6/12 md:w-9/12`,
+        `flex transition ease-in-out ${css} rounded-full px-5 py-[0.8rem] my-2 border shadow w-9/12`,
         {
-          'text-gray-500 bg-white hover:bg-gray-100 font-semibold': color === 'primary',
-        },
-        
+          'text-[#1C658C] opacity-[74%] bg-white hover:bg-gray-100 ':
+            color === 'primary',
+        }
       )}
     >
-      {icon && <Image src={icon} width={20} height={20} alt={'login-icon'} className={'mr-2'} />}
+      {icon && (
+        <Image
+          src={icon}
+          width={20}
+          height={20}
+          alt={'login-icon'}
+          className={'mr-3'}
+        />
+      )}
       {context}
     </button>
   );
