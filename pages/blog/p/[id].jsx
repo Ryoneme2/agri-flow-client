@@ -5,9 +5,9 @@ import { useRouter } from 'next/router';
 
 const BlogOne = () => {
   const [data, setData] = useState('<p>wow</p>');
-
   const router = useRouter();
   const { id } = router.query;
+  console.log(id);
 
   useEffect(() => {
     const fetchData = async () => {
