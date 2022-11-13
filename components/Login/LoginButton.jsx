@@ -10,9 +10,16 @@ import Image from 'next/image';
  * @param css - string
  * @param icon - string
  */
-const LoginButton = ({ color = 'primary', context, css = '', icon }) => {
+const LoginButton = ({
+  onClick,
+  color = 'primary',
+  context,
+  css = '',
+  icon,
+}) => {
   return (
     <button
+      onClick={onClick}
       className={clsx(
         `flex items-center transition ease-in-out ${css} rounded-full sm:text-[1rem] text-[0.75rem] px-5 py-[0.8rem] sm:my-2 my-1 border shadow sm:w-[18rem] w-full `,
         {
