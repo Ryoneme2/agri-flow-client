@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import LoginButton from '../components/Login/LoginButton';
-import BoxLogin from '../components/Layouts/BoxLogin';
+import LoginButton from '../../components/Login/LoginButton';
+import BoxLogin from '../../components/Layouts/BoxLogin';
 
 const Login_SSO = () => {
   // Provide a custom `fetch` implementation as an option
@@ -50,7 +50,7 @@ const Login_SSO = () => {
     return (
       <BoxLogin>
         <div className="flex-1 flex-col flex justify-center items-center">
-          <h1 className="font-senibold text-[1.7rem] text-[#1C658C] my-3">
+          <h1 className="font-semibold sm:text-[1.7rem] text-[#1C658C] my-3">
             ลงชื่อเข้าใช้
           </h1>
 
