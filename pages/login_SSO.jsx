@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import LoginButton from '../components/LoginButton';
+import LoginButton from '../components/Login/LoginButton';
 import BoxLogin from '../components/Layouts/BoxLogin';
 
 const Login_SSO = () => {
@@ -68,7 +68,7 @@ const Login_SSO = () => {
             icon={'/icon/icons8-facebook.svg'}
           />
 
-          <div className="inline-flex justify-center items-center w-9/12">
+          <div className="inline-flex justify-center items-center sm:w-[18rem] w-full">
             <hr className="my-4 w-5/12 h-[1px] bg-[#A1C0D0] border-0" />
             <p className="w-2/12 text-center text-[#A1C0D0] ">or</p>
             <hr className="my-4 w-5/12 h-[1px] bg-[#A1C0D0] border-0" />

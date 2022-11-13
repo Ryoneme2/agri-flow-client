@@ -14,7 +14,7 @@ const LoginButton = ({ color = 'primary', context, css = '', icon }) => {
   return (
     <button
       className={clsx(
-        `flex items-center transition ease-in-out ${css} rounded-full px-5 py-[0.8rem] my-2 border shadow w-[18rem]`,
+        `flex items-center transition ease-in-out ${css} rounded-full px-5 py-[0.8rem] sm:my-2 my-1 border shadow sm:w-[18rem] w-full `,
         {
           'text-[#1C658C] opacity-[74%] bg-white hover:bg-gray-100 ':
             color === 'primary',
