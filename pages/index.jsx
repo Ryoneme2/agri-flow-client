@@ -1,9 +1,10 @@
 import React,{ useState } from 'react';
 import InputBox from '../components/InputBox';
-import NavbarNonlogin from '../components/Navbar/NavbarNonlogin';
-import Navbar from '../components/Navbar/Navbarlogin';
 import Router from 'next/router';
-import Dropdown from '../components/Navbar/Dropdown'
+import dynamic from 'next/dynamic';
+const Navbar = dynamic(() => import('../components/Navbar/Navbarlogin'), { ssr: false })
+const NavbarNonlogin = dynamic(() => import('../components/Navbar/NavbarNonlogin'), { ssr: false })
+const CommunityBlock = dynamic(() => import('../components/community/Community_block'),{ ssr: false })
 export default function Home() {
 
   const [value, setValue] = useState('');
@@ -13,10 +14,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <NavbarNonlogin />
-      <InputBox />
-      <Dropdown/>
-      <></>
+      <CommunityBlock/>
       <div className='flex justify-center items-center w-[100vw] h-[100vh]'>
         <div className='loading'></div>
       </div>
