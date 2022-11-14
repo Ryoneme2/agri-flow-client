@@ -1,10 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link.js';
+import Button from '../Button.jsx';
 
 import Dropdown from './Dropdown.jsx';
 const Navbarlogin = () => {
-    const [open,setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
     const [menu, setMenu] = React.useState([{
         title: 'หน้าหลัก',
@@ -32,10 +33,9 @@ const Navbarlogin = () => {
 
     return (
         <>
-            <div className='border-b w-screen h-[80px] flex justify-between content-center items-center text-[16px]'>
-
+            <div className='border-b w-full h-[80px] flex justify-between content-center items-center text-[16px]'>
                 <div className='md:invisible md:w-[0] w-[20rem] '>
-                    <div className='w-full  py-2 px-4'>
+                    <div className='w-full'>
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1C658C" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <line x1="4" y1="8" x2="20" y2="8" />
@@ -51,11 +51,11 @@ const Navbarlogin = () => {
                 </div>
 
                 <div className=' w-0 md:w-[40%]  h-full  invisible md:visible'>
-                    <div className='md:w-[70%] flex h-full justify-evenly'>
+                    <div className='md:w-[70%] flex h-full justify-evenly items-center'>
                         {
                             menu.map((item, index) => (
                                 <div key={index}>
-                                    <div className='h-[100%] border-b-[3px] border-white hover:border-[#1C658C] text-[#1C658C] flex items-center cursor-pointer'>
+                                    <div className='h-auto overflow-y-hidden'>
                                         <Link href={item.link}>
                                             {item.title}
                                         </Link>
@@ -64,9 +64,7 @@ const Navbarlogin = () => {
                             ))
                         }
                     </div>
-
                 </div>
-
                 <div className='flex h-full w-[20rem] md:w-[60%] '>
 
                     <div className='flex w-[100%] justify-end'>
@@ -74,17 +72,25 @@ const Navbarlogin = () => {
                         {/* search bar */}
                         <div className=' w-[40%] flex justify-end content-center items-center invisible md:visible'>
                             <input placeholder='ค้นหา' type="text" name="search" className='border rounded-[20px] p-2 text-[1rem] w-[100%]' />
-                            <button className='absolute mr-2' type='submit'>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1C658C" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            
+                            <div className='absolute bg-white mr-2 rounded-full border-none' type='submit'>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#BABABA" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <circle cx="10" cy="10" r="7" />
                                     <line x1="21" y1="21" x2="15" y2="15" />
-                                </svg></button>
+                                </svg>
+                            </div>
+                            
                         </div>
 
                         {/* Build blog */}
                         <div className=' w-[0] md:w-[20%] invisible md:visible flex justify-center content-center items-center'>
-                            <button className='border-[3px] rounded-[20px] p-2 text-[0.8rem] border-[#1C658C] w-[6.875rem] h-[2.5rem]  font-bold text-[#1C658C]'>สร้างบล็อค</button>
+                            <Link href={'/blog/newBlog'}>
+                                <button className='bg-white border-2 h-[2.5rem] w-[6.875rem] border-[#1C658C] text-[#1C658C] text-[1rem] font-bold rounded-[20px]'>
+                                    สร้างบล็อค
+                                </button>
+                            </Link>
+
                         </div>
 
                         {/* Noti */}
