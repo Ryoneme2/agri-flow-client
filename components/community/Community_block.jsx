@@ -5,7 +5,7 @@ const CommunityBlock = ({Communityimg,CommunityMember,CommunityName,CommunityDet
 
     return (
         <>
-            <div className='border w-[12.55rem] h-[14.688rem] rounded-t-[0.438rem]'>
+            <div className=' w-[12.55rem] h-auto rounded-t-[0.438rem]'>
                 <div className='rounded-t-[0.438rem] w-full h-full bg-center bg-no-repeat bg-cover relative bg-gradient-to-t from-black to-[#4E4E4E]'>
 
                     <img src={Communityimg}
