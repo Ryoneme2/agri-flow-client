@@ -4,6 +4,12 @@ import Button from '../components/Button';
 import NavbarNonlogin from '../components/Navbar/NavbarNonlogin';
 import Navbar from '../components/Navbar/Navbarlogin';
 
+import Router from 'next/router';
+import dynamic from 'next/dynamic';
+const Navbar = dynamic(() => import('../components/Navbar/Navbarlogin'), { ssr: false })
+const NavbarNonlogin = dynamic(() => import('../components/Navbar/NavbarNonlogin'), { ssr: false })
+const Blog = dynamic(() => import('../components/Blog/Blog'),{ ssr: false })
+const Tag = dynamic(() => import('../components/Tag'),{ ssr: false })
 export default function Home() {
 
   const [value, setValue] = useState('');
@@ -13,8 +19,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <NavbarNonlogin />
-      <InputBox />
+      <Blog/>
       <div className='flex justify-center items-center w-[100vw] h-[100vh]'>
         <div className='loading'></div>
         <Button color='danger' context={ 'hello, world!' }/>

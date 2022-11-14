@@ -5,6 +5,7 @@
 *,
 body {
   font-family: 'Pridi', serif;
+  overflow-x: hidden;
 }
 
 *,
