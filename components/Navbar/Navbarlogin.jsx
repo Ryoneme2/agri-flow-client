@@ -86,7 +86,7 @@ const Navbarlogin = () => {
                         {/* Build blog */}
                         <div className=' w-[0] md:w-[20%] invisible md:visible flex justify-center content-center items-center'>
                             <Link href={'/blog/newBlog'}>
-                                <button className='bg-white border-2 h-[2.5rem] w-[6.875rem] border-[#1C658C] text-[#1C658C] text-[1rem] font-bold rounded-[20px]'>
+                                <button className='bg-white border-2 h-[2.5rem] w-auto border-[#1C658C] text-[#1C658C] text-[1rem] font-bold rounded-[20px] truncate'>
                                     สร้างบล็อค
                                 </button>
                             </Link>

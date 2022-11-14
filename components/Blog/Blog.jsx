@@ -174,11 +174,14 @@ const Blog = () => {
 
                 <div className='w-full h-full ml-2'>
                     {/* Header */}
-                    <div className='w-full flex justify-between items-center my-2'>
+                    <div className='w-full flex flex-col  justify-between items-center my-2'>
                         <div>
                             <p className='text-[1.75rem] m-0 p-0 truncate'>จิ๊กโก๋สัมนาเบบี้ปัจฉิมนิเทศ</p>
                         </div>
-                        <Tag linkto={''} tagName={'รักน้ำรักปลา'}/>
+                        <div>
+                            <Tag linkto={''} tagName={'รักน้ำรักปลา'}/>
+                        </div>
+                        
                     </div>
                     {/* detail */}
                     <div className='w-full'>
