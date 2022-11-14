@@ -8,7 +8,7 @@ import BoxLogin from '../../components/Layouts/BoxLogin';
 const Login_email = () => {
   // Provide a custom `fetch` implementation as an option
   const [person, setPerson] = useState({});
-  const [color, setColor] = useState({ email: 'primary', password: 'primary' });
+  const [color, setColor] = useState({ email: '', password: '' });
 
   const {
     register,
