@@ -1,8 +1,6 @@
 import React,{ useState } from 'react';
 import InputBox from '../components/InputBox';
 import Button from '../components/Button';
-import NavbarNonlogin from '../components/Navbar/NavbarNonlogin';
-import Navbar from '../components/Navbar/Navbarlogin';
 
 import Router from 'next/router';
 import dynamic from 'next/dynamic';
