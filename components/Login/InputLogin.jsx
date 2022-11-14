@@ -31,11 +31,12 @@ const InputLogin = ({
         type={type}
         placeholder={placeholder}
         className={clsx(
-          `flex items-center transition ease-in-out ${css} rounded-full sm:text-[1rem] text-[0.75rem] px-5 py-[0.8rem] sm:my-2 my-1 border shadow sm:w-[18rem] w-full`,
+          `flex items-center transition ease-in-out ${css} rounded-full text-[0.75rem] sm:text-[1rem] px-5 py-[0.8rem] sm:my-2 my-1 border shadow w-full sm:w-[18rem] `,
           {
             'text-[#1C658C] opacity-[74%] bg-white hover:bg-gray-100':
               color === 'primary',
-            'text-white bg-[#1C658C] hover:bg-[#164b68] ': color === 'submit',
+            'text-white bg-[#1C658C] border-transparent hover:bg-[#164b68] ':
+              color === 'submit',
             'text-[#1C658C] opacity-[74%] bg-white border-red-500 hover:bg-gray-100':
               color === 'warn',
           }
