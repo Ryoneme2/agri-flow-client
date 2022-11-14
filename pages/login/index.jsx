@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
@@ -10,39 +11,37 @@ const Login_SSO = () => {
   // Provide a custom `fetch` implementation as an option
   const [person, setPerson] = useState({});
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const token = localStorage.getItem('google_access_token');
-        if (!token) return;
-        const res = await axios.get(
-          `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${token}`
-        );
-        setPerson(res.data);
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    getData();
-  }, []);
-
   const handlerLogout = async () => {
-    await googleLogout();
+    googleLogout();
     console.log('logged out');
   };
 
-  const login = useGoogleLogin({
-    onSuccess: async (credentialResponse) => {
+  const handleGoogleOnSuccess = async (credentialResponse) => {
+    try {
       console.log(credentialResponse);
       const res = await axios.get(
-        `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${credentialResponse.credential}`
+        `https://www.googleapis.com/oauth2/v2/tokeninfo?access_token=${credentialResponse.access_token}`
       );
-      console.log(res.data);
+
+      const apiResponse = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/loginSSO`,
+        {
+          token: credentialResponse.access_token,
+        }
+      );
+
+      console.log(apiResponse.data.data);
       setPerson(res.data);
-      localStorage.setItem(
-        'google_access_token',
-        credentialResponse.credential
-      );
+      localStorage.setItem('access_token', apiResponse.data.data.token);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const login = useGoogleLogin({
+    onSuccess: handleGoogleOnSuccess,
+    onError: (x) => {
+      console.log(x);
     },
   });
 
@@ -59,7 +58,7 @@ const Login_SSO = () => {
             icon={'/icon/87386-line-logo.png'}
           />
           <LoginButton
-            onClick={() => login(credentialResponse)}
+            onClick={() => login()}
             context={'ลงชื่อเข้าใช้ด้วย Google'}
             icon={'/icon/icons8-google.svg'}
           />
