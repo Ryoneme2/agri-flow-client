@@ -5,9 +5,9 @@ import Tag from '../Tag';
 const Blog = () => {
     return (
         <div className='w-[100%] h-[16.25rem] border-b-2 border-[#1C658C] flex mt-2 justify-center'>
-            <div className='w-[98%] h-[15.625rem] flex justify-center items-center'>
+            <div className='w-[98%] h-[15.625rem] flex justify-center items-center pt-3'>
                 {/* Img */}
-                <div className='w-[0] md:w-[14.25rem] h-full '>
+                <div className='w-[0] md:w-auto h-full overflow-hidden'>
                     <div>
                         <Image src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAA
                                     JbSJIAAAAM1BMVEXk5ueutLeqsbTn6eqpr7PJzc/j5ebf4eLZ3N2wtrnBxsjN0NLGysy6v8HT
@@ -36,12 +36,11 @@ const Blog = () => {
                                     w3FfdEbTEEDdLI9TdIKRUzUesa3I461ER8cpNT7gMRhpKmYVS9ELOgCUQsa4SsulciKiLbY+A
                                     nHD8cpuhISsnxpamI84sbDq9qYJgf8wiiOBrC7Ml7M7ZECCqKoiiKoiiKoiiKoijv5AvJxlZR
                                     yNWWLwAAAABJRU5ErkJggg=="
-                            width={180} height={180}
+                            width={160} height={160}
                             className='rounded-[7px]'
                         />
                     </div>
                     <div className='flex w-full overflow-hidden'>
-                        <div>
                             <Image src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAA
                                     JbSJIAAAAM1BMVEXk5ueutLeqsbTn6eqpr7PJzc/j5ebf4eLZ3N2wtrnBxsjN0NLGysy6v8HT
                                     1tissra8wMNxTKO9AAAFDklEQVR4nO2d3XqDIAxAlfivoO//tEOZWzvbVTEpic252W3PF0gAI
@@ -71,9 +70,7 @@ const Blog = () => {
                                     yNWWLwAAAABJRU5ErkJggg=="
                                 width={40} height={40}
                                 className='rounded-[7px] mt-2 mr-2'
-                            />
-                        </div>
-                        <div>
+                            />           
                             <Image src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAA
                                     JbSJIAAAAM1BMVEXk5ueutLeqsbTn6eqpr7PJzc/j5ebf4eLZ3N2wtrnBxsjN0NLGysy6v8HT
                                     1tissra8wMNxTKO9AAAFDklEQVR4nO2d3XqDIAxAlfivoO//tEOZWzvbVTEpic252W3PF0gAI
@@ -103,9 +100,7 @@ const Blog = () => {
                                     yNWWLwAAAABJRU5ErkJggg=="
                                 width={40} height={40}
                                 className='rounded-[7px] mt-2 mr-2'
-                            />
-                        </div>
-                        <div>
+                            />                
                             <Image src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAA
                                     JbSJIAAAAM1BMVEXk5ueutLeqsbTn6eqpr7PJzc/j5ebf4eLZ3N2wtrnBxsjN0NLGysy6v8HT
                                     1tissra8wMNxTKO9AAAFDklEQVR4nO2d3XqDIAxAlfivoO//tEOZWzvbVTEpic252W3PF0gAI
@@ -135,9 +130,7 @@ const Blog = () => {
                                     yNWWLwAAAABJRU5ErkJggg=="
                                 width={40} height={40}
                                 className='rounded-[7px] mt-2 mr-2'
-                            />
-                        </div>
-                        <div>
+                            />         
                             <Image src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAA
                                     JbSJIAAAAM1BMVEXk5ueutLeqsbTn6eqpr7PJzc/j5ebf4eLZ3N2wtrnBxsjN0NLGysy6v8HT
                                     1tissra8wMNxTKO9AAAFDklEQVR4nO2d3XqDIAxAlfivoO//tEOZWzvbVTEpic252W3PF0gAI
@@ -167,18 +160,17 @@ const Blog = () => {
                                     yNWWLwAAAABJRU5ErkJggg=="
                                 width={40} height={40}
                                 className='rounded-[7px] mt-2 mr-2'
-                            />
-                        </div>
+                            />  
                     </div>
                 </div>
 
-                <div className='w-full h-full ml-2'>
+                <div className='w-full h-full ml-2 flex-col item-center'>
                     {/* Header */}
-                    <div className='w-full flex flex-col  justify-between items-center my-2'>
-                        <div>
+                    <div className='w-full flex flex-col sm:flex-row  justify-between items-center my-2'>
+                        <div className='w-full'>
                             <p className='text-[1.75rem] m-0 p-0 truncate'>จิ๊กโก๋สัมนาเบบี้ปัจฉิมนิเทศ</p>
                         </div>
-                        <div>
+                        <div className='w-full sm:w-50 flex justify-start sm:justify-end'>
                             <Tag linkto={''} tagName={'รักน้ำรักปลา'}/>
                         </div>
                         
@@ -198,7 +190,7 @@ const Blog = () => {
                     </div>
                     {/* footer */}
                     <div className='w-full'>
-                        <div className='w-full mt-5 flex justify-between items-center'>
+                        <div className='w-full mt-6 flex justify-between items-center'>
                             <div className='flex items-center'>
                                 <div>
                                     <Image src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAA
