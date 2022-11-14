@@ -77,6 +77,7 @@ const Login_SSO = () => {
           <LoginButton
             context={'ลงชื่อเข้าใช้ด้วย Email'}
             css={'justify-center text-center'}
+            link={'./login/login-email'}
           />
         </div>
       </BoxLogin>

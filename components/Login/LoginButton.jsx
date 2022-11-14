@@ -10,7 +10,13 @@ import Image from 'next/image';
  * @param css - string
  * @param icon - string
  */
-const LoginButton = ({ color = 'primary', context, css = '', icon }) => {
+const LoginButton = ({
+  color = 'primary',
+  context,
+  css = '',
+  icon,
+  link = '#',
+}) => {
   return (
     <button
       className={clsx(
@@ -30,7 +36,7 @@ const LoginButton = ({ color = 'primary', context, css = '', icon }) => {
           className={'mr-3'}
         />
       )}
-      {context}
+      <a href={link}>{context}</a>
     </button>
   );
 };
