@@ -16,6 +16,7 @@ const LoginButton = ({
   context,
   css = '',
   icon,
+  link = '#',
 }) => {
   return (
     <button
@@ -37,7 +38,7 @@ const LoginButton = ({
           className={'mr-3'}
         />
       )}
-      {context}
+      <a href={link}>{context}</a>
     </button>
   );
 };
