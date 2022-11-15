@@ -12,7 +12,7 @@ const Login_email = () => {
   const [user, setUser] = useState({ email: '', password: '' });
   const [color, setColor] = useState({ email: '', password: '' });
 
-  const setup = { email: '=', password: '' };
+  const setup = { email: '', password: '' };
 
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
@@ -52,10 +52,6 @@ const Login_email = () => {
               type={'email'}
               name={'email'}
               register={register('email', {
-                pattern: {
-                  value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/g,
-                  message: 'Pattern error naka',
-                },
                 required: 'email required!',
               })}
               value={user.email}
