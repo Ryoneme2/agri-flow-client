@@ -5,7 +5,7 @@ const CommunityBlock = ({ Communityimg, CommunityMember, CommunityName, Communit
 
     return (
         <>
-            <div className='min-w-[12.55rem] h-auto rounded-t-[0.438rem]'>
+            <div className='min-w-[12.55rem] h-auto rounded-t-[0.438rem] mx-2'>
                 <div className='rounded-t-[0.438rem] w-full h-full bg-center bg-no-repeat bg-cover relative bg-gradient-to-t from-black to-[#4E4E4E]'>
 
                     <img src={Communityimg}
@@ -41,3 +41,10 @@ const CommunityBlock = ({ Communityimg, CommunityMember, CommunityName, Communit
 }
 
 export default CommunityBlock;
+
+{/* <div className='flex justify-between overflow-x-scroll sm:overflow-y-hidden'>
+        <CommunityBlock/>
+        <CommunityBlock/>
+        <CommunityBlock/>
+        <CommunityBlock/>
+      </div> */}
