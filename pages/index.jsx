@@ -17,7 +17,6 @@ const CommunityBlock = dynamic(
   () => import('../components/community/Community_block'),
   { ssr: false }
 );
-
 export default function Home() {
   const [value, setValue] = useState('');
   const handle = (e) => {

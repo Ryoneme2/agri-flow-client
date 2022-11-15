@@ -18,12 +18,12 @@ const NavbarNonlogin= () => {
 
                 <div className=' h-[50%] flex justify-around my-auto'>
                     <div className=' flex my-auto px-5'>
-                        <Link href="/testGoogleLogin">
+                        <Link href="/login">
                             <span className='underline font-bold'>ลงชื่อเข้าใช้งาน</span>
                         </Link>
                     </div>
                     <div className='px-5'>
-                        <Link href="/testGoogleLogin">
+                        <Link href="/login/signup">
                             <Button className="text-[1rem] font-bold" context={'สมัครเข้าใช้งาน'} onClick={''} />
                         </Link>
                     </div>
