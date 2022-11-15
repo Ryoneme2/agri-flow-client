@@ -60,13 +60,13 @@ const BlogOne = () => {
       <div className="container max-w-[40rem] mx-auto my-10">
         <div>
           <h1 className="text-[2.1rem] mb-4 font-bold h-auto overflow-y-hidden">
-            {data?.title}
+            {data?.blogContent?.title}
           </h1>
         </div>
         <TypographyStylesProvider>
           <div
             dangerouslySetInnerHTML={{
-              __html: data?.content,
+              __html: data?.blogContent?.content,
             }}
           />
         </TypographyStylesProvider>
