@@ -8,7 +8,7 @@ const Navbar = dynamic(() => import('../../../components/Navbar/Navbarlogin'), {
 });
 
 const BlogOne = () => {
-  const [data, setData] = useState('<p>wow</p>');
+  const [data, setData] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { id } = router.query;
@@ -30,19 +30,20 @@ const BlogOne = () => {
 
         console.log(res.data.data);
         setData(res.data.data);
+        setLoading(false);
       } catch (e) {
         if (e instanceof AxiosError) {
           console.warn(e.cause);
         }
         console.error(e);
       } finally {
-        setLoading(false);
       }
     };
     fetchData();
   }, [id]);
 
-  if (loading)
+  if (loading || !data) {
+    console.log(data);
     return (
       <>
         <Navbar />
@@ -51,6 +52,7 @@ const BlogOne = () => {
         </div>
       </>
     );
+  }
 
   return (
     <>
@@ -58,13 +60,13 @@ const BlogOne = () => {
       <div className="container max-w-[40rem] mx-auto my-10">
         <div>
           <h1 className="text-[2.1rem] mb-4 font-bold h-auto overflow-y-hidden">
-            {data?.blogContent?.title || ''}
+            {data?.title}
           </h1>
         </div>
         <TypographyStylesProvider>
           <div
             dangerouslySetInnerHTML={{
-              __html: data?.blogContent?.content || '',
+              __html: data?.content,
             }}
           />
         </TypographyStylesProvider>
