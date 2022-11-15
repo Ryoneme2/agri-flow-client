@@ -74,7 +74,7 @@ const NewBlog = () => {
   };
 
   return (
-    <div className="container mx-auto mt-4 h-screen">
+    <div className="container mx-auto mt-4">
       <div className="h-full  mb-[4rem]">
         <div className="flex items-center">
           <input
