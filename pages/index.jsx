@@ -18,18 +18,16 @@ export default function Home() {
   };
   return (
     <>
-      <Navbar />
-      
-    <div className='flex justify-between overflow-x-scroll sm:overflow-x-hidden'>
+      <Navbar/>
+      <div className='flex'>
         <CommunityBlock/>
         <CommunityBlock/>
         <CommunityBlock/>
         <CommunityBlock/>
-    </div> 
+      </div>
 
       <div className='flex justify-center items-center w-[100vw] h-[100vh]'>
         <div className='loading'></div>
-        <Button color='danger' context={'hello, world!'} />
       </div>
     </>
   );
