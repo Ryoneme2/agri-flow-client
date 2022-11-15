@@ -11,11 +11,13 @@ const CommunityBlock = ({
     <>
       <div className="min-w-[12.55rem] h-auto rounded-t-[0.438rem] mx-2">
         <div className="rounded-t-[0.438rem] w-full h-full bg-center bg-no-repeat bg-cover relative bg-gradient-to-t from-black to-[#4E4E4E]">
-          <img
-            src={Communityimg}
-            alt="Communityimg"
-            className="w-full h-full rounded-t-[0.438rem] absolute mix-blend-overlay"
-          />
+          <picture>
+            <img
+              src={Communityimg}
+              alt="Communityimg"
+              className="w-full h-full rounded-t-[0.438rem] absolute mix-blend-overlay"
+            />
+          </picture>
 
           <div className="w-full h-full flex flex-col text-white">
             <div className="w-full flex justify-end pr-4">
