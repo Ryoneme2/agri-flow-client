@@ -18,7 +18,7 @@ function Iconlinepopup() {
 
       <Group className='mx-1'>
         <button onClick={() => setOpened(true)}>
-            <Image src="/images/png/line.png" width={40} height={40}  />
+            <Image src="/images/png/line.png" width={40} height={40} className='bg-white' />
         </button>
       </Group>
     </>

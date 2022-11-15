@@ -25,7 +25,7 @@ const Blog = () => {
         <div className='w-[100%] h-[16.25rem] border-b-2 border-[#1C658C] flex mt-2 justify-center'>
             <div className='w-[97%] h-auto flex pt-3'>
                 {/* Img */}
-                <div className='w-[0] md:w-auto h-[210px] border overflow-hidden'>
+                <div className='w-[0] md:w-auto h-[210px] overflow-hidden'>
                     <div className='h-auto'>
                         <img src="https://fphftuccochbjgwngnrc.supabase.co/storage/v1/object/public/image-bucket/avatar/blank-profile.jpeg" 
                         className='w-full h-[160px] ' />
