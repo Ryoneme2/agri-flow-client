@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link.js';
-import Button from '../Button.jsx';
+import Button from '../CreateBlogB.jsx';
 
 import Dropdown from './Dropdown.jsx';
 const Navbarlogin = () => {
@@ -33,7 +33,7 @@ const Navbarlogin = () => {
 
     return (
         <>
-            <div className='border-b w-full h-[80px] flex justify-between content-center items-center text-[16px]'>
+            <div className='border-b w-full flex justify-between content-center items-center text-[16px]'>
                 <div className='md:invisible md:w-[0] w-[20rem] '>
                     <div className='w-full'>
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1C658C" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -65,12 +65,12 @@ const Navbarlogin = () => {
                         }
                     </div>
                 </div>
-                <div className='flex h-full w-[20rem] md:w-[60%] '>
+                <div className='flex h-full w-auto md:w-[50%] '>
 
-                    <div className='flex w-[100%] justify-end'>
+                    <div className='flex w-full ju'>
 
                         {/* search bar */}
-                        <div className=' w-[40%] flex justify-end content-center items-center invisible md:visible'>
+                        <div className=' w-[full] flex justify-end content-center items-center invisible md:visible'>
                             <input placeholder='ค้นหา' type="text" name="search" className='border rounded-[20px] p-2 text-[1rem] w-[100%]' />
                             
                             <div className='absolute bg-white mr-2 rounded-full border-none' type='submit'>
@@ -80,15 +80,14 @@ const Navbarlogin = () => {
                                     <line x1="21" y1="21" x2="15" y2="15" />
                                 </svg>
                             </div>
-                            
                         </div>
 
                         {/* Build blog */}
                         <div className=' w-[0] md:w-[20%] invisible md:visible flex justify-center content-center items-center'>
                             <Link href={'/blog/newBlog'}>
-                                <button className='bg-white border-2 h-[2.5rem] w-[6.875rem] border-[#1C658C] text-[#1C658C] text-[1rem] font-bold rounded-[20px]'>
+                                <button className='bg-white border-2 py-2 px-3 w-auto border-[#1C658C] text-[#1C658C] text-[0.8rem] font-bold rounded-[20px]'>
                                     สร้างบล็อค
-                                </button>
+                                </button> 
                             </Link>
 
                         </div>
