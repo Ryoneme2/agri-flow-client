@@ -27,12 +27,13 @@ export default function Home() {
   };
   return (
     <>
-      <Navbar />
-      <Profile />
-      <Blog />
-      <div className="flex justify-center items-center w-[100vw] h-[100vh]">
-        <div className="loading"></div>
-        <Button color="danger" context={'hello, world!'} />
+      <Navbar/>
+      <NavbarNonlogin/>
+      <Sidebar/>
+      
+
+      <div className='flex justify-center items-center w-[100vw] h-[100vh]'>
+        <div className='loading'></div>
       </div>
     </>
   );
