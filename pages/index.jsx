@@ -27,13 +27,12 @@ export default function Home() {
   };
   return (
     <>
-      <Navbar/>
-      <NavbarNonlogin/>
-      <Sidebar/>
-      
+      <Navbar />
+      <NavbarNonlogin />
+      <Sidebar />
 
-      <div className='flex justify-center items-center w-[100vw] h-[100vh]'>
-        <div className='loading'></div>
+      <div className="flex justify-center items-center w-[100vw] h-[100vh]">
+        <div className="loading"></div>
       </div>
     </>
   );

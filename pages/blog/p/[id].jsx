@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { TypographyStylesProvider } from '@mantine/core';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
-import Navbar from '../../../components/Navbar/Navbarlogin';
+import dynamic from 'next/dynamic';
+const Navbar = dynamic(() => import('../../../components/Navbar/Navbarlogin'), {
+  ssr: false,
+});
 
 const BlogOne = () => {
   const [data, setData] = useState('<p>wow</p>');
