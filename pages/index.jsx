@@ -10,7 +10,6 @@ const Blog = dynamic(() => import('../components/Blog/Blog'),{ ssr: false })
 const Tag = dynamic(() => import('../components/Tag'),{ ssr: false })
 const CommunityBlock = dynamic(() => import('../components/community/Community_block'),{ssr: false})
 const Profile = dynamic(()=> import('../components/Sidebar/Profile'),{ssr: false})
-const Line = dynamic(() => import('../components/iconlinepopup'),{ssr: false})
 export default function Home() {
 
   const [value, setValue] = useState('');
@@ -21,7 +20,6 @@ export default function Home() {
     <>
       <Navbar />
       <Profile />
-      <Line/>
       <div className='flex justify-center items-center w-[100vw] h-[100vh]'>
         <div className='loading'></div>
         <Button color='danger' context={ 'hello, world!' }/>
