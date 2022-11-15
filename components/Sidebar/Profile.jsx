@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Button } from '@mantine/core';
 import Line from '../contact/iconlinepopup';
 import Facebook from '../contact/iconfacebook';
+import Mail from '../contact/mail';
 
 const Proflie = () => {
     return (
@@ -30,6 +31,7 @@ const Proflie = () => {
                     <div className='flex justify-center content-center items-center'>
                         <Facebook/>
                         <Line/>
+                        <Mail/>
                     </div>
                 </div>
             </div>

@@ -20,6 +20,13 @@ export default function Home() {
     <>
       <Navbar />
       <Profile />
+      <Blog/>
+      <div className='flex'>
+        <CommunityBlock/>
+        <CommunityBlock/>
+        <CommunityBlock/>
+        <CommunityBlock/>
+      </div>
       <div className='flex justify-center items-center w-[100vw] h-[100vh]'>
         <div className='loading'></div>
         <Button color='danger' context={ 'hello, world!' }/>

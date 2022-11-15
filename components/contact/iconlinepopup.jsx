@@ -16,9 +16,9 @@ function Iconlinepopup() {
        <p className='w-full text-center'>LINE QR CODE</p>
       </Modal>
 
-      <Group>
+      <Group className='mx-1'>
         <button onClick={() => setOpened(true)}>
-            <img src="/images/png/line.png" className='w-[40px] h-[40px]'  />
+            <Image src="/images/png/line.png" width={40} height={40}  />
         </button>
       </Group>
     </>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CommunityBlock = ({Communityimg,CommunityMember,CommunityName,CommunityDetail,Rang}) => {
+const CommunityBlock = ({ Communityimg, CommunityMember, CommunityName, CommunityDetail, Rang }) => {
 
 
     return (
@@ -10,11 +10,12 @@ const CommunityBlock = ({Communityimg,CommunityMember,CommunityName,CommunityDet
 
                     <img src={Communityimg}
                         alt="Communityimg"
-                        className='w-full h-full rounded-t-[0.438rem] absolute mix-blend-overlay' />
+                        className='w-full h-full rounded-t-[0.438rem] absolute mix-blend-overlay'
+                    />
 
-                    <div className=' text-white'>
-                        <div className='w-full  flex justify-end pr-4'>
-                            <span className='text-[4rem] font-light'>   0{Rang}   </span>
+                    <div className='w-full h-full flex flex-col text-white'>
+                        <div className='w-full flex justify-end pr-4'>
+                            <span className='text-[4rem] font-light overflow-y-hidden'>0{Rang}</span>
                         </div>
                         <div className='truncate px-2 pt-[3rem]'>
                             <p className='text-[1rem]'>   {CommunityName}  </p>
@@ -30,6 +31,8 @@ const CommunityBlock = ({Communityimg,CommunityMember,CommunityName,CommunityDet
                             </div>
                         </div>
                     </div>
+
+
 
                 </div>
             </div>
