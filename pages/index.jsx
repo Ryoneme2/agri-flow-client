@@ -29,8 +29,12 @@ export default function Home() {
     <>
       <Navbar/>
       <NavbarNonlogin/>
-      <Sidebar/>
-      
+      <div className='flex justify-between overflow-x-scroll sm:overflow-x-hidden '>
+        <CommunityBlock/>
+        <CommunityBlock/>
+        <CommunityBlock/>
+        <CommunityBlock/>
+      </div>
 
       <div className='flex justify-center items-center w-[100vw] h-[100vh]'>
         <div className='loading'></div>
