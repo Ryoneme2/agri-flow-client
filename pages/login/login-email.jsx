@@ -8,25 +8,15 @@ import BoxLogin from '../../components/Layouts/BoxLogin';
 const Login_email = () => {
   // Provide a custom `fetch` implementation as an option
   const [person, setPerson] = useState({});
+
+  const [user, setUser] = useState({ email: '', password: '' });
   const [color, setColor] = useState({ email: '', password: '' });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const setup = { email: '=', password: '' };
 
-  const onSubmitClick = (data) => {
-    console.log(data);
-    setColor({ email: 'primary', password: 'primary' });
-  };
-
-  useEffect(() => {
-    errors.email ? setColor({ email: 'warn' }) : console.log('email verified');
-    errors.password
-      ? setColor({ password: 'warn' })
-      : console.log('password verified');
-  }, [errors]);
+  const { register, handleSubmit, formState } = useForm();
+  const { errors } = formState;
+  console.log(formState);
 
   const handleOnChange = (e) => {
     setUser((prev) => {
@@ -37,17 +27,18 @@ const Login_email = () => {
     });
   };
 
-  console.log(errors);
-  //console.log(errors.email?.message ? 'verified' : setColor('warn'));
+  const onSubmitClick = (data) => {
+    console.log(data);
+    setColor(setup);
+  };
 
-  /*
-  const rx = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/g).test(
-    'adsfsadf@gmail.cm'
-  );
-  console.log(rx);
-  */
-
-  const [user, setUser] = useState({ email: '', password: '' });
+  useEffect(() => {
+    errors.email
+      ? setColor({ email: 'warn' })
+      : errors.password
+      ? setColor({ password: 'warn' })
+      : console.log('verified');
+  }, [formState]);
 
   if (Object.values(person).length <= 0)
     return (
@@ -67,8 +58,8 @@ const Login_email = () => {
                 },
                 required: 'email required!',
               })}
-              onChange={handleOnChange}
               value={user.email}
+              onChange={handleOnChange}
               color={color.email}
               placeholder={'ชื่อผู้ใช้หรืออีเมล...'}
             />
@@ -78,8 +69,8 @@ const Login_email = () => {
               register={register('password', {
                 required: 'password required!',
               })}
-              onChange={handleOnChange}
               value={user.password}
+              onChange={handleOnChange}
               color={color.password}
               placeholder={'รหัสผ่าน...'}
             />

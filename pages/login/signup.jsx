@@ -9,12 +9,9 @@ const ResetPassword = () => {
   const [user, setUser] = useState(setup);
   const [color, setColor] = useState(setup);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  console.log(errors);
+  const { register, handleSubmit, formState } = useForm();
+  const { errors } = formState;
+  //console.log(formState, errors);
 
   const handleOnChange = (e) => {
     setUser((prev) => {
@@ -31,15 +28,17 @@ const ResetPassword = () => {
   };
 
   useEffect(() => {
-    errors.email ? setColor({ email: 'warn' }) : console.log(`email verified`);
-    errors.username
+    console.log('change');
+    errors.email
+      ? setColor({ email: 'warn' })
+      : errors.username
       ? setColor({ username: 'warn' })
-      : console.log(`username verified`);
-    errors.pw ? setColor({ pw: 'warn' }) : console.log(`password verified`);
-    errors.cmpw
+      : errors.pw
+      ? setColor({ pw: 'warn' })
+      : errors.cmpw
       ? setColor({ cmpw: 'warn' })
-      : console.log(`confirm password verified`);
-  }, [errors]);
+      : console.log('verified');
+  }, [formState]);
 
   return (
     <BoxLogin>
@@ -51,8 +50,6 @@ const ResetPassword = () => {
           <InputLogin
             type={'email'}
             name={'email'}
-            value={user.email}
-            onChange={handleOnChange}
             register={register('email', {
               pattern: {
                 value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/g,
@@ -60,36 +57,38 @@ const ResetPassword = () => {
               },
               required: 'email required!',
             })}
+            value={user.email}
+            onChange={handleOnChange}
             color={color.email}
             placeholder={'อีเมล'}
           />
           <InputLogin
             type={'text'}
             name={'username'}
+            register={register('username', { required: 'username required!' })}
             value={user.username}
             onChange={handleOnChange}
-            register={register('username', { required: 'username required!' })}
             color={color.username}
             placeholder={'ชื่อผู้ใช้'}
           />
           <InputLogin
             type={'password'}
             name={'pw'}
+            register={register('pw', { required: 'password required!' })}
             value={user.pw}
             onChange={handleOnChange}
-            register={register('pw', { required: 'password required!' })}
             color={color.pw}
             placeholder={'รหัสผ่าน'}
           />
           <InputLogin
             type={'password'}
             name={'cmpw'}
-            value={user.cmpw}
-            onChange={handleOnChange}
             register={register('cmpw', {
               required: 'confirm required!',
               validate: (value) => value === user.pw,
             })}
+            value={user.cmpw}
+            onChange={handleOnChange}
             color={color.cmpw}
             placeholder={'ยืนยันรหัสผ่าน'}
           />
