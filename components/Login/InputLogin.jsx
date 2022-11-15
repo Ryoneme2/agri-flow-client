@@ -16,20 +16,25 @@ const InputLogin = ({
   name,
   type,
   onChange = () => {},
+  onClick = () => {},
   value,
   register,
   css = '',
 }) => {
   //console.dir(register);
+  const prop = {
+    placeholder,
+    name,
+    type,
+    onChange,
+    onClick,
+    value,
+  };
   return (
     <>
       <input
         {...register}
-        name={name}
-        value={value}
-        onChange={onChange}
-        type={type}
-        placeholder={placeholder}
+        {...prop}
         className={clsx(
           `flex items-center transition ease-in-out ${css} rounded-full text-[0.75rem] sm:text-[1rem] px-5 py-[0.8rem] sm:my-2 my-1 border shadow w-full sm:w-[18rem] `,
           {
