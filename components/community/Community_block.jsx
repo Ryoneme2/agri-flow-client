@@ -5,7 +5,7 @@ const CommunityBlock = ({Communityimg,CommunityMember,CommunityName,CommunityDet
 
     return (
         <>
-            <div className=' w-[12.55rem] h-auto rounded-t-[0.438rem]'>
+            <div className='min-w-[12.55rem] h-auto rounded-t-[0.438rem]'>
                 <div className='rounded-t-[0.438rem] w-full h-full bg-center bg-no-repeat bg-cover relative bg-gradient-to-t from-black to-[#4E4E4E]'>
 
                     <img src={Communityimg}
@@ -24,6 +24,7 @@ const CommunityBlock = ({Communityimg,CommunityMember,CommunityName,CommunityDet
                             <div className='text-[0.8rem]'>
                                 สมาชิกทั้งหมด
                             </div>
+
                             <div>
                                 <span className='text-[1.25rem] px-2'>   {CommunityMember}  </span>
                             </div>
