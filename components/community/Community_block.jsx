@@ -22,12 +22,12 @@ const CommunityBlock = ({ Communityimg, CommunityMember, CommunityName, Communit
                             <p className='text-[0.8rem] truncate font-light'>  {CommunityDetail} </p>
                         </div>
                         <div className='flex justify-end  items-baseline p-2 '>
-                            <div className='text-[0.8rem]'>
+                            <div className='text-[0.8rem] overflow-y-hidden'>
                                 สมาชิกทั้งหมด
                             </div>
 
                             <div>
-                                <span className='text-[1.25rem] px-2'>   {CommunityMember}  </span>
+                                <span className='text-[1.25rem] px-2 overflow-y-hidden'>   {CommunityMember}  </span>
                             </div>
                         </div>
                     </div>
