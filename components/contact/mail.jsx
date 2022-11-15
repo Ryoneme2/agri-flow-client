@@ -4,8 +4,8 @@ const Mail = () => {
     return (
         <>
             <div className='w-full h-auto rounded-[20px] bg-[#B6DCFE] mx-1'>
-                <div className='px-2 py-[5px] text-white'>
-                    Fourth4884@gmail.com
+                <div className='px-2 py-[5px] text-[#1C658C] truncate'>
+                    อีเมล : {`Fourth4884@gmail.com`}
                 </div>
             </div>
         </>

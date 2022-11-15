@@ -17,6 +17,9 @@ const CommunityBlock = dynamic(
   () => import('../components/community/Community_block'),
   { ssr: false }
 );
+const Profile = dynamic(() => import('../components/Sidebar/Profile'), {
+  ssr: false,
+});
 export default function Home() {
   const [value, setValue] = useState('');
   const handle = (e) => {
@@ -25,9 +28,8 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      <Profile />
       <Blog />
-      <CommunityBlock />
-      <NavbarNonlogin />
       <div className="flex justify-center items-center w-[100vw] h-[100vh]">
         <div className="loading"></div>
         <Button color="danger" context={'hello, world!'} />

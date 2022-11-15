@@ -26,6 +26,10 @@ body {
   --tw-content: '';
 }
 
+div {
+  overflow-y: hidden;
+}
+
 /*
 1. Use a consistent sensible line-height in all browsers.
 2. Prevent adjustments of font size after orientation changes in iOS.
@@ -187,8 +191,8 @@ button,
 [type='reset'],
 [type='submit'] {
   -webkit-appearance: button; /* 1 */
-  background-color: transparent; /* 2 */
   background-image: none; /* 2 */
+  cursor: pointer;
 }
 
 /*
@@ -442,4 +446,24 @@ video {
     clip-path: polygon(0 0, 100% 0, 100% 100%);
     transform: translate(-17.7px);
   }
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #1c658c;
+  border-radius: 100px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #278ec6;
 }
