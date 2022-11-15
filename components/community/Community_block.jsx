@@ -42,9 +42,11 @@ const CommunityBlock = ({ Communityimg, CommunityMember, CommunityName, Communit
 
 export default CommunityBlock;
 
-{/* <div className='flex justify-between overflow-x-scroll sm:overflow-y-hidden'>
+{/* 
+    <div className='flex justify-between overflow-x-scroll sm:overflow-x-hidden'>
         <CommunityBlock/>
         <CommunityBlock/>
         <CommunityBlock/>
         <CommunityBlock/>
-      </div> */}
+    </div> 
+*/}
