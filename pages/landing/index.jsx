@@ -20,7 +20,7 @@ const LandingNonLogin = () => {
   return (
     <>
       <NavbarNonlogin />
-      <div className="grid grid-cols-12 w-screen mt-5 pr-8 pl-4">
+      <div className="grid grid-cols-12 w-full sm:w-[90%] mx-auto mt-5 pr-8 pl-4">
         <div className="col-span-12 md:col-span-3 flex flex-row md:flex-col">
           <div className="hidden md:grid grid-cols-2 mb-6 ">
             <ShowUserNum amount={'250000'} name={'บล็อก'} />
