@@ -29,7 +29,7 @@ export default function Home() {
     <>
       <Navbar />
       <NavbarNonlogin />
-      <Sidebar />
+      {/* <Sidebar /> */}
 
       <div className="flex justify-center items-center w-[100vw] h-[100vh]">
         <div className="loading"></div>
