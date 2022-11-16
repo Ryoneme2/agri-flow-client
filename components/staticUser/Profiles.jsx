@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Profile from './profile';
+import Profile from './Profile';
 
 const Profiles = ({ imgProfile, css }) => {
   return (

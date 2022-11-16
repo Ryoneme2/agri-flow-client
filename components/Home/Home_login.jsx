@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 
-const Navbarlogin = dynamic(
-  () => import('../../components/Navbar/Navbarlogin'),
-  { ssr: false }
-);
-const NavbarNonlogin = dynamic(
-  () => import('../../components/Navbar/NavbarNonlogin'),
-  { ssr: false }
-);
-import Blog from '../../components/Blog/Blog';
-import CommunityBlock from '../../components/community/Community_block';
-import Profiles from '../../components/staticUser/profiles';
-import ShowUserNum from '../../components/staticUser/showUserNum';
-import Tag from '../../components/Tag';
-import Section from '../../components/Section/Section';
-import SuggustTopic from '../../components/home/suggustTopic';
+const Navbarlogin = dynamic(() => import('../Navbar/Navbarlogin'), {
+  ssr: false,
+});
+const NavbarNonlogin = dynamic(() => import('../Navbar/NavbarNonlogin'), {
+  ssr: false,
+});
+import Blog from '../Blog/Blog';
+import CommunityBlock from '../community/Community_block';
+import Profiles from '../staticUser/Profiles';
+import ShowUserNum from '../staticUser/ShowUserNum';
+import Tag from '../Tag';
+import Section from '../Section/Section';
+import SuggustTopic from './suggustTopic';
+import AvatarText from '../staticUser/AvatarText';
 
 const LandingNonLogin = () => {
   return (
@@ -23,13 +22,22 @@ const LandingNonLogin = () => {
       <Navbarlogin />
       <div className="grid grid-cols-12 w-full sm:w-[90%] mx-auto mt-5 pr-8 pl-4">
         <div className="col-span-12 md:col-span-3 flex flex-row md:flex-col">
-          <div className="hidden md:grid grid-cols-2 mb-6 ">
-            <div className="hidden md:grid mx-4 mb-5 w-full">
+          <div className="hidden md:grid mb-6 ">
+            <div className="hidden md:grid w-full">
               <h1 className="text-xl overflow-hidden">บุคคลที่ติดตาม</h1>
               <div className="">
-                <h1>1</h1>
-                <h1>1</h1>
-                <h1>1</h1>
+                <AvatarText
+                  imgProfile={'/images/profile/jammy.jpg'}
+                  name={'Pummy'}
+                />
+                <AvatarText
+                  imgProfile={'/images/profile/jammy.jpg'}
+                  name={'Jamie'}
+                />
+                <AvatarText
+                  imgProfile={'/images/profile/jammy.jpg'}
+                  name={'Fourthy'}
+                />
               </div>
             </div>
           </div>

@@ -1,5 +1,3 @@
-import clsx from 'clsx';
-
 const ShowUserNum = ({ amount, name, css }) => {
   return (
     <>
