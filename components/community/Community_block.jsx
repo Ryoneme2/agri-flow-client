@@ -20,14 +20,14 @@ const CommunityBlock = ({
           </picture>
 
           <div className="w-full h-full flex flex-col text-white">
-            <div className="w-full flex justify-end pr-4">
+            <div className="w-full flex justify-end pr-4 pb-4">
               <span className="text-[3rem] sm:text-[4rem] font-light overflow-y-hidden">
                 0{Rang}
               </span>
             </div>
-            <div className="truncate m-0 p-0 ">
+            <div className="truncate m-0 pt-2 px-2">
               <p className="text-[1rem] sm:text-[1.1] md:text-[1.25rem] m-0 p-0">{`151551`} {CommunityName} </p>
-              <p className="text-[0.8rem] sm:text-[1rem] truncate font-light m-0 p-0 hidden sm:block">
+              <p className="text-[0.8rem] sm:text-[1rem] truncate font-light m-0 p-0 hidden md:block">
                 {'กลุ่มสำหรับคนรักปลา'}
                 {CommunityDetail}
                 
