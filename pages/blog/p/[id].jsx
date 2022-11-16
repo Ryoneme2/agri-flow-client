@@ -75,15 +75,4 @@ const BlogOne = () => {
   );
 };
 
-// // This gets called on every request
-// export async function getServerSideProps() {
-//   // Fetch data from external API
-// const res = await axios.get(
-//   `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blog/p/1`
-// );
-
-//   // Pass data to the page via props
-//   return { props: { data: res.data } };
-// }
-
 export default BlogOne;

@@ -20,7 +20,7 @@ const Comment = ({ data }) => {
                         </div>
                     </div>
                 </div>
-                <div className=' w-full text-[1rem] mt-3 break-words'>
+                <div className=' w-full text-[1rem] mt-3 break-words border p-2 rounded-[10px] border-[#B6DCFE]'>
                     contents
                 </div>
             </div>
