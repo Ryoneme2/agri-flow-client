@@ -15,24 +15,26 @@ import Profiles from '../../components/staticUser/profiles';
 import ShowUserNum from '../../components/staticUser/showUserNum';
 import Tag from '../../components/Tag';
 import Section from '../../components/Section/Section';
+import SuggustTopic from '../../components/home/suggustTopic';
 
 const LandingNonLogin = () => {
   return (
     <>
-      <NavbarNonlogin />
+      <Navbarlogin />
       <div className="grid grid-cols-12 w-full sm:w-[90%] mx-auto mt-5 pr-8 pl-4">
         <div className="col-span-12 md:col-span-3 flex flex-row md:flex-col">
           <div className="hidden md:grid grid-cols-2 mb-6 ">
-            <ShowUserNum amount={'250000'} name={'บล็อก'} />
-            <ShowUserNum amount={'250000'} name={'บัญชีผู้ใช้'} />
-            <Profiles
-              imgProfile={'/images/profile/jammy.jpg'}
-              css={'my-5 col-span-2'}
-            />
-            <hr className="col-span-2 w-11/12 h-[2px] bg-[#000000] border-0 m-1" />
+            <div className="hidden md:grid mx-4 mb-5 w-full">
+              <h1 className="text-xl overflow-hidden">บุคคลที่ติดตาม</h1>
+              <div className="">
+                <h1>1</h1>
+                <h1>1</h1>
+                <h1>1</h1>
+              </div>
+            </div>
           </div>
           <div className="hidden md:contents mx-4 mb-5 w-full">
-            <h1 className="text-xl overflow-hidden">หมวดหมู่</h1>
+            <h1 className="text-xl overflow-hidden">หมวดหมู่ที่เข้าชมบ่อย</h1>
             <div className="flex flex-wrap">
               <Tag linkto={''} tagName={'โรคในพืชยืนต้น'} />
               <Tag linkto={''} tagName={'โรคในพืชล้มลุก'} />
@@ -62,13 +64,25 @@ const LandingNonLogin = () => {
               <Tag linkto={''} tagName={'สัตว์'} />
             </div>
           </div>
-          <div name="category">
-            <Section context={'บทความน่าสนใจ'} />
-            <div>
-              <Blog />
-              <Blog />
-            </div>
-          </div>
+
+          <SuggustTopic
+            Topic={'บทความสำหรับคุณ'}
+            Children={
+              <>
+                <Blog />
+                <Blog />
+              </>
+            }
+          />
+          <SuggustTopic
+            Topic={'บทความที่คุณติดตาม'}
+            Children={
+              <>
+                <Blog />
+              </>
+            }
+          />
+          <SuggustTopic Topic={'บทความน่าสนใจ'} />
         </div>
       </div>
     </>
