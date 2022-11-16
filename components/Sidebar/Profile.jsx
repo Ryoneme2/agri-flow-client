@@ -23,7 +23,7 @@ const Proflie = () => {
                     </div>
                     <div className='w-full h-[2.2rem] flex justify-between items-center px-2'>
                         <div>{`ชื่อผู้ใช้งาน`}</div>
-                        <Button className='h-[1.875rem] rounded-[10px] border-2 border-[#1C658C] bg-white hover:bg-white text-[#1C658C]'>ติดตาม</Button>
+                        <Button className='h-[1.875rem] rounded-[10px] hover:bg-[#1C658C] bg-[#1C658C] text-white'>ติดตาม</Button>
                     </div>
                     <div className='m-2 h-[6rem] border-b-2'>
                         <textarea name="bio" id="bio" placeholder="เกี่ยวกับฉัน" className='w-full h-[5rem] resize-none overflow-y-auto'></textarea>

@@ -10,7 +10,7 @@ const NavbarNonlogin= () => {
        <> 
             <div className="border-b w-full h-[80px] flex justify-between">
 
-                <div className='w-full h-full pt-[7px]'>
+                <div className='w-full h-full pt-[7px] ml-2'>
                     <Link href="/Home">
                         <Image src={'/images/png/2-2E.png'} width={160} height={100} />
                     </Link>
