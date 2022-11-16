@@ -13,21 +13,19 @@ const LandingNonLogin = () => {
     setToken(localToken);
   }, []);
 
-  if (token) return <Home_login />;
-  return (
-    <Home_nonlogin
-      blog={
-        <SuggustTopic
-          Topic={'บทความตาม หมวดหมู่'}
-          Children={
-            <>
-              <Blog />
-            </>
-          }
-        />
+  const haveBlog = (
+    <SuggustTopic
+      Topic={'บทความตาม หมวดหมู่'}
+      Children={
+        <>
+          <Blog />
+        </>
       }
     />
   );
+
+  if (!token) return <Home_nonlogin />;
+  return <Home_login />;
 };
 
 export default LandingNonLogin;
