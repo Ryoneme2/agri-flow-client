@@ -5,7 +5,7 @@ const Commu = () => {
   return (
     <>
       <div>Community</div>
-      <CommuSidebar />
+      <CommuSidebar name={'คนภาคเหนือ'} />
     </>
   );
 };

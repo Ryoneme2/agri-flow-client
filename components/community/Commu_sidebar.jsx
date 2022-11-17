@@ -1,6 +1,11 @@
 import { Image } from '@mantine/core';
 
-const CommunitySidebar = () => {
+import ShowUserNum from '../staticUser/ShowUserNum';
+import Profiles from '../staticUser/Profiles';
+import Profile from '../staticUser/Profile';
+import { Avatar } from '@mantine/core';
+
+const CommunitySidebar = ({ name }) => {
   return (
     <>
       <div>
@@ -11,6 +16,23 @@ const CommunitySidebar = () => {
             alt="Page commu"
           />
         </div>
+        <div className="w-full flex justify-center text-[1.5rem] absolute bg-white text-[#1C658C]">
+          <div>{name}</div>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 mb-6">
+        <ShowUserNum amount={'250000'} name={'บล็อก'} />
+        <ShowUserNum amount={'250000'} name={'สมาชิก'} />
+        <Profiles
+          profile={
+            <>
+              
+              <Profile imgProfile={'/images/profile/jammy.jpg'} />
+            </>
+          }
+          css={'my-5 col-span-2'}
+        />
+        <hr className="col-span-2 w-11/12 h-[2px] bg-[#000000] border-0 mx-auto" />
       </div>
     </>
   );
