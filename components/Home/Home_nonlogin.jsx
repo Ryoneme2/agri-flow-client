@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { Avatar } from '@mantine/core';
+import axios from 'axios';
 
 const NavbarNonlogin = dynamic(() => import('../Navbar/NavbarNonlogin'), {
   ssr: false,
@@ -10,10 +10,35 @@ import CommunityBlock from '../community/Community_block';
 import ShowUserNum from '../staticUser/ShowUserNum';
 import Tag from '../Tag';
 import SuggustTopic from './suggustTopic';
+import { Avatar } from '@mantine/core';
 
 const LandingNonLogin = ({ children }) => {
   let content;
-  // tag ? (content = 'hidden') : (content = '');
+  // const [tagPage, setTagPage] = useState(false);
+  // tagPage ? (content = 'hidden') : (content = '');
+
+  const [tagSuggest, setTagSuggest] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const tagNum = 5;
+
+  useEffect(() => {
+    try {
+      setLoading(true);
+      const getData = async () => {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/utilities/categories?limit=${tagNum}`
+        );
+        console.log(res.data);
+        setTagSuggest(res.data?.data || []);
+      };
+      getData();
+      console.log('here: ' + tagSuggest);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   return (
     <>
@@ -37,11 +62,18 @@ const LandingNonLogin = ({ children }) => {
           <div className="contents mx-4 mb-5 w-full">
             <h1 className="text-xl overflow-hidden text-[#1C658C]">หมวดหมู่</h1>
             <div className="flex flex-wrap">
-              <Tag linkto={''} tagName={'โรคในพืชยืนต้น'} />
-              <Tag linkto={''} tagName={'โรคในพืชล้มลุก'} />
-              <Tag linkto={''} tagName={'วัชพืช'} />
-              <Tag linkto={''} tagName={'แมลงศัตรูพืช'} />
-              <Tag linkto={''} tagName={'สัตว์'} />
+              {loading ? (
+                <div className="loading"></div>
+              ) : (
+                tagSuggest.map((tag) => {
+                  return (
+                    <Tag
+                      linkto={`./category/${tag.categoryId}`}
+                      tagName={tag.categoryName}
+                    />
+                  );
+                })
+              )}
             </div>
           </div>
         </div>
@@ -60,11 +92,14 @@ const LandingNonLogin = ({ children }) => {
               หมวดหมู่ :
             </h1>
             <div className="flex flex-wrap">
-              <Tag linkto={''} tagName={'โรคในพืชยืนต้น'} />
-              <Tag linkto={''} tagName={'โรคในพืชล้มลุก'} />
-              <Tag linkto={''} tagName={'วัชพืช'} />
-              <Tag linkto={''} tagName={'แมลงศัตรูพืช'} />
-              <Tag linkto={''} tagName={'สัตว์'} />
+              {tagSuggest.map((tag) => {
+                return (
+                  <Tag
+                    linkto={`./category/${tag.categoryId}`}
+                    tagName={tag.categoryName}
+                  />
+                );
+              })}
             </div>
           </div>
           <div className={content}>
