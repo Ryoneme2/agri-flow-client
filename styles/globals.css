@@ -386,7 +386,7 @@ video {
 .loading:after {
   content: '';
   width: 50%;
-  background: #514b82;
+  background: #1c658c;
   clip-path: polygon(0 50%, 100% 0, 100% 100%);
   animation: inherit;
   animation-name: sh3-1;
@@ -474,6 +474,3 @@ video {
 ::-webkit-scrollbar-thumb:hover {
   background: #278ec6;
 }
-code {
-  color : white !important;
-} 

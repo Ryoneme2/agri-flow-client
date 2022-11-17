@@ -12,9 +12,8 @@ const Discussmain = dynamic(
 const Discuss = () => {
   return (
     <>
-      <div className="flex-col justify-center w-full h-auto">
+      <div className="w-sreen h-screen flex justify-center items-center">
         <Discussmain />
-        <Discussblock />
       </div>
     </>
   );

@@ -2,7 +2,6 @@ import React from 'react';
 // import User from '../../staticUser/profile';
 import Addcomment from './addcomment';
 
-
 const Comment = ({ data }) => {
     return (
         <>
