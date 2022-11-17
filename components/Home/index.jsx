@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Home_login from './Home_login';
 import Home_nonlogin from './Home_nonlogin';
-import SuggustTopic from './suggustTopic';
+import SuggestTopic from './suggustTopic';
 import Blog from '../Blog/Blog';
 import axios from 'axios';
 
@@ -43,21 +43,23 @@ const LandingNonLogin = () => {
     return (
       <>
         <Home_login>
-          <SuggustTopic Topic={'บทความสำหรับคุณ'}>
+          <SuggestTopic Topic={'บทความสำหรับคุณ'}>
             {blogSuggest.map((blog) => {
               return <Blog blog={blog} key={blog.id} />;
             })}
-          </SuggustTopic>
+          </SuggestTopic>
+          <SuggestTopic Topic={'บทความที่คุณติดตาม'} />
+          <SuggestTopic Topic={'บทความน่าสนใจ'} />
         </Home_login>
       </>
     );
   return (
     <Home_nonlogin>
-      <SuggustTopic Topic={'บทความตาม หมวดหมู่'}>
+      <SuggestTopic Topic={'บทความตาม หมวดหมู่'}>
         {blogSuggest.map((blog) => {
           return <Blog blog={blog} key={blog.id} />;
         })}
-      </SuggustTopic>
+      </SuggestTopic>
     </Home_nonlogin>
   );
 };
