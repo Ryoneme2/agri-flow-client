@@ -79,7 +79,7 @@ const NewBlog = () => {
         <div className="flex items-center">
           <input
             type="text"
-            className="w-full h-20 text-3xl hover:outline-none mb-2 border border-l-0 border-t-0 border-b-0"
+            className="w-full h-20 text-3xl hover:outline-none mb-2 border border-l-0 border-t-0 border-b-0 focus:outline-none"
             placeholder="Title..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
