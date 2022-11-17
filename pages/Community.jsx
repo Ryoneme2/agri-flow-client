@@ -1,5 +1,5 @@
 import React from 'react';
-import CommuSidebar from '../components/community/Commu_sidebar';
+import CommuSidebar from '../components/Sidebar/Commu_sidebar';
 
 const Commu = () => {
   return (
