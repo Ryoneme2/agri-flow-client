@@ -48,22 +48,14 @@ const NewBlog = () => {
     try {
       const host = process.env.NEXT_PUBLIC_API_URL;
       const token = localStorage.getItem('access_token');
-      const res = await axios.post(
-        `${host}/api/v1/blogs/p`,
-        {
-          title,
-          content: value,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
+      const res = await axios.post(`${host}/api/v1/blogs/p`,{title,content: value,},{headers: {Authorization: token,},});
 
       if (res.status !== 201) throw new Error('internal error');
 
       console.log('published');
+
+      
+
     } catch (e) {
       if (e instanceof AxiosError) {
         console.error(e.response.data.msg);
@@ -79,7 +71,7 @@ const NewBlog = () => {
         <div className="flex items-center">
           <input
             type="text"
-            className="w-full h-20 text-3xl hover:outline-none mb-2 border border-l-0 border-t-0 border-b-0"
+            className="w-full h-20 text-3xl hover:outline-none mb-2 border border-l-0 border-t-0 border-b-0 focus:outline-none"
             placeholder="Title..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
