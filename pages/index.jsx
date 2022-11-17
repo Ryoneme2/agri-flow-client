@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 
 const Navbar = dynamic(() => import('../components/Navbar/Navbarlogin'), {ssr: false,});
 const NavbarNonlogin = dynamic(() => import('../components/Navbar/NavbarNonlogin'),{ ssr: false });
+const Discuss = dynamic(() => import('../components/Discuss/Disscuss'),{ssr: false});
 
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
     <>
       <Navbar />
       <NavbarNonlogin />
+      <Discuss/>
 
       <div className="flex justify-center items-center w-[100vw] h-[100vh]">
         <div className="loading"></div>
