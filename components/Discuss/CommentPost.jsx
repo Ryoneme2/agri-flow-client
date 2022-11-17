@@ -1,7 +1,7 @@
 import { comment } from 'postcss';
 import React from 'react';
 
-const CommentPost = ({Comment}) => {
+const CommentPost = ({CommentCount}) => {
     return (
         <>
             <div className='flex mx-2'>
@@ -13,7 +13,7 @@ const CommentPost = ({Comment}) => {
                     </svg>
                 </div>
                 <div className='mx-1'>
-                    {Comment}
+                    {CommentCount}
                 </div>
             </div>
         </>
