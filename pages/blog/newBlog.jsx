@@ -48,22 +48,14 @@ const NewBlog = () => {
     try {
       const host = process.env.NEXT_PUBLIC_API_URL;
       const token = localStorage.getItem('access_token');
-      const res = await axios.post(
-        `${host}/api/v1/blogs/p`,
-        {
-          title,
-          content: value,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
+      const res = await axios.post(`${host}/api/v1/blogs/p`,{title,content: value,},{headers: {Authorization: token,},});
 
       if (res.status !== 201) throw new Error('internal error');
 
       console.log('published');
+
+      
+
     } catch (e) {
       if (e instanceof AxiosError) {
         console.error(e.response.data.msg);

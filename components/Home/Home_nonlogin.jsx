@@ -6,7 +6,6 @@ const NavbarNonlogin = dynamic(() => import('../Navbar/NavbarNonlogin'), {
 });
 import Blog from '../Blog/Blog';
 import CommunityBlock from '../community/Community_block';
-import Profiles from '../staticUser/Profiles';
 import ShowUserNum from '../staticUser/ShowUserNum';
 import Tag from '../Tag';
 import SuggustTopic from './suggustTopic';
@@ -23,10 +22,7 @@ const LandingNonLogin = ({ blog }) => {
           <div className="grid grid-cols-2 mb-6 ">
             <ShowUserNum amount={'250000'} name={'บล็อก'} />
             <ShowUserNum amount={'250000'} name={'บัญชีผู้ใช้'} />
-            <Profiles
-              imgProfile={'/images/profile/jammy.jpg'}
-              css={'my-5 col-span-2'}
-            />
+          
             <hr className="col-span-2 w-11/12 h-[2px] bg-[#000000] border-0 m-1" />
           </div>
           <div className="contents mx-4 mb-5 w-full">

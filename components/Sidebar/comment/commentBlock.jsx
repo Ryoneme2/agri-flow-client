@@ -1,5 +1,5 @@
 import React from 'react';
-import User from '../../staticUser/profile';
+// import User from '../../staticUser/profile';
 import Addcomment from './addcomment';
 
 
@@ -9,7 +9,7 @@ const Comment = ({ data }) => {
             <div className=' flex flex-col pt-3 py-5 border-b-2 px-2 border-[#1C658C]'>
                 <div className=' flex'>
                     <div className=' overflow-hidden'>
-                        <User className='w-full h-full overflow-y-hidden' />
+                        {/* <User className='w-full h-full overflow-y-hidden' /> */}
                     </div>
                     <div className=' flex flex-col my-auto mx-3'>
                         <div className=' text-[0.938rem] text-[#1C658C]'>
