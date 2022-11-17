@@ -9,7 +9,6 @@ import axios from 'axios';
 
 const Login_email = () => {
   // Provide a custom `fetch` implementation as an option
-  const [person, setPerson] = useState({});
   const router = useRouter();
 
   const [user, setUser] = useState({ email: '', password: '' });

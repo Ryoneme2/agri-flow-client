@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+
 import axios from 'axios';
 
 import InputLogin from '../../components/Login/InputLogin';
@@ -10,7 +12,13 @@ const ResetPassword = () => {
   const setup = { email: '', username: '', password: '', cmpw: '' };
   const [user, setUser] = useState(setup);
   const [color, setColor] = useState(setup);
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState({
+    isError: false,
+    msg: '',
+  });
 
+  const router = useRouter();
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   //console.log(formState, errors);
@@ -26,14 +34,21 @@ const ResetPassword = () => {
 
   const onSubmitClick = (data) => {
     console.log(data);
+    setLoading(true);
     axios
       .post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/register`, data)
       .then(function (response) {
         console.log(response.data.msg);
-        window.location.href = '../login';
+        setLoading(false);
+        router.push('../auth/login-email');
       })
       .catch(function (error) {
         console.log(error);
+        setErr({
+          isError: true,
+          msg: error?.response?.data?.msg || 'ผิดพลาดงงๆ',
+        });
+        setLoading(false);
       });
     setColor(setup);
   };
@@ -57,6 +72,9 @@ const ResetPassword = () => {
         <h1 className="font-semibold sm:text-[1.7rem] text-[#1C658C] my-3">
           สมัครบัญชีผู้ใช้
         </h1>
+        <div className="flex justify-center">
+          {err.isError && <small className="text-red-500">{err.msg}</small>}
+        </div>
         <form onSubmit={handleSubmit(onSubmitClick)}>
           <InputLogin
             type={'email'}
@@ -103,12 +121,19 @@ const ResetPassword = () => {
             color={color.cmpw}
             placeholder={'ยืนยันรหัสผ่าน'}
           />
-          <InputLogin
-            type={'submit'}
-            value={'ยืนยันการสมัคร'}
-            css={'justify-center text-center'}
-            color={'submit'}
-          />
+          {loading && (
+            <div className="flex justify-center items-center h-[4rem] mb-5">
+              <div className="loading"></div>
+            </div>
+          )}
+          {!loading && (
+            <InputLogin
+              type={'submit'}
+              value={'ยืนยันการสมัคร'}
+              css={'justify-center text-center'}
+              color={'submit'}
+            />
+          )}
         </form>
       </div>
     </BoxLogin>
