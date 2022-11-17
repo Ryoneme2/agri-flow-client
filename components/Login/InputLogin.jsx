@@ -20,6 +20,7 @@ const InputLogin = ({
   value,
   register,
   css = '',
+  errorText,
 }) => {
   //console.dir(register);
   const prop = {
@@ -49,7 +50,7 @@ const InputLogin = ({
       />
       {color == 'warn' ? (
         <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-          Invalid field !
+          {errorText}
         </span>
       ) : (
         ''

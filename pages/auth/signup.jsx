@@ -1,11 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
+
 import InputLogin from '../../components/Login/InputLogin';
 import BoxLogin from '../../components/Layouts/BoxLogin';
 
 const ResetPassword = () => {
-  const setup = { email: '', username: '', pw: '', cmpw: '' };
+  const setup = { email: '', username: '', password: '', cmpw: '' };
   const [user, setUser] = useState(setup);
   const [color, setColor] = useState(setup);
 
@@ -24,6 +26,15 @@ const ResetPassword = () => {
 
   const onSubmitClick = (data) => {
     console.log(data);
+    axios
+      .post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/register`, data)
+      .then(function (response) {
+        console.log(response.data.msg);
+        window.location.href = '../login';
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     setColor(setup);
   };
 
@@ -33,8 +44,8 @@ const ResetPassword = () => {
       ? setColor({ email: 'warn' })
       : errors.username
       ? setColor({ username: 'warn' })
-      : errors.pw
-      ? setColor({ pw: 'warn' })
+      : errors.password
+      ? setColor({ password: 'warn' })
       : errors.cmpw
       ? setColor({ cmpw: 'warn' })
       : console.log('verified');
@@ -73,11 +84,11 @@ const ResetPassword = () => {
           />
           <InputLogin
             type={'password'}
-            name={'pw'}
-            register={register('pw', { required: 'password required!' })}
-            value={user.pw}
+            name={'password'}
+            register={register('password', { required: 'password required!' })}
+            value={user.password}
             onChange={handleOnChange}
-            color={color.pw}
+            color={color.password}
             placeholder={'รหัสผ่าน'}
           />
           <InputLogin
@@ -85,7 +96,7 @@ const ResetPassword = () => {
             name={'cmpw'}
             register={register('cmpw', {
               required: 'confirm required!',
-              validate: (value) => value === user.pw,
+              validate: (value) => value === user.password,
             })}
             value={user.cmpw}
             onChange={handleOnChange}
