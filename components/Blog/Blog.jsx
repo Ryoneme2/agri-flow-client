@@ -1,81 +1,95 @@
-import React from 'react';
+/* eslint-disable @next/next/no-img-element */
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Tag from '../Tag';
 
-const Blog = () => {
-    const rawText = `หากยังนึกไม่ออก ให้ลองจินตนาการภาพเด็กที่ไม่กลัวฝน ไม่กลัวเปียก กลับมองฝน มองการเปียกปอนเป็นเรื่องสนุกสนานด้วยซ้ำไป
-    ช่างต่างกับวัยผู้ใหญ่ที่บางทีทำน้ำหกใส่เสื้อไม่กี่หยดก็หมดความมั่นใจได้แล้ว เด็กคนนั้นอาจเป็นเราในเวอร์ชั่นที่ดีที่สุดก็เป็นได้
-    เขียนบทความนี้ไป ก็ยังแอบคิดตามไปพร้อมกันได้ว่า มันใช้ได้กับแทบทุกเรื่องที่เรากำลังแย่ เพียงแค่คิดย้อนไป ถ้าเป็นเราในเวอร์ชั่นที่ดีที่สุด
-    เราคิดอย่างไร เราตัดสินใจอย่างไร เราทำตัวอย่างไร อะไรทำให้เรามั่นใจในสิ่งต่าง ๆ เหล่านั้น?เช่นนี้แล้ว ทันทีที่เรากำลังท้อแท้ ย่ำแย่
-    ถดถอย เพียงลองระลึกดูว่า ถ้าเราในเวอร์ชั่นที่ดีที่สุดกำลังอยู่ในสถานการณ์นี้ เราจะคิด, จะทำ, จะเป็นอย่างไร? หรือ บางทีเรื่องแย่ ๆ
-    เหล่านี้ มันไม่สำคัญอะไรต่อ “เราในเวอร์ชั่นที่ดีที่สุด”หากยังนึกไม่ออก ให้ลองจินตนาการภาพเด็กที่ไม่กลัวฝน ไม่กลัวเปียก กลับมองฝน 
-    มองการเปียกปอนเป็นเรื่องสนุกสนานด้วยซ้ำไปช่างต่างกับวัยผู้ใหญ่ที่บางทีทำน้ำหกใส่เสื้อไม่กี่หยดก็หมดความมั่นใจได้แล้ว เด็กคนนั้นอาจเป็นเราในเวอร์ชั่นที่ดีที่สุดก็เป็นได้
-    เขียนบทความนี้ไป ก็ยังแอบคิดตามไปพร้อมกันได้ว่า มันใช้ได้กับแทบทุกเรื่องที่เรากำลังแย่ เพียงแค่คิดย้อนไป ถ้าเป็นเราในเวอร์ชั่นที่ดีที่สุด
-    เราคิดอย่างไร เราตัดสินใจอย่างไร เราทำตัวอย่างไร อะไรทำให้เรามั่นใจในสิ่งต่าง ๆ เหล่านั้น?เช่นนี้แล้ว ทันทีที่เรากำลังท้อแท้ ย่ำแย่
-    ถดถอย เพียงลองระลึกดูว่า ถ้าเราในเวอร์ชั่นที่ดีที่สุดกำลังอยู่ในสถานการณ์นี้ เราจะคิด, จะทำ, จะเป็นอย่างไร? หรือ บางทีเรื่องแย่ ๆ
-    เหล่านี้ มันไม่สำคัญอะไรต่อ “เราในเวอร์ชั่นที่ดีที่สุด” 
-    `
+const Blog = ({ blog }) => {
+  //   const [loading, setLoading] = useState(false);
 
-    const numSplit = 450
+  console.log({ blog });
 
-    const text = rawText.split('').length > numSplit ? `${rawText.split('').slice(0,numSplit).join('')}....` : rawText
-
-    
+  if (!blog)
     return (
-        <div className='w-[100%] h-[16.25rem] border-b-2 border-[#1C658C] flex mt-2 justify-center'>
-            <div className='w-[97%] h-auto flex pt-3'>
-                {/* Img */}
-                <div className='w-[0] md:w-auto h-[210px] overflow-hidden'>
-                    <div className='h-auto'>
-                        <img src="https://fphftuccochbjgwngnrc.supabase.co/storage/v1/object/public/image-bucket/avatar/blank-profile.jpeg" 
-                        className='w-full h-[160px] ' />
-                        
-                    </div>
-                    <div className='w-full flex justify-between content-center items-center'>
-                        <Image src="https://fphftuccochbjgwngnrc.supabase.co/storage/v1/object/public/image-bucket/avatar/blank-profile.jpeg"
-                            width={40} height={40}
-                            className='rounded-[7px] mt-2 mr-2'
-                        />
-                        <Image src="https://fphftuccochbjgwngnrc.supabase.co/storage/v1/object/public/image-bucket/avatar/blank-profile.jpeg"
-                            width={40} height={40}
-                            className='rounded-[7px] mt-2 mr-2'
-                        />
-                        <Image src="https://fphftuccochbjgwngnrc.supabase.co/storage/v1/object/public/image-bucket/avatar/blank-profile.jpeg"
-                            width={40} height={40}
-                            className='rounded-[7px] mt-2 mr-2'
-                        />
-                        <Image src="https://fphftuccochbjgwngnrc.supabase.co/storage/v1/object/public/image-bucket/avatar/blank-profile.jpeg"
-                            width={40} height={40}
-                            className='rounded-[7px] mt-2 mr-2'
-                        />
-                    </div>
-                </div>
+      <>
+        <div className="loading"></div>
+      </>
+    );
 
-                <div className='w-full h-full ml-2 flex-col item-center'>
-                    {/* Header */}
-                    <div className='w-full flex flex-col sm:flex-row  justify-between items-center '>
-                        <div className='w-full'>
-                            <p className='text-[1.75rem] m-0 p-0 truncate'>จิ๊กโก๋สัมนาเบบี้ปัจฉิมนิเทศ</p>
-                        </div>
-                        <div className='w-full sm:w-50 flex justify-start sm:justify-end'>
-                            <Tag linkto={''} tagName={'รักน้ำรักปลา'} />
-                        </div>
+  const rawText = blog?.blogContent?.content || 'หาไม่เจอ';
+  const firstImage = blog?.thumbnail[0] || '';
+  const otherImage =
+    blog?.thumbnail?.slice(
+      1,
+      3 - blog.thumbnail.length + blog.thumbnail.length
+    ) || [];
 
-                    </div>
-                    {/* detail */}
-                    <div className='w-full'>
-                        <div className='h-[7rem] w-[90%] overflow-y-hidden '>
-                            <p className='text-[#979797] text-[1.2rem] font-light m-0 p-0 overflow-y-hidden'>
-                                {text}
-                            </p>
-                        </div>
-                    </div>
-                    {/* footer */}
-                    <div className='w-full'>
-                        <div className='w-full  flex justify-between items-center mt-4'>
-                            <div className='flex items-center'>
-                                <div>
-                                    <Image src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAA
+  const numSplit = 450;
+
+  const text =
+    rawText.split('').length > numSplit
+      ? `${rawText.split('').slice(0, numSplit).join('')}....`
+      : rawText;
+
+  return (
+    <div className="w-[100%] h-[16.25rem] border-b-2 border-[#1C658C] flex mt-2 justify-center">
+      <div className="w-[97%] h-auto flex pt-3">
+        {/* Img */}
+        <div className="w-[0] md:w-auto h-[210px] overflow-hidden">
+          <div className="h-auto">
+            <img
+              src={firstImage}
+              //   width={160}
+              //   height={160}
+              className="w-full h-[160px] "
+              alt="thumbnail image"
+            />
+          </div>
+          <div className="w-full flex justify-between content-center items-center">
+            {otherImage.map((img, i) => {
+              return (
+                <Image
+                  key={img}
+                  src={img}
+                  width={40}
+                  height={40}
+                  className="rounded-[7px] mt-2 mr-2"
+                  alt={`sub thumbnail-${i}`}
+                />
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="w-full h-full ml-2 flex-col item-center">
+          {/* Header */}
+          <div className="w-full flex flex-col sm:flex-row  justify-between items-center ">
+            <div className="w-full">
+              <p className="text-[1.75rem] m-0 p-0 truncate">
+                {blog.blogContent.title}
+              </p>
+            </div>
+            <div className="w-full sm:w-50 flex justify-start sm:justify-end">
+              <Tag
+                linkto={`/category/${blog.tag.categoryId}`}
+                tagName={blog.tag.categoryName}
+              />
+            </div>
+          </div>
+          {/* detail */}
+          <div className="w-full">
+            <div className="h-[7rem] w-[90%] overflow-y-hidden ">
+              <p className="text-[#979797] text-[1.2rem] font-light m-0 p-0 overflow-y-hidden">
+                {text}
+              </p>
+            </div>
+          </div>
+          {/* footer */}
+          <div className="w-full">
+            <div className="w-full  flex justify-between items-center mt-4">
+              <div className="flex items-center">
+                <div>
+                  <Image
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAA
                                     JbSJIAAAAM1BMVEXk5ueutLeqsbTn6eqpr7PJzc/j5ebf4eLZ3N2wtrnBxsjN0NLGysy6v8HT
                                     1tissra8wMNxTKO9AAAFDklEQVR4nO2d3XqDIAxAlfivoO//tEOZWzvbVTEpic252W3PF0gAI
                                     csyRVEURVEURVEURVEURVEURVEURVEURVEURVEURflgAFL/AirAqzXO9R7XNBVcy9TbuMHmxj
@@ -102,33 +116,43 @@ const Blog = () => {
                                     w3FfdEbTEEDdLI9TdIKRUzUesa3I461ER8cpNT7gMRhpKmYVS9ELOgCUQsa4SsulciKiLbY+A
                                     nHD8cpuhISsnxpamI84sbDq9qYJgf8wiiOBrC7Ml7M7ZECCqKoiiKoiiKoiiKoijv5AvJxlZR
                                     yNWWLwAAAABJRU5ErkJggg=="
-                                        width={31} height={31}
-                                        className='rounded-full' />
-                                </div>
-                                <div className='px-3 text-[#7A7A7A]'>
-                                    {`ชื่อผู้เขียน`}
-                                </div>
-                                <div className='px-3 text-[#7A7A7A]'>
-                                    {`เวลาที่เผยแพร่`}
-                                </div>
-                            </div>
-                            <div className='mr-2 sm:mr-0'>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-plus"
-                                    width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1C658C" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                                    <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                                    <line x1="12" y1="11" x2="12" y2="17" />
-                                    <line x1="9" y1="14" x2="15" y2="14" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
+                    width={31}
+                    height={31}
+                    className="rounded-full"
+                    alt={'profile author'}
+                  />
                 </div>
+                <div className="px-3 text-[#7A7A7A]">
+                  {blog.author.username}
+                </div>
+                <div className="px-3 text-[#7A7A7A]">{blog.create_at}</div>
+              </div>
+              <div className="mr-2 sm:mr-0">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-file-plus"
+                  width="35"
+                  height="35"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="#1C658C"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                  <line x1="12" y1="11" x2="12" y2="17" />
+                  <line x1="9" y1="14" x2="15" y2="14" />
+                </svg>
+              </div>
             </div>
+          </div>
         </div>
-    );
-}
+      </div>
+    </div>
+  );
+};
 
 export default Blog;
