@@ -4,11 +4,13 @@ import UpgateAccount from './UpgateAccount';
 import MiniBlog from '../Blog/miniBlog';
 import Comment from './comment/comments';
 
-const Sidebar = () => {
+const Sidebar = ({data}) => {
     return (
         <div>
-            <Proflie />
-            <UpgateAccount />
+            <Proflie profliedata={data.author} />
+            <div className='my-5'>
+                <UpgateAccount/>
+            </div>
             <div className='w-full h-auto'>
                 <div className='w-full h-auto'>
                     <p className='text-[1.375rem] text-[#1C658C] px-2'>บทความที่คล้ายกัน</p>

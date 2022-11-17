@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 const Navbar = dynamic(() => import('../../../components/Navbar/Navbarlogin'), {
   ssr: false,
 });
+const Sidebar = dynamic(() => import('../../../components/Sidebar/Sidebar'),{ssr: false,});
 
 const BlogOne = () => {
   const [data, setData] = useState('');
@@ -57,19 +58,31 @@ const BlogOne = () => {
   return (
     <>
       <Navbar />
-      <div className="container max-w-[40rem] mx-auto my-10">
-        <div>
-          <h1 className="text-[2.1rem] mb-4 font-bold h-auto overflow-y-hidden">
-            {data?.blogContent?.title}
-          </h1>
+      <div className='flex'>
+        <div className='w-full md:w-[70%] flex justify-center mx-10  md:mx-0 '>
+          <div className="max-w-[50rem] mx-5 lg:mx-auto my-10 ">
+            <div>
+              <h1 className="text-[1.5rem] md:text-[2.5rem] mb-4 font-bold h-auto overflow-y-hidden">
+                {data?.blogContent?.title}
+              </h1>
+            </div>
+            <TypographyStylesProvider>
+              <div className='text-[1rem] sm:text-[1.15] md:text-[1.25rem] text-light'
+                dangerouslySetInnerHTML={{
+                  __html: data?.blogContent?.content,
+                }}
+              />
+            </TypographyStylesProvider>
+          </div>
         </div>
-        <TypographyStylesProvider>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: data?.blogContent?.content,
-            }}
-          />
-        </TypographyStylesProvider>
+        <div className='w-[0] md:w-[30%]  flex justify-center my-10'>
+              <div className='w-[75%] '>
+                <Sidebar data={data}/>
+              </div>
+        </div>
+      </div>
+      <div className=''>
+
       </div>
     </>
   );

@@ -474,3 +474,6 @@ video {
 ::-webkit-scrollbar-thumb:hover {
   background: #278ec6;
 }
+code {
+  color : white !important;
+} 
