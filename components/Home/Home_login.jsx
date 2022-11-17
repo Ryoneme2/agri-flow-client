@@ -15,9 +15,10 @@ import SuggustTopic from './suggustTopic';
 import AvatarText from '../staticUser/AvatarText';
 import UpgateAccount from '../Sidebar/UpgateAccount';
 
-const LandingNonLogin = ({ blog }) => {
+const LandingNonLogin = ({ suggestBlog }) => {
   let content = '';
-  blog ? (content = 'hidden') : (content = '');
+
+  // blog ? (content = 'hidden') : (content = '');
 
   return (
     <>
@@ -82,22 +83,19 @@ const LandingNonLogin = ({ blog }) => {
               Topic={'บทความสำหรับคุณ'}
               Children={
                 <>
-                  <Blog />
-                  <Blog />
+                  {suggestBlog.map((blog) => {
+                    return <Blog blog={blog} key={blog.id} />;
+                  })}
                 </>
               }
             />
             <SuggustTopic
               Topic={'บทความที่คุณติดตาม'}
-              Children={
-                <>
-                  <Blog />
-                </>
-              }
+              Children={<>{/* <Blog /> */}</>}
             />
             <SuggustTopic Topic={'บทความน่าสนใจ'} />
           </div>
-          {blog}
+          {''}
         </div>
       </div>
     </>
