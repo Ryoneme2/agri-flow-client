@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Like = ({Like}) => {
+const Like = ({LikeCount}) => {
     return (
         <div className='flex mx-1'>
             <div className='mx-2'>
@@ -10,7 +10,7 @@ const Like = ({Like}) => {
                 </svg>
             </div>
             <div className='mx-1'>
-                {Like}
+                {LikeCount}
             </div>
         </div>
     );
