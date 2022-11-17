@@ -11,9 +11,9 @@ import ShowUserNum from '../staticUser/ShowUserNum';
 import Tag from '../Tag';
 import SuggustTopic from './suggustTopic';
 
-const LandingNonLogin = ({ blog }) => {
+const LandingNonLogin = ({ children }) => {
   let content;
-  blog ? (content = 'hidden') : (content = '');
+  // blog ? (content = 'hidden') : (content = '');
 
   return (
     <>
@@ -73,7 +73,7 @@ const LandingNonLogin = ({ blog }) => {
               }
             />
           </div>
-          {blog}
+          {children}
         </div>
       </div>
     </>

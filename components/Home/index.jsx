@@ -39,22 +39,26 @@ const LandingNonLogin = () => {
       </>
     );
 
-  if (token) return <Home_login suggestBlog={blogSuggest} />;
+  if (token)
+    return (
+      <>
+        <Home_login>
+          <SuggustTopic Topic={'บทความสำหรับคุณ'}>
+            {blogSuggest.map((blog) => {
+              return <Blog blog={blog} key={blog.id} />;
+            })}
+          </SuggustTopic>
+        </Home_login>
+      </>
+    );
   return (
-    <Home_nonlogin
-      blog={
-        <SuggustTopic
-          Topic={'บทความตาม หมวดหมู่'}
-          Children={
-            <>
-              {blogSuggest.map((blog) => {
-                return <Blog blog={blog} key={blog.id} />;
-              })}
-            </>
-          }
-        />
-      }
-    />
+    <Home_nonlogin>
+      <SuggustTopic Topic={'บทความตาม หมวดหมู่'}>
+        {blogSuggest.map((blog) => {
+          return <Blog blog={blog} key={blog.id} />;
+        })}
+      </SuggustTopic>
+    </Home_nonlogin>
   );
 };
 
