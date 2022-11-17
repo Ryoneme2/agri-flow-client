@@ -15,9 +15,9 @@ import SuggustTopic from './suggustTopic';
 import AvatarText from '../staticUser/AvatarText';
 import UpgateAccount from '../Sidebar/UpgateAccount';
 
-const LandingNonLogin = ({ blog }) => {
+const LandingNonLogin = ({ children }) => {
   let content = '';
-  blog ? (content = 'hidden') : (content = '');
+  // blog ? (content = 'hidden') : (content = '');
 
   return (
     <>
@@ -78,26 +78,13 @@ const LandingNonLogin = ({ blog }) => {
             </div>
           </div>
           <div className={content}>
-            <SuggustTopic
-              Topic={'บทความสำหรับคุณ'}
-              Children={
-                <>
-                  <Blog />
-                  <Blog />
-                </>
-              }
-            />
-            <SuggustTopic
+            {children}
+            {/* <SuggustTopic
               Topic={'บทความที่คุณติดตาม'}
-              Children={
-                <>
-                  <Blog />
-                </>
-              }
             />
-            <SuggustTopic Topic={'บทความน่าสนใจ'} />
+            <SuggustTopic Topic={'บทความน่าสนใจ'} /> */}
           </div>
-          {blog}
+          {/* {blog} */}
         </div>
       </div>
     </>

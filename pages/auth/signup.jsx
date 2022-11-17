@@ -1,14 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+
+import axios from 'axios';
+
 import InputLogin from '../../components/Login/InputLogin';
 import BoxLogin from '../../components/Layouts/BoxLogin';
 
 const ResetPassword = () => {
-  const setup = { email: '', username: '', pw: '', cmpw: '' };
+  const setup = { email: '', username: '', password: '', cmpw: '' };
   const [user, setUser] = useState(setup);
   const [color, setColor] = useState(setup);
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState({
+    isError: false,
+    msg: '',
+  });
 
+  const router = useRouter();
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   //console.log(formState, errors);
@@ -24,6 +34,22 @@ const ResetPassword = () => {
 
   const onSubmitClick = (data) => {
     console.log(data);
+    setLoading(true);
+    axios
+      .post(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/register`, data)
+      .then(function (response) {
+        console.log(response.data.msg);
+        setLoading(false);
+        router.push('../auth/login-email');
+      })
+      .catch(function (error) {
+        console.log(error);
+        setErr({
+          isError: true,
+          msg: error?.response?.data?.msg || 'ผิดพลาดงงๆ',
+        });
+        setLoading(false);
+      });
     setColor(setup);
   };
 
@@ -33,8 +59,8 @@ const ResetPassword = () => {
       ? setColor({ email: 'warn' })
       : errors.username
       ? setColor({ username: 'warn' })
-      : errors.pw
-      ? setColor({ pw: 'warn' })
+      : errors.password
+      ? setColor({ password: 'warn' })
       : errors.cmpw
       ? setColor({ cmpw: 'warn' })
       : console.log('verified');
@@ -46,6 +72,9 @@ const ResetPassword = () => {
         <h1 className="font-semibold sm:text-[1.7rem] text-[#1C658C] my-3">
           สมัครบัญชีผู้ใช้
         </h1>
+        <div className="flex justify-center">
+          {err.isError && <small className="text-red-500">{err.msg}</small>}
+        </div>
         <form onSubmit={handleSubmit(onSubmitClick)}>
           <InputLogin
             type={'email'}
@@ -73,11 +102,11 @@ const ResetPassword = () => {
           />
           <InputLogin
             type={'password'}
-            name={'pw'}
-            register={register('pw', { required: 'password required!' })}
-            value={user.pw}
+            name={'password'}
+            register={register('password', { required: 'password required!' })}
+            value={user.password}
             onChange={handleOnChange}
-            color={color.pw}
+            color={color.password}
             placeholder={'รหัสผ่าน'}
           />
           <InputLogin
@@ -85,19 +114,26 @@ const ResetPassword = () => {
             name={'cmpw'}
             register={register('cmpw', {
               required: 'confirm required!',
-              validate: (value) => value === user.pw,
+              validate: (value) => value === user.password,
             })}
             value={user.cmpw}
             onChange={handleOnChange}
             color={color.cmpw}
             placeholder={'ยืนยันรหัสผ่าน'}
           />
-          <InputLogin
-            type={'submit'}
-            value={'ยืนยันการสมัคร'}
-            css={'justify-center text-center'}
-            color={'submit'}
-          />
+          {loading && (
+            <div className="flex justify-center items-center h-[4rem] mb-5">
+              <div className="loading"></div>
+            </div>
+          )}
+          {!loading && (
+            <InputLogin
+              type={'submit'}
+              value={'ยืนยันการสมัคร'}
+              css={'justify-center text-center'}
+              color={'submit'}
+            />
+          )}
         </form>
       </div>
     </BoxLogin>

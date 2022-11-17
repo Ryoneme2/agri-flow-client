@@ -3,6 +3,9 @@ import { TypographyStylesProvider } from '@mantine/core';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+const Sidebar = dynamic(() => import('../../../components/Sidebar/Sidebar'), {
+  ssr: false,
+});
 const Navbar = dynamic(() => import('../../../components/Navbar/Navbarlogin'), {
   ssr: false,
 });
@@ -57,33 +60,32 @@ const BlogOne = () => {
   return (
     <>
       <Navbar />
-      <div className="container max-w-[40rem] mx-auto my-10">
-        <div>
-          <h1 className="text-[2.1rem] mb-4 font-bold h-auto overflow-y-hidden">
-            {data?.blogContent?.title}
-          </h1>
+      <div className="flex">
+        <div className="w-full md:w-[70%] flex justify-center mx-10  md:mx-0 ">
+          <div className="max-w-[50rem] mx-5 lg:mx-auto my-10 ">
+            <div>
+              <h1 className="text-[1.5rem] md:text-[2.5rem] mb-4 font-bold h-auto overflow-y-hidden">
+                {data?.blogContent?.title}
+              </h1>
+            </div>
+            <TypographyStylesProvider>
+              <div
+                className="text-[1rem] sm:text-[1.15] md:text-[1.25rem] text-light"
+                dangerouslySetInnerHTML={{
+                  __html: data?.blogContent?.content,
+                }}
+              />
+            </TypographyStylesProvider>
+          </div>
         </div>
-        <TypographyStylesProvider>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: data?.blogContent?.content,
-            }}
-          />
-        </TypographyStylesProvider>
+        <div className="w-[0] md:w-[30%]  flex justify-center my-10">
+          <div className="w-[75%] ">
+            <Sidebar data={data} />
+          </div>
+        </div>
       </div>
+      <div className=""></div>
     </>
   );
 };
-
-// // This gets called on every request
-// export async function getServerSideProps() {
-//   // Fetch data from external API
-// const res = await axios.get(
-//   `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blog/p/1`
-// );
-
-//   // Pass data to the page via props
-//   return { props: { data: res.data } };
-// }
-
 export default BlogOne;

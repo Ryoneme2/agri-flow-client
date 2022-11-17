@@ -1,4 +1,3 @@
-import Profile from './Profile';
 import { Avatar } from '@mantine/core';
 
 const AvatarText = ({ imgProfile, name }) => {
