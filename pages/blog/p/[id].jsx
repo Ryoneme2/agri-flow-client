@@ -6,7 +6,9 @@ import dynamic from 'next/dynamic';
 const Sidebar = dynamic(() => import('../../../components/Sidebar/Sidebar'), {
   ssr: false,
 });
-const Navbar = dynamic(() => import('../../../components/Navbar/Navbarlogin'), {ssr: false,});
+const Navbar = dynamic(() => import('../../../components/Navbar/Navbarlogin'), {
+  ssr: false,
+});
 
 const BlogOne = () => {
   const [data, setData] = useState('');
@@ -58,8 +60,8 @@ const BlogOne = () => {
   return (
     <>
       <Navbar />
-      <div className='flex'>
-        <div className='w-full md:w-[70%] flex justify-center mx-10  md:mx-0 '>
+      <div className="flex">
+        <div className="w-full md:w-[70%] flex justify-center mx-10  md:mx-0 ">
           <div className="max-w-[50rem] mx-5 lg:mx-auto my-10 ">
             <div>
               <h1 className="text-[1.5rem] md:text-[2.5rem] mb-4 font-bold h-auto overflow-y-hidden">
@@ -67,7 +69,8 @@ const BlogOne = () => {
               </h1>
             </div>
             <TypographyStylesProvider>
-              <div className='text-[1rem] sm:text-[1.15] md:text-[1.25rem] text-light'
+              <div
+                className="text-[1rem] sm:text-[1.15] md:text-[1.25rem] text-light"
                 dangerouslySetInnerHTML={{
                   __html: data?.blogContent?.content,
                 }}
@@ -75,16 +78,14 @@ const BlogOne = () => {
             </TypographyStylesProvider>
           </div>
         </div>
-        <div className='w-[0] md:w-[30%]  flex justify-center my-10'>
-              <div className='w-[75%] '>
-                <Sidebar data={data}/>
-              </div>
+        <div className="w-[0] md:w-[30%]  flex justify-center my-10">
+          <div className="w-[75%] ">
+            <Sidebar data={data} />
+          </div>
         </div>
       </div>
-      <div className=''>
-
-      </div>
+      <div className=""></div>
     </>
   );
-}
+};
 export default BlogOne;
