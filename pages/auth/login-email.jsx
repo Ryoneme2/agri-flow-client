@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import InputLogin from '../../components/Login/InputLogin';
 import BoxLogin from '../../components/Layouts/BoxLogin';
@@ -10,6 +10,7 @@ import axios from 'axios';
 const Login_email = () => {
   // Provide a custom `fetch` implementation as an option
   const [person, setPerson] = useState({});
+  const router = useRouter();
 
   const [user, setUser] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
@@ -43,7 +44,7 @@ const Login_email = () => {
         console.log(response.data);
         localStorage.setItem('access_token', response.data.data.token);
         setLoading(false);
-        window.location.href = '../';
+        router.push('../');
       })
       .catch(function (error) {
         console.log(error);
