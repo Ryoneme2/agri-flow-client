@@ -17,7 +17,7 @@ import UpgateAccount from '../Sidebar/UpgateAccount';
 
 const LandingNonLogin = ({ children }) => {
   let content = '';
-  // blog ? (content = 'hidden') : (content = '');
+  // tag ? (content = 'hidden') : (content = '');
 
   return (
     <>
@@ -27,7 +27,9 @@ const LandingNonLogin = ({ children }) => {
           <div className="grid mb-6">
             <UpgateAccount />
             <div className="w-full">
-              <h1 className="text-xl overflow-hidden">บุคคลที่ติดตาม</h1>
+              <h1 className="text-xl overflow-hidden text-[#1C658C]">
+                บุคคลที่ติดตาม
+              </h1>
               <div>
                 <AvatarText
                   imgProfile={'/images/profile/jammy.jpg'}
@@ -45,7 +47,9 @@ const LandingNonLogin = ({ children }) => {
             </div>
           </div>
           <div className="contents mx-4 mb-5 w-full">
-            <h1 className="text-xl overflow-hidden">หมวดหมู่ที่เข้าชมบ่อย</h1>
+            <h1 className="text-xl overflow-hidden text-[#1C658C]">
+              หมวดหมู่ที่เข้าชมบ่อย
+            </h1>
             <div className="flex flex-wrap">
               <Tag linkto={''} tagName={'โรคในพืชยืนต้น'} />
               <Tag linkto={''} tagName={'โรคในพืชล้มลุก'} />
@@ -66,9 +70,6 @@ const LandingNonLogin = ({ children }) => {
             <CommunityBlock />
           </div>
           <div className="flex md:hidden place-items-center mx-3">
-            <h1 className="sm:flex md:hidden hidden text-xl overflow-hidden min-w-[5rem]">
-              หมวดหมู่ :
-            </h1>
             <div className="flex flex-wrap">
               <Tag linkto={''} tagName={'โรคในพืชยืนต้น'} />
               <Tag linkto={''} tagName={'โรคในพืชล้มลุก'} />
@@ -78,13 +79,12 @@ const LandingNonLogin = ({ children }) => {
             </div>
           </div>
           <div className={content}>
-            {children}
             {/* <SuggustTopic
               Topic={'บทความที่คุณติดตาม'}
             />
             <SuggustTopic Topic={'บทความน่าสนใจ'} /> */}
           </div>
-          {/* {blog} */}
+          {children}
         </div>
       </div>
     </>
