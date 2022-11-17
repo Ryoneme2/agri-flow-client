@@ -38,7 +38,7 @@ const Blog = ({ blog }) => {
           <div className="h-auto">
             <img
               src={firstImage}
-              className="bg-cover bg-center border border-gray-400 w-auto h-[160px] object-cover"
+              className="bg-cover bg-center border border-gray-400 w-full h-[160px] object-cover"
               alt="thumbnail image"
             />
           </div>
