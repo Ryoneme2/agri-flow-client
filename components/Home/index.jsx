@@ -47,7 +47,9 @@ const LandingNonLogin = () => {
           Topic={'บทความตาม หมวดหมู่'}
           Children={
             <>
-              <Blog />
+              {blogSuggest.map((blog) => {
+                return <Blog blog={blog} key={blog.id} />;
+              })}
             </>
           }
         />
