@@ -6,7 +6,9 @@ import dynamic from 'next/dynamic';
 const Sidebar = dynamic(() => import('../../../components/Sidebar/Sidebar'), {
   ssr: false,
 });
-const Navbar = dynamic(() => import('../../../components/Navbar/Navbarlogin'), {ssr: false,});
+const Navbar = dynamic(() => import('../../../components/Navbar/Navbarlogin'), {
+  ssr: false,
+});
 
 const BlogOne = () => {
 
@@ -82,7 +84,10 @@ const BlogOne = () => {
               </div>
         </div>
       </div>
+      <div className=''>
+
+      </div>
     </>
   );
-}
+};
 export default BlogOne;

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Tag from '../Tag';
+import { TypographyStylesProvider } from '@mantine/core';
 
 const Blog = ({ blog }) => {
   //   const [loading, setLoading] = useState(false);
@@ -76,9 +77,14 @@ const Blog = ({ blog }) => {
           {/* detail */}
           <div className="w-full ml-3">
             <div className="h-[7rem] w-[90%] overflow-y-hidden ">
-              <p className="text-[#979797] text-[1.2rem] font-light m-0 p-0 overflow-y-hidden">
-                {text}
-              </p>
+              <TypographyStylesProvider>
+                <div
+                  className="text-[0.70rem] sm:text-[0.8rem] md:text-[0.9rem] text-light text-[#979797] font-light m-0 p-0 overflow-y-hidden"
+                  dangerouslySetInnerHTML={{
+                    __html: text,
+                  }}
+                />
+              </TypographyStylesProvider>
             </div>
           </div>
           {/* footer */}
