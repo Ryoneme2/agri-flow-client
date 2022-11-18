@@ -16,6 +16,7 @@ const NewBlog = () => {
 
 
   console.log(value);
+  
   const people = useMemo(
     () => [
       { id: 1, value: 'Bill Horsefighter' },

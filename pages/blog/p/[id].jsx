@@ -16,12 +16,14 @@ const BlogOne = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { id } = router.query;
-  console.log(id);
+  
+  console.log(`id:${id}`);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
+        if (!id) return;
         const token = localStorage.getItem('access_token');
         const res = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs/p/${id}`,
@@ -80,7 +82,7 @@ const BlogOne = () => {
         </div>
         <div className='w-[0] md:w-[30%] flex justify-center my-10 '>
               <div className='w-[75%]'>
-                <Sidebar data={data}/>
+                <Sidebar data={data} postid ={id}/>
               </div>
         </div>
       </div>

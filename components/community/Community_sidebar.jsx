@@ -4,7 +4,7 @@ import { Avatar } from '@mantine/core';
 const CommumitySidebar = ({ data }) => {
     return (
         <>
-            <div className='flex h-[5rem] items-center my-3 mx-3 shadow-md rounded-[10px]'>
+            <div className='flex h-[6rem] items-center my-3 mx-3 shadow-md rounded-[10px]'>
                 <div className='w-[5rem] h-[5rem] rounded-[10px]'>
                     <image src={data} />
                 </div>

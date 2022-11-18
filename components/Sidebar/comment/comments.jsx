@@ -2,7 +2,9 @@ import React from 'react';
 import Comment from './commentBlock';
 import Addcomment from './addcomment';
 
-const Comments = ({ dataComment }) => {
+
+const Comments = ({ dataComment ,postid}) => {
+    console.log(dataComment);
   return (
     <>
       <div className="w-full h-auto">
@@ -15,7 +17,7 @@ const Comments = ({ dataComment }) => {
               </div>
           }
         <div>
-          <Addcomment />
+          <Addcomment postid={postid}/>
         </div>
       </div>
     </>
