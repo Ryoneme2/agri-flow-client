@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import Comment from './commentBlock';
 import Addcomment from './addcomment';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 const Comments = ({ dataComment, postid }) => {
   console.log(dataComment);
-  const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
+
+  const parent = useRef(null);
+
+  useEffect(() => {
+    parent.current && autoAnimate(parent.current);
+  }, [parent]);
   return (
     <>
       <div className="w-full h-auto">

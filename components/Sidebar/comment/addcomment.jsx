@@ -17,7 +17,7 @@ const Addcomment = ({ postid }) => {
       setComment((prev) => [
         ...prev,
         {
-          id: 99999,
+          id: Math.floor(Math.random() * 9999),
           author: {
             username: user.username,
             imageProfile: user.imageProfile,
