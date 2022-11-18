@@ -25,7 +25,7 @@ const NewPost = dynamic(
   ssr: false,
 });
 const Community = dynamic(
-  () => import('../components/community/Commumity_sidebar'), {
+  () => import('../components/community/Community_sidebar'), {
     ssr: false,
 });
 const Discuss = () => {

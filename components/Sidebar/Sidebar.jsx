@@ -3,8 +3,24 @@ import Proflie from './Profile';
 import UpgateAccount from './UpgateAccount';
 import MiniBlog from '../Blog/miniBlog';
 import Comment from './comment/comments';
+import axios from 'axios';
 
-const Sidebar = ({ data }) => {
+const Sidebar = ({ data , postid }) => {
+    
+    const [comment,setComment] = React.useState([])
+
+    React.useEffect(() => {
+    const host = process.env.NEXT_PUBLIC_API_URL;
+    const comment = async() => {
+      const commentGet = await axios.get(`${host}/api/v1/blogs/p/comments/${postid}`);
+      setComment(commentGet.data.data)
+      console.log(commentGet.data.data);
+    }
+    comment();
+    },[]);
+
+    console.log(comment);
+
     return (
         <>
             <div className='w-full'>
@@ -24,7 +40,7 @@ const Sidebar = ({ data }) => {
                 <div className='w-full h-auto'>
                     <div className=' w-full h-auto'>
                         <p className='text-[1.375rem] text-[#1C658C] px-2'>ความคิดเห็น</p>
-                            <Comment dataComment={data.comment}/>
+                            <Comment dataComment={comment} postid={postid} />
                     </div>
                 
                 </div>

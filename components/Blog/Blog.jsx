@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Tag from '../Tag';
 import { TypographyStylesProvider } from '@mantine/core';
+import Link from 'next/link';
 
 const Blog = ({ blog }) => {
   //   const [loading, setLoading] = useState(false);
@@ -61,32 +62,35 @@ const Blog = ({ blog }) => {
 
         <div className="w-full h-full ml-2 flex-col item-center">
           {/* Header */}
-          <div className="w-full flex flex-col sm:flex-row  justify-between items-center ">
-            <div className="w-full">
-              <p className="text-[1.75rem] ml-3 mb-0 mt-0 p-0 truncate">
-                {blog.blogContent.title}
-              </p>
-            </div>
-            <div className="w-full sm:w-50 flex justify-start sm:justify-end">
-              <Tag
-                linkto={`/category/${blog.tag.categoryId}`}
-                tagName={blog.tag.categoryName}
-              />
-            </div>
-          </div>
-          {/* detail */}
-          <div className="w-full ml-3">
-            <div className="h-[7rem] w-[90%] overflow-y-hidden ">
-              <TypographyStylesProvider>
-                <div
-                  className="text-[0.70rem] sm:text-[0.8rem] md:text-[0.9rem] text-light text-[#979797] font-light m-0 p-0 overflow-y-hidden"
-                  dangerouslySetInnerHTML={{
-                    __html: text,
-                  }}
+          <Link href={`/blog/p/${blog.id}`}>
+            <div className="w-full flex flex-col sm:flex-row  justify-between items-center ">
+              <div className="w-full">
+                <p className="text-[1.75rem] ml-3 mb-0 mt-0 p-0 truncate">
+                  {blog.blogContent.title}
+                </p>
+              </div>
+              <div className="w-full sm:w-50 flex justify-start sm:justify-end">
+                <Tag
+                  linkto={`/category/${blog.tag.categoryId}`}
+                  tagName={blog.tag.categoryName}
                 />
-              </TypographyStylesProvider>
+              </div>
             </div>
-          </div>
+            {/* detail */}
+
+            <div className="w-full ml-3">
+              <div className="h-[7rem] w-[90%] overflow-y-hidden ">
+                <TypographyStylesProvider>
+                  <div
+                    className="text-[0.70rem] sm:text-[0.8rem] md:text-[0.9rem] text-light text-[#979797] font-light m-0 p-0 overflow-y-hidden"
+                    dangerouslySetInnerHTML={{
+                      __html: text,
+                    }}
+                  />
+                </TypographyStylesProvider>
+              </div>
+            </div>
+          </Link>
           {/* footer */}
           <div className="w-full">
             <div className="w-full  flex justify-between items-center mt-4">
@@ -108,15 +112,15 @@ const Blog = ({ blog }) => {
               <div className="mr-2 sm:mr-0">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-file-plus"
+                  className="icon icon-tabler icon-tabler-file-plus"
                   width="35"
                   height="35"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="#1C658C"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M14 3v4a1 1 0 0 0 1 1h4" />

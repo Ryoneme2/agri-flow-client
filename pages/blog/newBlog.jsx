@@ -9,12 +9,14 @@ const NewBlog = () => {
   const router = useRouter()
   const [value, onChange] = React.useState('');
   const [title, setTitle] = React.useState('');
+  const [tag,setTag] = React.useState([]);
   const editorRef = useRef();
-  const [alltag,setAllTag] = React.useState([]);
+
+  
 
 
   console.log(value);
-
+  
   const people = useMemo(
     () => [
       { id: 1, value: 'Bill Horsefighter' },
@@ -24,6 +26,7 @@ const NewBlog = () => {
     ],
     []
   );
+
 
   const tags = useMemo(
     () => [
@@ -71,9 +74,16 @@ const NewBlog = () => {
     }
   };
 
-  const selectTag =async () => {
+  useEffect(() => {
+    const host = process.env.NEXT_PUBLIC_API_URL;
+    const tagData= async() => {
+      const tagGet = await axios.get(`${host}/api/v1/utilities/categories?char`)
+      setTag(tagGet.data.data.map(v=>v.categoryName))
+      console.log(tagGet.data.data.map(v=>v.categoryName));
+    }
+    tagData();
+},[]);
   
-  };
 
   return (
     <div className="container mx-auto mt-4">
@@ -96,10 +106,11 @@ const NewBlog = () => {
         <div className='my-2'>
           
           <MultiSelect
-            data={alltag}
+            data={tag}
             variant="unstyled"
             placeholder="เลือกหมวดหมู่ที่ต้องการ"
-            onChange={''}
+            searchable
+            nothingFound="Nobody here"
           />
 
         </div>
