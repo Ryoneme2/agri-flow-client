@@ -45,6 +45,7 @@ span {
 5. Use the user's configured `sans` font-feature-settings by default.
 */
 
+
 html {
   line-height: 1.5; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -461,7 +462,7 @@ video {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: white;
 }
 
 /* Handle */
