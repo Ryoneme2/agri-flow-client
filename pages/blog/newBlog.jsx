@@ -86,7 +86,7 @@ const NewBlog = () => {
   
 
   return (
-    <div className="container mx-auto mt-4">
+    <div className="w-full md:container mx-auto mt-4">
       <div className="h-full  mb-[4rem]">
         <div className="flex items-center">
           <input
@@ -98,7 +98,7 @@ const NewBlog = () => {
           />
           <button
             onClick={publishBlog}
-            className="w-[8rem] bg-[#1C658C] hover:bg-[#114c6c] transition-all h-12 ml-2 text-white text-lg rounded-r-full"
+            className="w-[8rem] bg-[#1C658C] hover:bg-[#114c6c] transition-all h-[2rem] md:h-[3rem] ml-2 text-white text-lg rounded-r-full"
           >
             เผยแพร่
           </button>
