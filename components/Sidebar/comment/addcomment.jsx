@@ -10,7 +10,6 @@ const Addcomment = ({ postid }) => {
 
   const clickComment = async () => {
     try {
-      console.log(postid);
       const token = localStorage.getItem('access_token');
       const user = JSON.parse(localStorage.getItem('user'));
       const host = process.env.NEXT_PUBLIC_API_URL;

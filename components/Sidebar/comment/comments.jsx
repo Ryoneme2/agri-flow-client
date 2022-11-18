@@ -4,12 +4,11 @@ import Addcomment from './addcomment';
 
 
 const Comments = ({ dataComment ,postid}) => {
-    console.log(dataComment);
   return (
     <>
       <div className="w-full h-auto">
           {
-            !dataComment ? <div className='w-full'></div> :
+            dataComment.length == 0 ? <div className='w-full'></div> :
               <div className="w-full h-[30rem] selection:border overflow-y-scroll">
                 {dataComment.map((comment) => {
                   return <Comment data={comment} key={comment.id} />
