@@ -9,7 +9,7 @@ const Comments = ({ dataComment, postid }) => {
   return (
     <>
       <div className="w-full h-auto">
-        {!dataComment ? (
+        {dataComment.length == 0 ? (
           <div className="w-full"></div>
         ) : (
           <div
