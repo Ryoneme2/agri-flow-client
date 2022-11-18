@@ -22,13 +22,11 @@ const Sidebar = ({ data }) => {
 
                 </div>
                 <div className='w-full h-auto'>
-                    <div className='w-full h-auto'>
+                    <div className=' w-full h-auto'>
                         <p className='text-[1.375rem] text-[#1C658C] px-2'>ความคิดเห็น</p>
+                            <Comment dataComment={data.comment}/>
                     </div>
-                    <div>
-                        <Comment />
-                    </div>
-
+                
                 </div>
             </div>
         </>

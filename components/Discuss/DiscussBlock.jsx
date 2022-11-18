@@ -4,20 +4,20 @@ import Comment from './CommentPost';
 import Header from './header';
 
 
-const PostBlock = () => {
+const PostBlock = ({ dataImage }) => {
     return (
         <>
             <div className='w-full h-auto shadow-lg rounded-[20px] my-3 '>
                 <div className='w-full h-full p-3'>
                     <Header />
 
-                    <div className=' w-full h-auto p-2'>
-                        <div className=''>
-
-                        </div>
-                    </div>
-
-
+                    {
+                        !dataImage ?
+                            <div className=' my-2'></div> :
+                            <div className=' w-full h-auto p-2 my-3 border border-[#1C658C] flex justify-center items-center rounded-[20px]'>
+                                <img src={dataImage} className='w-auto max-h-[20rem] md:max-h-[25rem]  bg-cover bg-center' />
+                            </div>
+                    }
 
                     <div className='px-2 w-full h-[8.50rem] break-words'>
                         <p className='text-[1.125rem] font-light m-0 p-0'>

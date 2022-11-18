@@ -1,12 +1,18 @@
 import dynamic from 'next/dynamic';
 import React, { useEffect, useMemo, useRef } from 'react';
 import axios, { AxiosError } from 'axios';
+import { MultiSelect } from '@mantine/core';
 const RichTextEditor = dynamic(() => import('@mantine/rte'), { ssr: false });
+import { useRouter } from 'next/router'
 
 const NewBlog = () => {
+  const router = useRouter()
   const [value, onChange] = React.useState('');
   const [title, setTitle] = React.useState('');
   const editorRef = useRef();
+  const [alltag,setAllTag] = React.useState([]);
+
+
   console.log(value);
 
   const people = useMemo(
@@ -48,13 +54,13 @@ const NewBlog = () => {
     try {
       const host = process.env.NEXT_PUBLIC_API_URL;
       const token = localStorage.getItem('access_token');
-      const res = await axios.post(`${host}/api/v1/blogs/p`,{title,content: value,},{headers: {Authorization: token,},});
+      const res = await axios.post(`${host}/api/v1/blogs/p`, { title, content: value, }, { headers: { Authorization: token, }, });
 
       if (res.status !== 201) throw new Error('internal error');
 
       console.log('published');
 
-      
+      router.push('../')
 
     } catch (e) {
       if (e instanceof AxiosError) {
@@ -65,6 +71,10 @@ const NewBlog = () => {
     }
   };
 
+  const selectTag =async () => {
+  
+  };
+
   return (
     <div className="container mx-auto mt-4">
       <div className="h-full  mb-[4rem]">
@@ -72,7 +82,7 @@ const NewBlog = () => {
           <input
             type="text"
             className="w-full h-20 text-3xl hover:outline-none mb-2 border border-l-0 border-t-0 border-b-0 focus:outline-none"
-            placeholder="Title..."
+            placeholder="หัวเรื่อง"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -82,6 +92,16 @@ const NewBlog = () => {
           >
             เผยแพร่
           </button>
+        </div>
+        <div className='my-2'>
+          
+          <MultiSelect
+            data={alltag}
+            variant="unstyled"
+            placeholder="เลือกหมวดหมู่ที่ต้องการ"
+            onChange={''}
+          />
+
         </div>
         <RichTextEditor
           value={value}
