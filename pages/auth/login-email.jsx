@@ -42,6 +42,10 @@ const Login_email = () => {
       .then(function (response) {
         console.log(response.data);
         localStorage.setItem('access_token', response.data.data.token);
+        localStorage.setItem(
+          'user',
+          JSON.stringify(response.data.data.user)
+        );
         setLoading(false);
         router.push('../');
       })
