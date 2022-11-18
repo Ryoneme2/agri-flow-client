@@ -68,6 +68,7 @@ const LandingNonLogin = ({ children }) => {
                 tagSuggest.map((tag) => {
                   return (
                     <Tag
+                      key={''}
                       linkto={`./category/${tag.categoryId}`}
                       tagName={tag.categoryName}
                     />
@@ -95,6 +96,7 @@ const LandingNonLogin = ({ children }) => {
               {tagSuggest.map((tag) => {
                 return (
                   <Tag
+                    key={''}
                     linkto={`./category/${tag.categoryId}`}
                     tagName={tag.categoryName}
                   />
