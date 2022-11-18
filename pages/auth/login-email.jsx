@@ -43,7 +43,7 @@ const Login_email = () => {
         console.log(response.data);
         localStorage.setItem('access_token', response.data.data.token);
         localStorage.setItem(
-          'access_token',
+          'user',
           JSON.stringify(response.data.data.user)
         );
         setLoading(false);
