@@ -5,7 +5,7 @@ import CommentBlock from './CommentBlock';
 import Header from './header';
 
 
-const Disscuss = () => {
+const Disscuss = ({data}) => {
     return (
         <>
             <div className='w-full h-full flex-col my-3'>
@@ -13,8 +13,9 @@ const Disscuss = () => {
                     <div className='w-full h-full p-3'>
                         <Header />
 
+                        
                         <div className=' w-full h-auto p-2 my-3 border border-[#1C658C] flex justify-center items-center rounded-[20px]'>
-                            <img src="/images/png/1_2.png" className='w-auto max-h-[20rem] md:max-h-[25rem]  bg-cover bg-center' />
+                            <img src={data.image} className='w-auto max-h-[20rem] md:max-h-[25rem]  bg-cover bg-center' />
                         </div>
 
 

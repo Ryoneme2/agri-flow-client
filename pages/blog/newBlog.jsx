@@ -9,14 +9,15 @@ const NewBlog = () => {
   const router = useRouter()
   const [value, onChange] = React.useState('');
   const [title, setTitle] = React.useState('');
-  const [tag,setTag] = React.useState([]);
+  const [tag, setTag] = React.useState([]);
   const editorRef = useRef();
 
-  
+
+
 
 
   console.log(value);
-  
+
   const people = useMemo(
     () => [
       { id: 1, value: 'Bill Horsefighter' },
@@ -57,7 +58,7 @@ const NewBlog = () => {
     try {
       const host = process.env.NEXT_PUBLIC_API_URL;
       const token = localStorage.getItem('access_token');
-      const res = await axios.post(`${host}/api/v1/blogs/p`, { title, content: value, }, { headers: { Authorization: token, }, });
+      const res = await axios.post(`${host}/api/v1/blogs/p`, { title, categories:tag ,content: value, }, { headers: { Authorization: token, }, });
 
       if (res.status !== 201) throw new Error('internal error');
 
@@ -76,14 +77,14 @@ const NewBlog = () => {
 
   useEffect(() => {
     const host = process.env.NEXT_PUBLIC_API_URL;
-    const tagData= async() => {
+    const tagData = async () => {
       const tagGet = await axios.get(`${host}/api/v1/utilities/categories?char`)
-      setTag(tagGet.data.data.map(v=>v.categoryName))
-      console.log(tagGet.data.data.map(v=>v.categoryName));
+      setTag(tagGet.data.data.map(v => v.categoryName))
+      console.log(tagGet.data.data.map(v => v.categoryName));
     }
     tagData();
-},[]);
-  
+  }, []);
+
 
   return (
     <div className="w-full md:container mx-auto mt-4">
@@ -104,14 +105,24 @@ const NewBlog = () => {
           </button>
         </div>
         <div className='my-2'>
-          
+
           <MultiSelect
             data={tag}
             variant="unstyled"
             placeholder="เลือกหมวดหมู่ที่ต้องการ"
             searchable
-            nothingFound="Nobody here"
-          />
+            creatable
+            getCreateLabel={(query) => `+ Create ${query}`}
+            onCreate={ (query) => {
+              const item = { value: query, label: query };
+              setTag((current) => [...current, item]);
+              const host = process.env.NEXT_PUBLIC_API_URL;
+              const token = localStorage.getItem('access_token');
+              axios.post(`${host}/api/v1/utilities/categories`,{ context : query ,}, { headers: { Authorization: token, }, }).then(_ => console.log('ok')).catch(err => console.log(err));
+              return item;
+              
+            }}
+            />
 
         </div>
         <RichTextEditor
