@@ -4,6 +4,7 @@ import Narbarlogin from '../components/Navbar/Navbarlogin';
 import CommuSidebar from '../components/Sidebar/Commu_sidebar';
 import { Tabs } from '@mantine/core';
 import Blog from '../components/Blog/Blog';
+import CommunityQuestion from '../components/community/Community_question';
 
 const Commu = () => {
   const member = true;
@@ -27,7 +28,7 @@ const Commu = () => {
                 </Tabs.Panel>
 
                 <Tabs.Panel value="question" pt="xs">
-                  คำถามภายในกลุ่ม tab content
+                  <CommunityQuestion />
                 </Tabs.Panel>
               </Tabs>
             </div>
