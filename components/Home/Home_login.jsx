@@ -11,6 +11,7 @@ const NavbarNonlogin = dynamic(() => import('../Navbar/NavbarNonlogin'), {
 });
 
 import SidebarLogin from './Sidebar_login';
+import SidebarNonLogin from './Sidebar_nonlogin';
 import CommunityBar from './Community_bar';
 import TagGroup from './TagGroup';
 import SubHomeLayout from '../Layouts/SubHomeLayout';
@@ -29,7 +30,7 @@ const LandingNonLogin = ({ children }) => {
       {isLogin ? <Navbarlogin /> : <NavbarNonlogin />}
       <SubHomeLayout>
         <div className="col-span-12 md:col-span-3 hidden md:flex flex-row md:flex-col">
-          <SidebarLogin />
+          {isLogin ? <SidebarLogin /> : <SidebarNonLogin />}
         </div>
 
         <div className="col-span-12 md:col-span-9">
