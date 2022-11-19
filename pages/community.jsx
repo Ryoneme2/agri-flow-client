@@ -14,7 +14,7 @@ const Commu = () => {
           <div className="col-span-3">
             <div>
               <Tabs defaultValue="content">
-                <Tabs.List>
+                <Tabs.List className="pb-[2px]">
                   <Tabs.Tab value="content">บทความภายในกลุ่ม</Tabs.Tab>
                   {member && (
                     <Tabs.Tab value="question">คำถามภายในกลุ่ม</Tabs.Tab>
