@@ -1,92 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import dynamic from 'next/dynamic';
+import axios from 'axios';
 
 const Navbarlogin = dynamic(() => import('../Navbar/Navbarlogin'), {
   ssr: false,
 });
+
 const NavbarNonlogin = dynamic(() => import('../Navbar/NavbarNonlogin'), {
   ssr: false,
 });
-import Blog from '../Blog/Blog';
-import CommunityBlock from '../community/Community_block';
-import Tag from '../Tag';
-import Section from '../Section/Section';
-import SuggustTopic from './suggustTopic';
-import AvatarText from '../staticUser/AvatarText';
-import UpgateAccount from '../Sidebar/UpgateAccount';
+
+import SidebarLogin from './Sidebar_login';
+import SidebarNonLogin from './Sidebar_nonlogin';
+import CommunityBar from './Community_bar';
+import TagGroup from './TagGroup';
+import SubHomeLayout from '../Layouts/SubHomeLayout';
+
+import { homeContext } from '../../context/store';
 
 const LandingNonLogin = ({ children }) => {
-  let content = '';
+  let hidden = '';
+
+  const { isLogin } = useContext(homeContext);
+
   // tag ? (content = 'hidden') : (content = '');
 
   return (
     <>
-      <Navbarlogin />
-      <div className="grid grid-cols-12 w-full sm:w-[90%] mx-auto mt-5 pr-8 pl-4">
+      {isLogin ? <Navbarlogin /> : <NavbarNonlogin />}
+      <SubHomeLayout>
         <div className="col-span-12 md:col-span-3 hidden md:flex flex-row md:flex-col">
-          <div className="grid mb-6">
-            <UpgateAccount />
-            <div className="w-full">
-              <h1 className="text-xl overflow-hidden text-[#1C658C]">
-                บุคคลที่ติดตาม
-              </h1>
-              <div>
-                <AvatarText
-                  imgProfile={'/images/profile/jammy.jpg'}
-                  name={'Pummy'}
-                />
-                <AvatarText
-                  imgProfile={'/images/profile/jammy.jpg'}
-                  name={'Jamie'}
-                />
-                <AvatarText
-                  imgProfile={'/images/profile/jammy.jpg'}
-                  name={'Fourthy'}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="contents mx-4 mb-5 w-full">
-            <h1 className="text-xl overflow-hidden text-[#1C658C]">
-              หมวดหมู่ที่เข้าชมบ่อย
-            </h1>
-            <div className="flex flex-wrap">
-              <Tag linkto={''} tagName={'โรคในพืชยืนต้น'} />
-              <Tag linkto={''} tagName={'โรคในพืชล้มลุก'} />
-              <Tag linkto={''} tagName={'วัชพืช'} />
-              <Tag linkto={''} tagName={'แมลงศัตรูพืช'} />
-              <Tag linkto={''} tagName={'สัตว์'} />
-            </div>
-          </div>
+          {isLogin ? <SidebarLogin /> : <SidebarNonLogin />}
         </div>
 
         <div className="col-span-12 md:col-span-9">
-          <div
-            className={`${content} grid grid-flow-col justify-between auto-cols-max overflow-x-auto mb-5`}
-          >
-            <CommunityBlock />
-            <CommunityBlock />
-            <CommunityBlock />
-            <CommunityBlock />
-          </div>
+          <CommunityBar content={hidden} />
           <div className="flex md:hidden place-items-center mx-3">
-            <div className="flex flex-wrap">
-              <Tag linkto={''} tagName={'โรคในพืชยืนต้น'} />
-              <Tag linkto={''} tagName={'โรคในพืชล้มลุก'} />
-              <Tag linkto={''} tagName={'วัชพืช'} />
-              <Tag linkto={''} tagName={'แมลงศัตรูพืช'} />
-              <Tag linkto={''} tagName={'สัตว์'} />
-            </div>
+            <TagGroup />
           </div>
-          <div className={content}>
-            {/* <SuggustTopic
-              Topic={'บทความที่คุณติดตาม'}
-            />
-            <SuggustTopic Topic={'บทความน่าสนใจ'} /> */}
-          </div>
+          <div className={hidden}>{/* default home content */}</div>
           {children}
         </div>
-      </div>
+      </SubHomeLayout>
     </>
   );
 };
