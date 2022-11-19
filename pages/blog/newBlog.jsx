@@ -10,11 +10,8 @@ const NewBlog = () => {
   const [value, onChange] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [tag, setTag] = React.useState([]);
+  const [categories, setCategories] = React.useState([])
   const editorRef = useRef();
-
-
-
-
 
   console.log(value);
 
@@ -58,7 +55,8 @@ const NewBlog = () => {
     try {
       const host = process.env.NEXT_PUBLIC_API_URL;
       const token = localStorage.getItem('access_token');
-      const res = await axios.post(`${host}/api/v1/blogs/p`, { title, categories:tag ,content: value, }, { headers: { Authorization: token, }, });
+    //  console.log(categories);
+      const res = await axios.post(`${host}/api/v1/blogs/p`, { title, categories ,content: value, }, { headers: { Authorization: token, }, });
 
       if (res.status !== 201) throw new Error('internal error');
 
@@ -83,7 +81,7 @@ const NewBlog = () => {
       console.log(tagGet.data.data.map(v => v.categoryName));
     }
     tagData();
-  }, []);
+  }, [categories]);
 
 
   return (
@@ -107,6 +105,7 @@ const NewBlog = () => {
         <div className='my-2'>
 
           <MultiSelect
+            onChange={setCategories}
             data={tag}
             variant="unstyled"
             placeholder="เลือกหมวดหมู่ที่ต้องการ"
@@ -115,12 +114,12 @@ const NewBlog = () => {
             getCreateLabel={(query) => `+ Create ${query}`}
             onCreate={ (query) => {
               const item = { value: query, label: query };
+              setCategories((current) => [...current, query])
               setTag((current) => [...current, item]);
               const host = process.env.NEXT_PUBLIC_API_URL;
               const token = localStorage.getItem('access_token');
               axios.post(`${host}/api/v1/utilities/categories`,{ context : query ,}, { headers: { Authorization: token, }, }).then(_ => console.log('ok')).catch(err => console.log(err));
-              return item;
-              
+              return item
             }}
             />
 
