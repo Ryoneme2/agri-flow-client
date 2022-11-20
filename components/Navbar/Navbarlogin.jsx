@@ -3,86 +3,102 @@ import Image from 'next/image';
 import Link from 'next/link.js';
 import Button from '../CreateBlogB.jsx';
 
-import Dropdown from './Dropdown.jsx';
+
 const Navbarlogin = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
+  const Toggle = () => open === true ? setOpen(false) : setOpen(true);
+  
 
-  const [menu, setMenu] = React.useState([
-    {
-      title: 'หน้าหลัก',
-      value: 'Home',
-      link: '/Home',
-    },
-    {
-      title: 'บล็อก',
-      value: 'Blog',
-      link: '/Blog',
-    },
-    {
-      title: 'ถกเถียง',
-      value: 'Dis',
-      link: '/Discuss',
-    },
-    {
-      title: 'ชุมชน',
-      value: 'commu',
-      link: '/Community',
-    },
-  ]);
-
-  const onClick = () => {
-    setOpen(!open);
+  const handlerLogout = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user');
+    window.location.replace('/auth');
   };
+  const menu = [
+    {
+      name: 'หน้าหลัก',
+      to: '/',
+    },
+    {
+      name: 'บล็อก',
+      to: '/Blog',
+    },
+    {
+      name: 'ถกเถียง',
+      to: '/Discuss',
+    },
+    {
+      name: 'ชุมชน',
+      to: '/Community',
+    },
+  ];
+
+  const usermenu = [
+    {
+      name: 'My Settings',
+      to: '/setting',
+    },
+    {
+      name: 'Log Out',
+      to: '/logout',
+    },
+  ];
+
+  const [user, setUser] = React.useState({})
+
+  React.useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem('user')))
+    console.log(localStorage.getItem('user'));
+  }, [])
+
 
   return (
     <>
-      <div className="border-b w-full flex justify-between content-center items-center text-[16px]">
-        <div className="md:invisible md:w-[0] w-[20rem] ">
-          <div className="w-full">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-tabler icon-tabler-menu"
-              width="35"
-              height="35"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="#1C658C"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
+      <div className='w-full h-[80px] flex border-b border-gray-400'>
+
+        <div className="md:invisible px-3 md:w-[0] w-[20rem] mt-5 absolute">
+          <button className="w-auto" onClick={Toggle}>
+            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-menu" width="35" height="35" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#1C658C" fill="none" strokeLinecap="round" strokeLinejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <line x1="4" y1="8" x2="20" y2="8" />
               <line x1="4" y1="16" x2="20" y2="16" />
             </svg>
+          </button>
+        </div>
+
+        { open &&
+          <div className=" w-full h-auto md:w-[15%] flex justify-center content-center items-center">
+            <Link href="/Home">
+              <div className='w-full h-full'>
+                <img src='/images/png/2-2E.png' alt={'logo'} className=' max-w-[10rem] h-full' />
+              </div>
+            </Link>
           </div>
-        </div>
-
-        <div className="p-2  w-[40%] md:w-[15%] flex justify-center content-center items-center">
-          <Link href="/Home">
-            <Image
-              src={'/images/png/2-2E.png'}
-              width={160}
-              height={100}
-              alt={'logo'}
-            />
-          </Link>
-        </div>
-
+        }
         <div className=" w-0 md:w-[40%]  h-full  invisible md:visible">
           <div className="md:w-[70%] flex h-full justify-evenly items-center">
             {menu.map((item, index) => (
               <div key={index}>
                 <div className="h-auto overflow-y-hidden">
-                  <Link href={item.link}>{item.title}</Link>
+                  <Link href={item.to}>{item.name}</Link>
                 </div>
               </div>
             ))}
           </div>
         </div>
         <div className="flex h-full w-auto md:w-[50%] ">
-          <div className="flex w-full ju">
-            {/* search bar */}
+
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default Navbarlogin;
+
+{/* <div className="flex w-full ju">
+            
+
             <div className=" w-[full] flex justify-end content-center items-center invisible md:visible">
               <input
                 placeholder="ค้นหา"
@@ -114,7 +130,7 @@ const Navbarlogin = () => {
               </div>
             </div>
 
-            {/* Build blog */}
+            
             <div className=" w-[0] md:w-[20%] invisible md:visible flex justify-center content-center items-center">
               <Link href={'/blog/newBlog'}>
                 <button className="bg-white border-2 py-2 px-3 w-auto border-[#1C658C] text-[#1C658C] text-[0.8rem] font-bold rounded-[20px]">
@@ -123,7 +139,7 @@ const Navbarlogin = () => {
               </Link>
             </div>
 
-            {/* Noti */}
+            
             <div className=" w-[0] md:w-[8%] flex justify-start  items-center invisible md:visible">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -145,21 +161,33 @@ const Navbarlogin = () => {
               </svg>
             </div>
 
-            {/* profile */}
-            <div className=" w-[100%] md:w-[15%] flex justify-center md:justify-start items-center pl-2">
-              <Image
-                src={'/images/png/2-2.png'}
-                className="rounded-[100px] border border-[#1C658C]"
-                width={45}
-                height={45}
-                alt="profile avatar"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
+            
+            <div className=" w-full border flex justify-center md:justify-start items-center ">
 
-export default Navbarlogin;
+              <div className='flex-col'>
+                <button className='rounded-[100px] border border-[#1C658C] bg-inherit relative '>
+                  <Image
+                    src={'/images/png/2-2.png'}
+                    width={45}
+                    height={45}
+                    alt="profile avatar"
+                  />
+                </button>
+
+                <div className='border absolute p-3 rounded-[10px] right-2 hidden'>
+                  {
+                    usermenu.map((menu, index) => (
+                      <div key={index} >
+                        <div>
+                          {menu.name}
+                        </div>
+                      </div>
+                    ))
+                  }
+                </div>
+
+              </div>
+
+
+            </div>
+          </div> */}

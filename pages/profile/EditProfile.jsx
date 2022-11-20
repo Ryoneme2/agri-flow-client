@@ -1,10 +1,10 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 const EditProfilecomponnection = dynamic(
-  () => import('../components/EditProfile/Editprofile'),
+  () => import('../../components/EditProfile/Editprofile'),
   { ssr: false, }
 );
-const Section = dynamic(() => import('../components/Section/Section'), { ssr: false });
+const Section = dynamic(() => import('../../components/Section/Section'), { ssr: false });
 
 
 const EditProfile = () => {

@@ -59,15 +59,3 @@ const Discuss = () => {
 };
 
 export default Discuss;
-{/* <div className='w-full my-1'>
-                <AvatarText name={'ลุงดำ แม่สาว'} imgProfile={'/images/profile/jammy.jpg'} />
-              </div>
-              <div className='w-full my-1'>
-                <AvatarText name={'ลุงดำ แม่สาว'} imgProfile={'/images/profile/jammy.jpg'} />
-              </div>
-              <div className='w-full my-1'>
-                <AvatarText name={'ลุงดำ แม่สาว'} imgProfile={'/images/profile/jammy.jpg'} />
-              </div>
-              <div className='w-full my-1'>
-                <AvatarText name={'ลุงดำ แม่สาว'} imgProfile={'/images/profile/jammy.jpg'} />
-              </div> */}

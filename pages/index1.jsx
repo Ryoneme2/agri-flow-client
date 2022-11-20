@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <NavbarNonlogin />
+      {/* <NavbarNonlogin /> */}
 
       <div className="flex justify-center items-center w-[100vw] h-[100vh]">
         <div className="loading"></div>
