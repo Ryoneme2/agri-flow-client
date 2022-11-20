@@ -26,19 +26,25 @@ const CommunityBlock = ({
               </span>
             </div>
             <div className="truncate m-0 pt-2 px-2">
-              <p className="text-[1rem] sm:text-[1.1] md:text-[1.25rem] m-0 p-0">{`151551`} {CommunityName} </p>
+              <p className="text-[1rem] sm:text-[1.1] md:text-[1.25rem] m-0 p-0">
+                {`151551`} {CommunityName}{' '}
+              </p>
               <p className="text-[0.8rem] sm:text-[1rem] truncate font-light m-0 p-0 hidden md:block">
                 {'กลุ่มสำหรับคนรักปลา'}
                 {CommunityDetail}
-                
               </p>
             </div>
             <div className="flex justify-end items-baseline px-2 overflow-y-hidden">
-              <div className="text-[0.8rem] "><p className='flex'>สมาชิก<span className='hidden sm:block'>ทั้งหมด</span></p></div>
+              <div className="text-[0.8rem] ">
+                <p className="flex">
+                  สมาชิก<span className="hidden sm:block">ทั้งหมด</span>
+                </p>
+              </div>
 
               <div className="overflow-y-hidden">
                 <span className="text-[1rem] sm:text-[1.25rem] px-1 sm:px-2 overflow-y-hidden">
-                  {CommunityMember}{`3250`}
+                  {CommunityMember}
+                  {`3250`}
                 </span>
               </div>
             </div>

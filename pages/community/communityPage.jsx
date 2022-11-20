@@ -1,15 +1,17 @@
 import React from 'react';
 
-import Narbarlogin from '../components/Navbar/Navbarlogin';
-import CommuSidebar from '../components/Sidebar/Commu_sidebar';
+import Narbarlogin from '../../components/Navbar/Navbarlogin';
+import CommuSidebar from '../../components/Sidebar/Commu_sidebar';
 import { Tabs } from '@mantine/core';
-import Blog from '../components/Blog/Blog';
-import CommunityQuestion from '../components/community/Community_question';
+import Blog from '../../components/Blog/Blog';
+import CommunityQuestion from '../../components/community/Community_question';
+import CommunityBlog from '../../components/community/Commuity_Blog';
 
 const Commu = () => {
   const member = true;
   return (
     <>
+      <Narbarlogin />
       <div className="w-[90%] mx-auto pt-4">
         <div className="grid grid-cols-4">
           <div className="col-span-3">
@@ -23,8 +25,7 @@ const Commu = () => {
                 </Tabs.List>
 
                 <Tabs.Panel value="content" pt="xs">
-                  บทความภายในกลุ่ม tab content
-                  <Blog />
+                  <CommunityBlog />
                 </Tabs.Panel>
 
                 <Tabs.Panel value="question" pt="xs">
