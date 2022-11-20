@@ -6,6 +6,7 @@ import Blog from '../Blog/Blog';
 import axios from 'axios';
 import { homeContext } from '../../context/store';
 import LoadingBlog from '../Blog/LoadingBlog';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const LandingNonLogin = ({ contentLink }) => {
   const [token, setToken] = useState('');
@@ -36,6 +37,7 @@ const LandingNonLogin = ({ contentLink }) => {
         const [blog, tag] = await Promise.all([res, res2]);
         setTagSuggest(tag.data?.data || []);
         setBlogSuggest(blog.data?.data || []);
+        console.log('blog ', blogSuggest);
         setLoading(false);
       };
 
@@ -47,7 +49,39 @@ const LandingNonLogin = ({ contentLink }) => {
 
   console.log(!localStorage.getItem('access_token') ? false : true);
 
-  console.log(loading);
+  const [blogMore, setBlogMore] = useState({
+    items: [
+      {
+        id: 0,
+        blogContent: { title: 'example', content: 'hi, i am testing' },
+        create_at: 'just now',
+        thumbnail: [''],
+        author: { username: 'system' },
+        tag: { categoryId: 1, categoryName: 'no tag' },
+      },
+    ],
+    hasMore: true,
+  });
+  console.log(blogMore);
+
+  const scrollMore = (newBlog) => {
+    if (blogMore.items.length >= 15) {
+      setBlogMore((prev) => {
+        return {
+          ...prev,
+          hasMore: false,
+        };
+      });
+    }
+    setBlogMore((prev) => {
+      console.log('newblog : ', newBlog);
+      return {
+        ...prev,
+        items: blogMore.items.concat(newBlog),
+      };
+    });
+    console.log('blog', blogSuggest);
+  };
 
   return (
     <>
@@ -75,9 +109,31 @@ const LandingNonLogin = ({ contentLink }) => {
                 <LoadingBlog />
               </div>
             ) : (
-              blogSuggest.map((blog) => {
-                return <Blog blog={blog} key={blog.id} />;
-              })
+              <InfiniteScroll
+                dataLength={blogMore.items.length} //This is important field to render the next data
+                next={() => scrollMore(blogSuggest)}
+                hasMore={blogMore.hasMore}
+                loader={
+                  <div className="ml-2">
+                    <LoadingBlog />
+                  </div>
+                }
+                endMessage={
+                  <p style={{ textAlign: 'center' }}>
+                    <b>Yay! You have seen it all</b>
+                  </p>
+                }
+              >
+                {console.log('blog โว้ยย', blogSuggest)}
+                {console.log(blogMore.items.length)}
+                {blogMore.items.map((blog) => {
+                  return <Blog blog={blog} key={blog.id} />;
+                })}
+              </InfiniteScroll>
+
+              // blogSuggest.map((blog) => {
+              //   return <Blog blog={blog} key={blog.id} />;
+              // })
             )}
           </SuggestTopic>
           {tagName ? (

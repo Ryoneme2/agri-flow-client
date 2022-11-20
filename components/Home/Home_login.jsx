@@ -25,7 +25,7 @@ const LandingNonLogin = ({ children, tag }) => {
     <>
       {isLogin ? <Navbarlogin /> : <NavbarNonlogin />}
       <SubHomeLayout>
-        <div className="col-span-12 md:col-span-3 hidden md:flex flex-row md:flex-col">
+        <div className="col-span-12 md:col-span-3 hidden mr-3 md:flex flex-row md:flex-col">
           {isLogin ? <SidebarLogin /> : <SidebarNonLogin />}
         </div>
 
