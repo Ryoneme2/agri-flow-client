@@ -1,4 +1,5 @@
-import { Grid, Image } from '@mantine/core';
+import React, { useState, useEffect } from 'react';
+import { Image } from '@mantine/core';
 
 import ShowUserNum from '../staticUser/ShowUserNum';
 import { Avatar } from '@mantine/core';
@@ -6,11 +7,11 @@ import Button from '../Button';
 import UpgateAccount from './UpgateAccount';
 
 const CommunitySidebar = ({ name }) => {
-  const member = false;
+  const [groupMember, setGroupMember] = useState(false);
 
   return (
     <>
-      <div className="flex-col py-4">
+      <div className="flex-col py-4 mx-3">
         <div>
           <div style={{ width: 150, marginLeft: 'auto', marginRight: 'auto' }}>
             <Image
@@ -24,7 +25,7 @@ const CommunitySidebar = ({ name }) => {
           </div>
         </div>
 
-        {!member ? (
+        {!groupMember ? (
           <div>
             <div className="grid grid-cols-2">
               <ShowUserNum amount={'250000'} name={'บล็อก'} />
@@ -41,7 +42,13 @@ const CommunitySidebar = ({ name }) => {
               <hr className="col-span-2 w-11/12 h-[2px] bg-[#000000] border-0 mx-auto my-4 mt-6" />
             </div>
             <div className="flex justify-center">
-              <Button context={'เข้าร่วม'} css={'w-3/4 justify-center'} />
+              <Button
+                context={'เข้าร่วม'}
+                css={'w-3/4 justify-center'}
+                onClick={() => {
+                  setGroupMember(true);
+                }}
+              />
             </div>
           </div>
         ) : (
@@ -52,13 +59,23 @@ const CommunitySidebar = ({ name }) => {
               <ShowUserNum amount={'68'} name={'คำถาม'} />
               <hr className="col-span-3 w-11/12 h-[2px] bg-[#000000] border-0 mx-auto" />
             </div>
+            <div className="flex justify-center">
+              <Button
+                context={'ออก'}
+                css={'w-3/4 justify-center'}
+                color={'reverse'}
+                onClick={() => {
+                  confirm('คุณต้องการออกจากกลุ่ม') && setGroupMember(false);
+                }}
+              />
+            </div>
           </div>
         )}
 
         <div className="my-3">
           <UpgateAccount />
         </div>
-        <div className="border rounded-md m-2 p-2">
+        <div className="border rounded-md p-2">
           <h3 className="text-[#1C658C]">วัตถุประสงค์ในการตั้งกลุ่ม</h3>
           <ol>
             <li>1.ทำให้รักพ่อ</li>
