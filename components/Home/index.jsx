@@ -5,6 +5,7 @@ import SuggestTopic from './suggustTopic';
 import Blog from '../Blog/Blog';
 import axios from 'axios';
 import { homeContext } from '../../context/store';
+import LoadingBlog from '../Blog/LoadingBlog';
 
 const LandingNonLogin = () => {
   const [token, setToken] = useState('');
@@ -41,13 +42,6 @@ const LandingNonLogin = () => {
     }
   }, []);
 
-  if (loading)
-    return (
-      <>
-        <div className="loading"></div>
-      </>
-    );
-
   console.log(!localStorage.getItem('access_token') ? false : true);
 
   return (
@@ -60,6 +54,13 @@ const LandingNonLogin = () => {
       >
         <Home_login isLogin={!token ? 'false' : 'true'}>
           <SuggestTopic Topic={!token ? 'บทความน่าสนใจ' : 'บทความสำหรับคุณ'}>
+            {!loading ? (
+              <div className="ml-2">
+                <LoadingBlog />
+              </div>
+            ) : (
+              <></>
+            )}
             {blogSuggest.map((blog) => {
               return <Blog blog={blog} key={blog.id} />;
             })}
