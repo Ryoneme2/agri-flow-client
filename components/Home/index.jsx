@@ -14,6 +14,10 @@ const LandingNonLogin = ({ contentLink }) => {
   const [tagSuggest, setTagSuggest] = useState([]);
   const tagNum = 5;
 
+  const params = new URLSearchParams(window.location.search);
+  const tagName = params.get('tagName');
+  console.log(tagName);
+
   useEffect(() => {
     try {
       const localToken = localStorage.getItem('access_token');
@@ -53,8 +57,19 @@ const LandingNonLogin = ({ contentLink }) => {
           isLogin: !localStorage.getItem('access_token') ? false : true,
         }}
       >
-        <Home_login isLogin={!token ? 'false' : 'true'}>
-          <SuggestTopic Topic={!token ? 'บทความน่าสนใจ' : 'บทความสำหรับคุณ'}>
+        <Home_login
+          isLogin={!token ? 'false' : 'true'}
+          tag={tagName && 'hidden'}
+        >
+          <SuggestTopic
+            Topic={
+              tagName
+                ? `หมวดหมู่ - ${tagName}`
+                : !token
+                ? 'บทความน่าสนใจ'
+                : 'บทความสำหรับคุณ'
+            }
+          >
             {loading ? (
               <div className="ml-2">
                 <LoadingBlog />
@@ -65,7 +80,9 @@ const LandingNonLogin = ({ contentLink }) => {
               })
             )}
           </SuggestTopic>
-          {!token ? (
+          {tagName ? (
+            <></>
+          ) : !token ? (
             <></>
           ) : (
             <>

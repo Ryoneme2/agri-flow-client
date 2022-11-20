@@ -18,12 +18,8 @@ import SubHomeLayout from '../Layouts/SubHomeLayout';
 
 import { homeContext } from '../../context/store';
 
-const LandingNonLogin = ({ children }) => {
-  let hidden = '';
-
+const LandingNonLogin = ({ children, tag }) => {
   const { isLogin } = useContext(homeContext);
-
-  // tag ? (content = 'hidden') : (content = '');
 
   return (
     <>
@@ -34,11 +30,10 @@ const LandingNonLogin = ({ children }) => {
         </div>
 
         <div className="col-span-12 md:col-span-9">
-          <CommunityBar content={hidden} />
+          <CommunityBar hidden={tag} />
           <div className="flex md:hidden place-items-center mx-3">
             <TagGroup />
           </div>
-          <div className={hidden}>{/* default home content */}</div>
           {children}
         </div>
       </SubHomeLayout>
