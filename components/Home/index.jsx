@@ -7,7 +7,7 @@ import axios from 'axios';
 import { homeContext } from '../../context/store';
 import LoadingBlog from '../Blog/LoadingBlog';
 
-const LandingNonLogin = () => {
+const LandingNonLogin = ({ contentLink }) => {
   const [token, setToken] = useState('');
   const [blogSuggest, setBlogSuggest] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -16,13 +16,13 @@ const LandingNonLogin = () => {
 
   useEffect(() => {
     try {
-      setLoading(true);
       const localToken = localStorage.getItem('access_token');
       setToken(localToken);
 
       const getData = async () => {
+        setLoading(true);
         const res = axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs/p`
+          `${process.env.NEXT_PUBLIC_API_URL}${contentLink}`
         );
         console.log(res.data);
         const res2 = axios.get(
@@ -32,17 +32,18 @@ const LandingNonLogin = () => {
         const [blog, tag] = await Promise.all([res, res2]);
         setTagSuggest(tag.data?.data || []);
         setBlogSuggest(blog.data?.data || []);
+        setLoading(false);
       };
 
       getData();
     } catch (e) {
       console.error(e);
-    } finally {
-      setLoading(false);
     }
-  }, []);
+  }, [contentLink]);
 
   console.log(!localStorage.getItem('access_token') ? false : true);
+
+  console.log(loading);
 
   return (
     <>
@@ -54,16 +55,15 @@ const LandingNonLogin = () => {
       >
         <Home_login isLogin={!token ? 'false' : 'true'}>
           <SuggestTopic Topic={!token ? 'บทความน่าสนใจ' : 'บทความสำหรับคุณ'}>
-            {!loading ? (
+            {loading ? (
               <div className="ml-2">
                 <LoadingBlog />
               </div>
             ) : (
-              <></>
+              blogSuggest.map((blog) => {
+                return <Blog blog={blog} key={blog.id} />;
+              })
             )}
-            {blogSuggest.map((blog) => {
-              return <Blog blog={blog} key={blog.id} />;
-            })}
           </SuggestTopic>
           {!token ? (
             <></>

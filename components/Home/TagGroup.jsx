@@ -27,7 +27,7 @@ const TagGroup = () => {
           return (
             <Tag
               key={tag.id}
-              linkto={`./category/${tag.categoryId}`}
+              linkto={`/category/${tag.categoryId}`}
               tagName={tag.categoryName}
             />
           );
