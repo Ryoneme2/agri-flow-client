@@ -8,7 +8,7 @@ import clsx from 'clsx';
  * @param context - string
  * @param css - string
  */
-const Button = ({ color = 'primary', context, css = '' }) => {
+const Button = ({ color = 'primary', context, css = '', onClick }) => {
   return (
     <button
       className={clsx(
@@ -17,8 +17,11 @@ const Button = ({ color = 'primary', context, css = '' }) => {
           'text-white bg-[#1C658C] hover:bg-[#124e6d]': color === 'primary',
           'text-white bg-[#FF3939] hover:bg-[#c12525]': color === 'danger',
           'bg-[#FFC017]': color === 'warn',
+          'text-[#1C658C] bg-gray-400 hover:bg-gray-600 hover:text-white ':
+            color === 'reverse',
         }
       )}
+      onClick={onClick}
     >
       {context}
     </button>
