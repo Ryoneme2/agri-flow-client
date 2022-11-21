@@ -12,4 +12,5 @@ export default function Home() {
   console.log(`id:${id}`);
 
   return <HomeComponent contentLink={`/api/v1/blogs/p/tag/${id}`} />;
+  //return <HomeComponent contentLink={`/api/v1/blogs/p`} />;
 }
