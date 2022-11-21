@@ -13,10 +13,11 @@ const NewPost = () => {
     const [textValue, setTextValue] = useState('');
     const [tag, setTag] = React.useState([]);
     const [categories, setCategories] = React.useState([]);
+    const [user,setUser] =React.useState('');
+
+    
 
     console.log(textValue);
-
-
     function publicPost(e) {
         e.preventDefault();
         console.log('You clicked submit.');
@@ -84,6 +85,7 @@ const NewPost = () => {
             const tagGet = await axios.get(`${host}/api/v1/utilities/categories?char`)
             setTag(tagGet.data.data.map(v => v.categoryName))
             console.log(tagGet.data.data.map(v => v.categoryName));
+            setUser (JSON.parse(localStorage.getItem('user'))) 
         }
         tagData();
     }, [categories]);
@@ -124,11 +126,11 @@ const NewPost = () => {
                     <div className="w-full h-auto  flex justify-between ">
                         <div className="w-full flex items-center h-auto">
                             <Avatar
-                                src={'/images/profile/jammy.jpg'}
+                                src={user.imageProfile}
                                 radius="xl"
                                 className="w-[2.5rem] md:w-[3.1rem] h-auto"
                             />
-                            <p className="mx-2"> {`username`} </p>
+                            <p className="mx-2"> {user.username} </p>
                         </div>
                         <div className="w-full flex justify-end items-center text-[0.9rem]">
                             <div

@@ -2,39 +2,36 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
 const Navbarlogin = dynamic(
-  () => import('../components/Navbar/Navbarlogin'),
+  () => import('../../components/Navbar/Navbarlogin'),
   { ssr: false, }
 );
 const Discussblock = dynamic(
-  () => import('../components/Discuss/DiscussBlock'),
+  () => import('../../components/Discuss/DiscussBlock'),
   { ssr: false }
 );
-const Discussmain = dynamic(
-  () => import('../components/Discuss/Discuss'), {
-  ssr: false,
-});
 const UpgateAccount = dynamic(
-  () => import('../components/Sidebar/UpgateAccount'), {
+  () => import('../../components/Sidebar/UpgateAccount'), {
   ssr: false,
 });
 const AvatarText = dynamic(
-  () => import('../components/staticUser/AvatarText'), {
+  () => import('../../components/staticUser/AvatarText'), {
   ssr: false,
 });
 const NewPost = dynamic(
-  () => import('../components/Discuss/post/NewPost'), {
+  () => import('../../components/Discuss/post/NewPost'), {
   ssr: false,
 });
 const Community = dynamic(
-  () => import('../components/community/Community_sidebar'), {
+  () => import('../../components/community/Community_sidebar'), {
   ssr: false,
 });
 
 const Discuss = () => {
   const [datapost, setDatapost] = React.useState([]);
-
+  const [token,setToken] =React.useState('');
   React.useEffect(() => {
     const host = process.env.NEXT_PUBLIC_API_URL;
+    setToken (JSON.parse(localStorage.getItem('user')))
     const postData = async () => {
       const postGet = await axios.get(`${host}/api/v1/discusses/post`)
       setDatapost(postGet.data.data)
@@ -43,6 +40,8 @@ const Discuss = () => {
     postData();
   },[]);
 
+
+  console.log(token);
 
 
 
@@ -72,15 +71,15 @@ const Discuss = () => {
             {
               datapost.map((data,index)=>
                 <div key={index}>
-                    <Discussblock data={data}/>
-                </div>              
+                    <Discussblock postData={data}/>
+                </div>               
               )
             }
             
           </div>
 
           <div className=' w-[0] invisible md:w-[25%] md:visible ml-1'>
-            <div className='w-full h-auto text-[#1C658C] text-[1.375rem]'>ชุมชนแนะนำ</div>
+            <div className='w-full h-auto text-[#1C658C] text-[1.375rem] ml-2'>ชุมชนแนะนำ</div>
             <Community />
             <Community />
             <Community />

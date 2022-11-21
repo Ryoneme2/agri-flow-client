@@ -97,8 +97,10 @@ const Navbarlogin = () => {
             ))}
           </div>
         </div>
+
+
         <div className="flex h-full w-auto md:w-[50%] ">
-          <div className="flex w-full ju">
+          <div className="flex w-full ">
             {/* search bar */}
             <div className=" w-[full] flex justify-end content-center items-center invisible md:visible">
               <input
@@ -132,7 +134,7 @@ const Navbarlogin = () => {
             </div>
 
             {/* Build blog */}
-            <div className=" w-[0] md:w-[20%] invisible md:visible flex justify-center content-center items-center">
+            <div className="w-full">
               <Link href={'/blog/newBlog'}>
                 <button className="bg-white border-2 py-2 px-3 w-auto border-[#1C658C] text-[#1C658C] text-[0.8rem] font-bold rounded-[20px]">
                   สร้างบล็อค
@@ -141,7 +143,7 @@ const Navbarlogin = () => {
             </div>
 
             {/* Noti */}
-            <div className=" w-[0] md:w-[8%] flex justify-start  items-center invisible md:visible">
+            <div className="border w-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="icon icon-tabler icon-tabler-bell-ringing"
@@ -163,7 +165,7 @@ const Navbarlogin = () => {
             </div>
 
             {/* profile */}
-            <div className=" w-[100%] md:w-[15%] flex justify-center md:justify-start items-center pl-2">
+            <div className="w-full border">
               <Image
                 src={'/images/png/2-2.png'}
                 className="rounded-[100px] border border-[#1C658C]"
