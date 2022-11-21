@@ -12,6 +12,7 @@ const NewBlog = () => {
   const [tag, setTag] = React.useState([]);
   const [categories, setCategories] = React.useState([])
   const editorRef = useRef();
+  const [loading, setLoading] = React.useState(false);
 
   console.log(value);
 
@@ -53,15 +54,16 @@ const NewBlog = () => {
 
   const publishBlog = async () => {
     try {
+      setLoading(true);
       const host = process.env.NEXT_PUBLIC_API_URL;
       const token = localStorage.getItem('access_token');
-    //  console.log(categories);
       const res = await axios.post(`${host}/api/v1/blogs/p`, { title, categories ,content: value, }, { headers: { Authorization: token, }, });
 
       if (res.status !== 201) throw new Error('internal error');
 
       console.log('published');
 
+      setLoading(false);
       router.push('../')
 
     } catch (e) {
@@ -82,6 +84,16 @@ const NewBlog = () => {
     }
     tagData();
   }, [categories]);
+
+  if (loading) {
+    return (
+        <>
+            <div className="flex w-screen h-screen justify-center items-center">
+                <div className="loading"></div>
+            </div>
+        </>
+    );
+}
 
 
   return (

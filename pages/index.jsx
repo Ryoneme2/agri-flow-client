@@ -7,5 +7,5 @@ const HomeComponent = dynamic(() => import('../components/Home'), {
 });
 
 export default function Home() {
-  return <HomeComponent />;
+  return <HomeComponent contentLink={'/api/v1/blogs/p'} />;
 }

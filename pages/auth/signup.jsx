@@ -89,24 +89,41 @@ const ResetPassword = () => {
             value={user.email}
             onChange={handleOnChange}
             color={color.email}
+            errorText={'email invalid'}
             placeholder={'อีเมล'}
           />
           <InputLogin
             type={'text'}
             name={'username'}
-            register={register('username', { required: 'username required!' })}
+            register={register('username', {
+              required: 'username required!',
+              minLength: {
+                value: 5,
+                message: 'should contain more than 5',
+              },
+            })}
             value={user.username}
             onChange={handleOnChange}
             color={color.username}
+            errorText={
+              'username invalid or it should contain more than 5 characters'
+            }
             placeholder={'ชื่อผู้ใช้'}
           />
           <InputLogin
             type={'password'}
             name={'password'}
-            register={register('password', { required: 'password required!' })}
+            register={register('password', {
+              required: 'password required!',
+              minLength: {
+                value: 8,
+                message: 'should contain more than 8',
+              },
+            })}
             value={user.password}
             onChange={handleOnChange}
             color={color.password}
+            errorText={'password should contains at least 8 characters'}
             placeholder={'รหัสผ่าน'}
           />
           <InputLogin
@@ -119,6 +136,7 @@ const ResetPassword = () => {
             value={user.cmpw}
             onChange={handleOnChange}
             color={color.cmpw}
+            errorText={'password not match'}
             placeholder={'ยืนยันรหัสผ่าน'}
           />
           {loading && (
