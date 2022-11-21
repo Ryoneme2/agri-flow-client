@@ -55,7 +55,6 @@ const NewBlog = () => {
     try {
       const host = process.env.NEXT_PUBLIC_API_URL;
       const token = localStorage.getItem('access_token');
-    //  console.log(categories);
       const res = await axios.post(`${host}/api/v1/blogs/p`, { title, categories ,content: value, }, { headers: { Authorization: token, }, });
 
       if (res.status !== 201) throw new Error('internal error');
