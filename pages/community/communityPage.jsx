@@ -3,7 +3,6 @@ import React from 'react';
 import Narbarlogin from '../../components/Navbar/Navbarlogin';
 import CommuSidebar from '../../components/Sidebar/Commu_sidebar';
 import { Tabs } from '@mantine/core';
-import Blog from '../../components/Blog/Blog';
 import CommunityQuestion from '../../components/community/Community_question';
 import CommunityBlog from '../../components/community/Commuity_Blog';
 
@@ -14,7 +13,7 @@ const Commu = () => {
       <Narbarlogin />
       <div className="w-[90%] mx-auto pt-4">
         <div className="grid grid-cols-4">
-          <div className="col-span-3">
+          <div className="col-span-4 md:col-span-3">
             <div>
               <Tabs defaultValue="content">
                 <Tabs.List className="pb-[2px]">
