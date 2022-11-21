@@ -1,5 +1,6 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
+import axios from 'axios';
 const Navbarlogin = dynamic(
   () => import('../components/Navbar/Navbarlogin'),
   { ssr: false, }
@@ -26,48 +27,69 @@ const NewPost = dynamic(
 });
 const Community = dynamic(
   () => import('../components/community/Community_sidebar'), {
-    ssr: false,
+  ssr: false,
 });
+
 const Discuss = () => {
+  const [datapost, setDatapost] = React.useState([]);
+
+  React.useEffect(() => {
+    const host = process.env.NEXT_PUBLIC_API_URL;
+    const postData = async () => {
+      const postGet = await axios.get(`${host}/api/v1/discusses/post`)
+      setDatapost(postGet.data.data)
+      console.log(postGet.data.data);
+    }
+    postData();
+  },[]);
+
+
+
+
   return (
     <>
       <div className=''>
         <Navbarlogin />
       </div>
+      <div className='mt-2 w-full h-auto  px-2'>
 
-      <div className='flex'>
-        <div className='w-[0] md:w-[25%] '>
-          <div className='w-[100%] px-1'>
-            <UpgateAccount />
-          </div>
-          <div className='w-[80%] mx-auto mt-5 '>
-            <div>
-              <p className='text-[1.375rem] text-[#1C658C] p-0 m-0'>บุคคลที่ติดตาม</p>
+        <div className='flex'>
+
+          <div className='w-[0]  sm:w-[25%] h-screen '>
+            <div className='w-[100%] px-1'>
+              <UpgateAccount />
             </div>
-
+            <div className='w-[80%] mx-auto mt-5 '>
+              <div>
+                <p className='text-[1.375rem] text-[#1C658C] p-0 m-0'>บุคคลที่ติดตาม</p>
+              </div>
+            </div>
+            
           </div>
-        </div>
-        <div className="w-full md:w-[50%] mx-3 md:mx-0 flex-col justify-center items-center px-2">
-          <NewPost />
-        </div>
-        <div className='w-[0] md:w-[25%]'>
-          <Community/>
+
+          <div className="w-full sm:w-[75%] md:w-[50%] h-screen mx-3 md:mx-0 flex-col justify-center items-center px-2 overflow-scroll scroll-none">
+            <NewPost />
+            {
+              datapost.map((data,index)=>
+                <div key={index}>
+                    <Discussblock data={data}/>
+                </div>              
+              )
+            }
+            
+          </div>
+
+          <div className=' w-[0] invisible md:w-[25%] md:visible ml-1'>
+            <div className='w-full h-auto text-[#1C658C] text-[1.375rem]'>ชุมชนแนะนำ</div>
+            <Community />
+            <Community />
+            <Community />
+          </div>
         </div>
       </div>
+      
     </>
   );
 };
 
 export default Discuss;
-{/* <div className='w-full my-1'>
-                <AvatarText name={'ลุงดำ แม่สาว'} imgProfile={'/images/profile/jammy.jpg'} />
-              </div>
-              <div className='w-full my-1'>
-                <AvatarText name={'ลุงดำ แม่สาว'} imgProfile={'/images/profile/jammy.jpg'} />
-              </div>
-              <div className='w-full my-1'>
-                <AvatarText name={'ลุงดำ แม่สาว'} imgProfile={'/images/profile/jammy.jpg'} />
-              </div>
-              <div className='w-full my-1'>
-                <AvatarText name={'ลุงดำ แม่สาว'} imgProfile={'/images/profile/jammy.jpg'} />
-              </div> */}

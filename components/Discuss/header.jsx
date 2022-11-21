@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar } from '@mantine/core';
 import Tag from '../Tag';
 
-const Header = () => {
+const Header = ({userdata,timepost}) => {
     return (
         <>
             <div className=' flex flex-col sm:flex-row justify-between'>
@@ -10,15 +10,15 @@ const Header = () => {
                 <div className='  flex w-full justify-center items-center'>
 
                     <div className='  w-[4.5rem] h-full '>
-                        <Avatar radius="xl" size={"lg"} className=' mx-auto' src={'/images/profile/jammy.jpg'} />
+                        <Avatar radius="xl" size={"lg"} className=' mx-auto' src={userdata.imageProfile} />
                     </div>
 
                     <div className=' w-full mx-2'>
                         <div className='  w-full text-[1.375]'>
-                            {`UserName`}
+                            {userdata.username}
                         </div>
                         <div className='  w-full text-[0.813rem]'>
-                            {`Time`}
+                            {timepost}
                         </div>
                     </div>
 
