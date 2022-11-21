@@ -6,7 +6,7 @@ const CommumitySidebar = ({ data }) => {
         <>
             <div className='flex h-[6rem] items-center my-3 mx-3 shadow-md rounded-[10px]'>
                 <div className='w-[5rem] h-[5rem] rounded-[10px]'>
-                    <image src={data} />
+                    <img src={data} />
                 </div>
                 <div className='mx-1 flex-col item-center'>
                     <div className='my-1 w-full'>
