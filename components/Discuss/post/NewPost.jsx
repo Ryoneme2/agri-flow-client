@@ -12,28 +12,32 @@ import { useDropzone } from 'react-dropzone';
 import imgToBase64 from '../../utils/imgToBase64';
 import axios from 'axios';
 
-const NewPost = () => {
-  const [opened, setOpened] = useState(false);
-  const [image, setImage] = useState();
-  const [file, setFile] = useState({});
-  const [textValue, setTextValue] = useState('');
-  const [tag, setTag] = React.useState([]);
-  const [categories, setCategories] = React.useState([]);
-  const [user, setUser] = React.useState('');
+const NewPost = ({setHasChange}) => {
+    const [opened, setOpened] = useState(false);
+    const [image, setImage] = useState();
+    const [file, setFile] = useState({});
+    const [textValue, setTextValue] = useState('');
+    const [tag, setTag] = React.useState([]);
+    const [categories, setCategories] = React.useState([]);
+    const [user,setUser] =React.useState('');
 
-  console.log(textValue);
-  function publicPost(e) {
-    e.preventDefault();
-    console.log('You clicked submit.');
-    shareHandler();
-  }
-  function cancelPost(e) {
-    e.preventDefault();
-    console.log('You clicked cancel.');
-    setTextValue('');
-    setImage('');
-    setFile({});
-  }
+    const [loading, setLoading] = React.useState(false);
+
+    
+
+    console.log(textValue);
+    function publicPost(e) {
+        e.preventDefault();
+        console.log('You clicked submit.');
+        shareHandler();
+    }
+    function cancelPost(e) {
+        e.preventDefault();
+        console.log('You clicked cancel.');
+        setTextValue('');
+        setImage('');
+        setFile({});
+    }
 
   const [postShow, setPostshow] = useState(false);
 
@@ -57,32 +61,40 @@ const NewPost = () => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-  const shareHandler = async () => {
-    setTextValue('');
-    setImage('');
-    setFile({});
-    let data = new FormData();
-    data.append('content', textValue);
-    data.append('file', file);
 
-    console.log(textValue);
-    console.log(file);
+    const shareHandler = async () => {
+        if(!textValue && file) {
+            alert('กรุณากรอกข้อมูลของคำถามของท่าน')
+            return
+        }
 
-    try {
-      const host = process.env.NEXT_PUBLIC_API_URL;
-      const token = localStorage.getItem('access_token');
-      const post = await axios.post(`${host}/api/v1/discusses/post`, data, {
-        headers: { Authorization: token },
-      });
+        setTextValue('');
+        setImage('');
+        setFile({});
+        let data = new FormData();
+        data.append('content', textValue);
+        data.append('file', file);
+        data.append('categories',categories.join(','));
+        console.log(categories);
+        console.log(file);
 
-      if (post.status !== 201) throw new Error('internal error');
-      console.log('Ok');
-    } catch (e) {
-      console.error(e);
-      console.log('On');
-      return;
-    }
-  };
+        try {
+            setLoading(true);
+            const host = process.env.NEXT_PUBLIC_API_URL;
+            const token = localStorage.getItem('access_token');
+            const post = await axios.post(`${host}/api/v1/discusses/post`, data, { headers: { Authorization: token, }, });
+
+            if (post.status !== 201) throw new Error('internal error');
+            console.log('Ok');
+            console.log(post)
+            setHasChange(prev => !prev)
+            setLoading(false);
+        } catch (e) {
+            console.error(e);
+            console.log('On')
+            return;
+        }
+    };
 
   useEffect(() => {
     const host = process.env.NEXT_PUBLIC_API_URL;
@@ -97,9 +109,19 @@ const NewPost = () => {
     tagData();
   }, [categories]);
 
-  return (
-    <>
-      {/* <Modal opened={opened} onClose={() => setOpened(false)} /> */}
+    if (loading) {
+        return (
+            <>
+                <div className="flex w-full h-full justify-center items-center">
+                    <div className="loading"></div>
+                </div>
+            </>
+        );
+    }
+
+    return (
+        <>
+            {/* <Modal opened={opened} onClose={() => setOpened(false)} /> */}
 
       <Dragfile
         visible={opened}

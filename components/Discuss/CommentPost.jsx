@@ -6,7 +6,7 @@ const CommentPost = ({ commentData }) => {
 
     return (
         <>
-            <div className='flex mx-1 mt-1'>
+            <div className='flex mx-1 mt-[6px]'>
                 <Link href={`/discuss/p/${commentData.id}`}>
                     <button className='mx-1 bg-white'>
                         <svg xmlns="http://www.w3.org/2000/svg"

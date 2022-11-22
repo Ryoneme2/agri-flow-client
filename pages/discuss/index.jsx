@@ -28,20 +28,23 @@ const Community = dynamic(
 
 const Discuss = () => {
   const [datapost, setDatapost] = React.useState([]);
-  const [token,setToken] =React.useState('');
+  const [token, setToken] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
+  const [hasChange, setHasChange] = React.useState(false);
+
   React.useEffect(() => {
     const host = process.env.NEXT_PUBLIC_API_URL;
-    setToken (JSON.parse(localStorage.getItem('user')))
+    const usertoken = localStorage.getItem('access_token')
+    setToken(usertoken);
     const postData = async () => {
-      const postGet = await axios.get(`${host}/api/v1/discusses/post`)
+      setLoading(true);
+      const postGet = await axios.get(`${host}/api/v1/discusses/post?limit=100`,{ headers: { Authorization: usertoken, }, })
       setDatapost(postGet.data.data)
       console.log(postGet.data.data);
+      setLoading(false);
     }
     postData();
-  },[]);
-
-
-  console.log(token);
+  }, [hasChange]);
 
 
 
@@ -63,20 +66,32 @@ const Discuss = () => {
                 <p className='text-[1.375rem] text-[#1C658C] p-0 m-0'>บุคคลที่ติดตาม</p>
               </div>
             </div>
-            
+
           </div>
 
-          <div className="w-full sm:w-[75%] md:w-[50%] h-screen mx-3 md:mx-0 flex-col justify-center items-center px-2 overflow-scroll scroll-none">
-            <NewPost />
-            {
-              datapost.map((data,index)=>
-                <div key={index}>
-                    <Discussblock postData={data}/>
-                </div>               
-              )
-            }
-            
-          </div>
+          {
+            loading ?
+              <div className="flex w-full sm:w-[75%] md:w-[50%] h-screen justify-center items-center">
+                <div className="loading"></div>
+              </div>
+              :
+              <div className="w-full sm:w-[75%] md:w-[50%] h-screen mx-3 md:mx-0 flex-col justify-center items-center px-2 overflow-scroll scroll-none ">
+                {
+                  ! token ? <></> : <NewPost setHasChange={setHasChange} />
+                }
+                
+
+                {
+                  datapost.map((data, index) =>
+                    <div key={index}>
+                      <Discussblock postData={data} />
+                    </div>
+                  )
+                }
+              </div>
+          }
+
+
 
           <div className=' w-[0] invisible md:w-[25%] md:visible ml-1'>
             <div className='w-full h-auto text-[#1C658C] text-[1.375rem] ml-2'>ชุมชนแนะนำ</div>
@@ -86,7 +101,7 @@ const Discuss = () => {
           </div>
         </div>
       </div>
-      
+
     </>
   );
 };

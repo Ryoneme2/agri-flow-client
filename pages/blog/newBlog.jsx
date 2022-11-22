@@ -15,6 +15,7 @@ const NewBlog = ({ postPath = '/api/v1/blogs/p' }) => {
   const [loading, setLoading] = React.useState(false);
 
   console.log(value);
+  console.log(categories);
 
   const people = useMemo(
     () => [
