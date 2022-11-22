@@ -5,7 +5,7 @@ import { MultiSelect } from '@mantine/core';
 const RichTextEditor = dynamic(() => import('@mantine/rte'), { ssr: false });
 import { useRouter } from 'next/router';
 
-const NewBlog = ({ postPath = '' }) => {
+const NewBlog = () => {
   const [value, onChange] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [tag, setTag] = React.useState([]);

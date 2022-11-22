@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Narbarlogin = dynamic(
   () => import('../../../components/Navbar/Navbarlogin'),
@@ -10,12 +11,53 @@ import { Tabs } from '@mantine/core';
 import CommunityQuestion from '../../../components/community/Community_question';
 import CommunityBlog from '../../../components/community/Commuity_Blog';
 import dynamic from 'next/dynamic';
+import LoadingBlog from '../../../components/Blog/LoadingBlog';
 
-const Commu = (data) => {
+const Commu = () => {
   const router = useRouter();
   const { id } = router.query;
+  const [groupMember, setGroupMember] = useState(false);
+  const [commu, setCommu] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [blogSuggest, setBlogSuggest] = useState([]);
 
-  const member = true;
+  useEffect(() => {
+    const username = JSON.parse(localStorage.getItem('user')).username || '';
+    if (!id) return;
+    const getData = async () => {
+      try {
+        setLoading(true);
+        const commu = axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/communities/${id}`
+        );
+        const res2 = axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs/c/${id}`
+        );
+        const [blog, res] = await Promise.all([res2, commu]);
+
+        setCommu(res.data.data);
+        setBlogSuggest(blog.data?.data || []);
+
+        const checkUser = res.data.data?.users?.find(
+          (user) => user.username == username
+        );
+        checkUser ? setGroupMember(true) : setGroupMember(false);
+        setLoading(false);
+      } catch (e) {
+        console.error(e);
+        setLoading(false);
+      }
+    };
+    getData();
+  }, [id]);
+
+  if (loading)
+    return (
+      <div className="w-full p-3">
+        <LoadingBlog />
+      </div>
+    );
+
   return (
     <>
       <Narbarlogin />
@@ -34,7 +76,11 @@ const Commu = (data) => {
                 </Tabs.List>
 
                 <Tabs.Panel value="content" pt="xs">
-                  <CommunityBlog id={id} />
+                  <CommunityBlog
+                    blogSuggest={blogSuggest}
+                    groupMember={groupMember}
+                    id={id}
+                  />
                 </Tabs.Panel>
 
                 <Tabs.Panel value="question" pt="xs">
@@ -44,7 +90,13 @@ const Commu = (data) => {
             </div>
           </div>
           <div className="hidden md:flex">
-            <CommuSidebar name={'คนภาคเหนือ'} id={id} />
+            <CommuSidebar
+              name={'คนภาคเหนือ'}
+              id={id}
+              commu={commu}
+              groupMember={groupMember}
+              setGroupMember={setGroupMember}
+            />
           </div>
         </div>
       </div>

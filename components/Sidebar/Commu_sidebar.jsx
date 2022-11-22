@@ -6,15 +6,8 @@ import { Avatar } from '@mantine/core';
 import Button from '../Button';
 import UpgateAccount from './UpgateAccount';
 import axios from 'axios';
-import LoadingBlog from '../Blog/LoadingBlog';
 
-const CommunitySidebar = ({ name, id }) => {
-  const [groupMember, setGroupMember] = useState(false);
-  const [token, setToken] = useState('');
-  const [username, setUsername] = useState('');
-  const [commu, setCommu] = useState({});
-  const [loading, setLoading] = useState(false);
-
+const CommunitySidebar = ({ name, id, commu, groupMember, setGroupMember }) => {
   const joinGroup = async () => {
     try {
       const token = localStorage.getItem('access_token');
@@ -35,39 +28,7 @@ const CommunitySidebar = ({ name, id }) => {
     }
   };
 
-  useEffect(() => {
-    setToken(localStorage.getItem('access_token') || '');
-    setUsername(JSON.parse(localStorage.getItem('user')).username || '');
-    if (!id) return;
-    const getData = async () => {
-      try {
-        setLoading(true);
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/communities/${id}`
-        );
-
-        console.log('response', res.data.data.data);
-        setCommu(res.data.data.data);
-
-        const checkUser = res.data.data.data?.users?.find(
-          (user) => user.username == username
-        );
-        checkUser ? setGroupMember(true) : setGroupMember(false);
-        setLoading(false);
-      } catch (e) {
-        console.error(e);
-        setLoading(false);
-      }
-    };
-    getData();
-  }, [id]);
-
-  if (loading)
-    return (
-      <div className="w-full p-3">
-        <LoadingBlog />
-      </div>
-    );
+  if (!commu || !commu.users) return <></>;
 
   return (
     <>
@@ -91,11 +52,21 @@ const CommunitySidebar = ({ name, id }) => {
               />
               <div className="flex justify-center col-span-2">
                 <Avatar.Group spacing="sm">
-                  <Avatar src="/images/profile/jammy.jpg" radius="xl" />
-                  <Avatar src="/images/profile/jammy.jpg" radius="xl" />
-                  <Avatar src="/images/profile/jammy.jpg" radius="xl" />
-                  <Avatar src="/images/profile/jammy.jpg" radius="xl" />
-                  <Avatar radius="xl">+5</Avatar>
+                  {commu.users.map((v) => (
+                    <Avatar
+                      key={v.username}
+                      src={v.Users.imageProfile}
+                      radius="xl"
+                    />
+                  ))}
+
+                  {commu.users.length - 5 < 0 ? (
+                    <></>
+                  ) : (
+                    <Avatar radius="xl">
+                      {`+${commu.users.length - 5 < 0}`}
+                    </Avatar>
+                  )}
                 </Avatar.Group>
               </div>
               <hr className="col-span-2 w-11/12 h-[2px] bg-[#000000] border-0 mx-auto my-4 mt-6" />
