@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 
 const Narbarlogin = dynamic(
@@ -10,7 +11,10 @@ import CommunityQuestion from '../../components/community/Community_question';
 import CommunityBlog from '../../components/community/Commuity_Blog';
 import dynamic from 'next/dynamic';
 
-const Commu = () => {
+const Commu = (data) => {
+  const router = useRouter();
+  const { id } = router.query;
+
   const member = true;
   return (
     <>
@@ -38,7 +42,7 @@ const Commu = () => {
             </div>
           </div>
           <div className="hidden md:flex">
-            <CommuSidebar name={'คนภาคเหนือ'} />
+            <CommuSidebar name={'คนภาคเหนือ'} id={id} />
           </div>
         </div>
       </div>

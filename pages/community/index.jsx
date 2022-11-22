@@ -1,19 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
-import Narbarlogin from '../../components/Navbar/Navbarlogin';
+const Narbarlogin = dynamic(
+  () => import('../../components/Navbar/Navbarlogin'),
+  { ssr: false }
+);
 import CommuCard from '../../components/community/Commu_card';
 import CommumitySidebarMini from '../../components/community/Community_sidebar';
 import Link from 'next/link';
+import axios from 'axios';
 
 const CommuLanding = () => {
+  const [commu, setCommu] = useState([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/communities/`)
+      .then((res) => {
+        console.log(res.data.data);
+        setCommu(res.data.data);
+      });
+  }, []);
+
   return (
     <>
-      {/* <Narbarlogin /> */}
+      <Narbarlogin />
       <div className="w-[90%] mx-auto pt-4">
         <div className="grid grid-cols-4">
           <div className="col-span-4 md:col-span-3">
             <div>
-              <CommuCard />
+              {commu.map((data, index) => (
+                <div key={index}>
+                  <CommuCard
+                    data={data}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      router.push(`../community/${data.id}`);
+                    }}
+                  />
+                </div>
+              ))}
             </div>
           </div>
           <div className="hidden md:flex">
@@ -24,7 +52,9 @@ const CommuLanding = () => {
               <h1 className="px-3 text-[1.3rem] text-[#1C658C]">
                 ชุมชนของท่าน
               </h1>
-              {/* <CommumitySidebarMini /> */}
+              <CommumitySidebarMini />
+              <CommumitySidebarMini />
+              <CommumitySidebarMini />
             </div>
           </div>
         </div>
