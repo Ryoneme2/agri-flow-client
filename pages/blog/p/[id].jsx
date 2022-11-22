@@ -76,7 +76,7 @@ const BlogOne = () => {
     fetchData();
   }, [id]);
 
-  if (!data) {
+  if (!data || loading) {
     console.log(data);
     return (
       <>
