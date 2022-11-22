@@ -5,9 +5,34 @@ import ShowUserNum from '../staticUser/ShowUserNum';
 import { Avatar } from '@mantine/core';
 import Button from '../Button';
 import UpgateAccount from './UpgateAccount';
+import axios from 'axios';
 
-const CommunitySidebar = ({ name }) => {
+const CommunitySidebar = ({ name, id }) => {
   const [groupMember, setGroupMember] = useState(false);
+  const [token, setToken] = useState('');
+  useEffect(() => {
+    setToken(localStorage.getItem('access_token') || '');
+  }, []);
+
+  const joinGroup = async () => {
+    try {
+      const token = localStorage.getItem('access_token');
+      const post = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/communities/join`,
+        { communityId: id },
+        {
+          headers: { Authorization: token },
+        }
+      );
+
+      if (post.status !== 201) throw new Error('internal error');
+      console.log('join success');
+    } catch (e) {
+      console.error(e);
+      console.log('join failed!');
+      return;
+    }
+  };
 
   return (
     <>
@@ -47,6 +72,7 @@ const CommunitySidebar = ({ name }) => {
                 css={'w-3/4 justify-center'}
                 onClick={() => {
                   setGroupMember(true);
+                  joinGroup();
                 }}
               />
             </div>

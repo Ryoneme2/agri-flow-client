@@ -20,12 +20,15 @@ const PostBlock = ({ postData }) => {
                             </div>
                     }
 
-                    {
-                        postData.post.content == '' ? '' :
-                            <div className='px-2 w-full max-h-[8.50rem] break-words'>
-                                <p className='text-[1.125rem] font-light m-0 p-0'>{postData.post.content}</p>
-                            </div>
-                    }
+          {postData.post.content == '' ? (
+            ''
+          ) : (
+            <div className="px-2 w-full max-h-[8.50rem] break-words">
+              <p className="text-[1.125rem] font-light m-0 p-0">
+                {postData.post.content}
+              </p>
+            </div>
+          )}
 
                     <div className=''>
                         <div className='p-2 flex items-center '>
