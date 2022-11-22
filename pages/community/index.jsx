@@ -37,7 +37,7 @@ const CommuLanding = () => {
                     data={data}
                     onClick={(e) => {
                       e.preventDefault();
-                      router.push(`../community/${data.id}`);
+                      router.push(`../community/p/${data.id}`);
                     }}
                   />
                 </div>

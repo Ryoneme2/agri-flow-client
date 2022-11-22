@@ -1,16 +1,16 @@
 import dynamic from 'next/dynamic';
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import axios, { AxiosError } from 'axios';
 import { MultiSelect } from '@mantine/core';
 const RichTextEditor = dynamic(() => import('@mantine/rte'), { ssr: false });
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
-const NewBlog = () => {
-  const router = useRouter()
+const NewBlog = ({ postPath = '/api/v1/blogs/p' }) => {
+  const router = useRouter();
   const [value, onChange] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [tag, setTag] = React.useState([]);
-  const [categories, setCategories] = React.useState([])
+  const [categories, setCategories] = React.useState([]);
   const editorRef = useRef();
   const [loading, setLoading] = React.useState(false);
 
@@ -25,7 +25,6 @@ const NewBlog = () => {
     ],
     []
   );
-
 
   const tags = useMemo(
     () => [
@@ -57,15 +56,18 @@ const NewBlog = () => {
       setLoading(true);
       const host = process.env.NEXT_PUBLIC_API_URL;
       const token = localStorage.getItem('access_token');
-      const res = await axios.post(`${host}/api/v1/blogs/p`, { title, categories ,content: value, }, { headers: { Authorization: token, }, });
+      const res = await axios.post(
+        `${host}${postPath}`,
+        { title, categories, content: value },
+        { headers: { Authorization: token } }
+      );
 
       if (res.status !== 201) throw new Error('internal error');
 
       console.log('published');
 
       setLoading(false);
-      router.push('../')
-
+      router.push('../');
     } catch (e) {
       if (e instanceof AxiosError) {
         console.error(e.response.data.msg);
@@ -78,23 +80,24 @@ const NewBlog = () => {
   useEffect(() => {
     const host = process.env.NEXT_PUBLIC_API_URL;
     const tagData = async () => {
-      const tagGet = await axios.get(`${host}/api/v1/utilities/categories?char`)
-      setTag(tagGet.data.data.map(v => v.categoryName))
-      console.log(tagGet.data.data.map(v => v.categoryName));
-    }
+      const tagGet = await axios.get(
+        `${host}/api/v1/utilities/categories?char`
+      );
+      setTag(tagGet.data.data.map((v) => v.categoryName));
+      console.log(tagGet.data.data.map((v) => v.categoryName));
+    };
     tagData();
   }, [categories]);
 
   if (loading) {
     return (
-        <>
-            <div className="flex w-screen h-screen justify-center items-center">
-                <div className="loading"></div>
-            </div>
-        </>
+      <>
+        <div className="flex w-screen h-screen justify-center items-center">
+          <div className="loading"></div>
+        </div>
+      </>
     );
-}
-
+  }
 
   return (
     <div className="w-full md:container mx-auto mt-4">
@@ -114,8 +117,7 @@ const NewBlog = () => {
             เผยแพร่
           </button>
         </div>
-        <div className='my-2'>
-
+        <div className="my-2">
           <MultiSelect
             onChange={setCategories}
             data={tag}
@@ -124,17 +126,23 @@ const NewBlog = () => {
             searchable
             creatable
             getCreateLabel={(query) => `+ Create ${query}`}
-            onCreate={ (query) => {
+            onCreate={(query) => {
               const item = { value: query, label: query };
-              setCategories((current) => [...current, query])
+              setCategories((current) => [...current, query]);
               setTag((current) => [...current, item]);
               const host = process.env.NEXT_PUBLIC_API_URL;
               const token = localStorage.getItem('access_token');
-              axios.post(`${host}/api/v1/utilities/categories`,{ context : query ,}, { headers: { Authorization: token, }, }).then(_ => console.log('ok')).catch(err => console.log(err));
-              return item
+              axios
+                .post(
+                  `${host}/api/v1/utilities/categories`,
+                  { context: query },
+                  { headers: { Authorization: token } }
+                )
+                .then((_) => console.log('ok'))
+                .catch((err) => console.log(err));
+              return item;
             }}
-            />
-
+          />
         </div>
         <RichTextEditor
           value={value}

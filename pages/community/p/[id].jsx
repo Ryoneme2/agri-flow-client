@@ -2,13 +2,13 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 const Narbarlogin = dynamic(
-  () => import('../../components/Navbar/Navbarlogin'),
+  () => import('../../../components/Navbar/Navbarlogin'),
   { ssr: false }
 );
-import CommuSidebar from '../../components/Sidebar/Commu_sidebar';
+import CommuSidebar from '../../../components/Sidebar/Commu_sidebar';
 import { Tabs } from '@mantine/core';
-import CommunityQuestion from '../../components/community/Community_question';
-import CommunityBlog from '../../components/community/Commuity_Blog';
+import CommunityQuestion from '../../../components/community/Community_question';
+import CommunityBlog from '../../../components/community/Commuity_Blog';
 import dynamic from 'next/dynamic';
 
 const Commu = (data) => {
@@ -26,9 +26,11 @@ const Commu = (data) => {
               <Tabs defaultValue="content">
                 <Tabs.List className="pb-[2px]">
                   <Tabs.Tab value="content">บทความภายในกลุ่ม</Tabs.Tab>
-                  {member && (
-                    <Tabs.Tab value="question">คำถามภายในกลุ่ม</Tabs.Tab>
-                  )}
+                  {
+                    /*member*/ false && (
+                      <Tabs.Tab value="question">คำถามภายในกลุ่ม</Tabs.Tab>
+                    )
+                  }
                 </Tabs.List>
 
                 <Tabs.Panel value="content" pt="xs">

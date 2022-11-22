@@ -6,13 +6,14 @@ import { Avatar } from '@mantine/core';
 import Button from '../Button';
 import UpgateAccount from './UpgateAccount';
 import axios from 'axios';
+import LoadingBlog from '../Blog/LoadingBlog';
 
 const CommunitySidebar = ({ name, id }) => {
   const [groupMember, setGroupMember] = useState(false);
   const [token, setToken] = useState('');
-  useEffect(() => {
-    setToken(localStorage.getItem('access_token') || '');
-  }, []);
+  const [username, setUsername] = useState('');
+  const [commu, setCommu] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const joinGroup = async () => {
     try {
@@ -34,27 +35,60 @@ const CommunitySidebar = ({ name, id }) => {
     }
   };
 
+  useEffect(() => {
+    setToken(localStorage.getItem('access_token') || '');
+    setUsername(JSON.parse(localStorage.getItem('user')).username || '');
+    if (!id) return;
+    const getData = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/communities/${id}`
+        );
+
+        console.log('response', res.data.data.data);
+        setCommu(res.data.data.data);
+
+        const checkUser = res.data.data.data?.users?.find(
+          (user) => user.username == username
+        );
+        checkUser ? setGroupMember(true) : setGroupMember(false);
+        setLoading(false);
+      } catch (e) {
+        console.error(e);
+        setLoading(false);
+      }
+    };
+    getData();
+  }, [id]);
+
+  if (loading)
+    return (
+      <div className="w-full p-3">
+        <LoadingBlog />
+      </div>
+    );
+
   return (
     <>
       <div className="flex-col py-4 mx-3">
         <div>
           <div style={{ width: 150, marginLeft: 'auto', marginRight: 'auto' }}>
-            <Image
-              radius="md"
-              src="https://images.unsplash.com/photo-1511216335778-7cb8f49fa7a3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
-              alt="Page commu"
-            />
+            <Image radius="md" src={commu.communityImage} alt="Page commu" />
           </div>
           <div className="w-full flex justify-center text-[1.5rem] bg-white text-[#1C658C]">
-            <div>{name}</div>
+            <div>{commu.name}</div>
           </div>
         </div>
 
         {!groupMember ? (
           <div>
             <div className="grid grid-cols-2">
-              <ShowUserNum amount={'250000'} name={'บล็อก'} />
-              <ShowUserNum amount={'250000'} name={'สมาชิก'} />
+              <ShowUserNum amount={commu?.users?.length || 0} name={'บล็อก'} />
+              <ShowUserNum
+                amount={commu?.BlogsOnCommunity?.length || 0}
+                name={'สมาชิก'}
+              />
               <div className="flex justify-center col-span-2">
                 <Avatar.Group spacing="sm">
                   <Avatar src="/images/profile/jammy.jpg" radius="xl" />
@@ -79,10 +113,13 @@ const CommunitySidebar = ({ name, id }) => {
           </div>
         ) : (
           <div>
-            <div className="grid grid-cols-3">
-              <ShowUserNum amount={'5000'} name={'สมาชิก'} />
-              <ShowUserNum amount={'245'} name={'บล็อก'} />
-              <ShowUserNum amount={'68'} name={'คำถาม'} />
+            <div className="grid grid-cols-2">
+              <ShowUserNum amount={commu?.users?.length || 0} name={'สมาชิก'} />
+              <ShowUserNum
+                amount={commu?.BlogsOnCommunity?.length || 0}
+                name={'บล็อก'}
+              />
+              {/* <ShowUserNum amount={'68'} name={'คำถาม'} /> */}
               <hr className="col-span-3 w-11/12 h-[2px] bg-[#000000] border-0 mx-auto" />
             </div>
             <div className="flex justify-center">
