@@ -1,24 +1,137 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar } from '@mantine/core';
-import { Modal, Autocomplete, Button, Textarea } from '@mantine/core';
+import {
+  Modal,
+  Autocomplete,
+  Button,
+  Textarea,
+  MultiSelect,
+} from '@mantine/core';
+import Dragfile from './Dragfile';
+import { useDropzone } from 'react-dropzone';
+import imgToBase64 from '../../utils/imgToBase64';
+import axios from 'axios';
 
-const NewPost = () => {
-  const [opened, setOpened] = useState(false);
+const NewPost = ({setHasChange}) => {
+    const [opened, setOpened] = useState(false);
+    const [image, setImage] = useState();
+    const [file, setFile] = useState({});
+    const [textValue, setTextValue] = useState('');
+    const [tag, setTag] = React.useState([]);
+    const [categories, setCategories] = React.useState([]);
+    const [user,setUser] =React.useState('');
 
-  function publicPost(e) {
-    e.preventDefault();
-    console.log('You clicked submit.');
-  }
-  function cancelPost(e) {
-    e.preventDefault();
-    console.log('You clicked cancel.');
-  }
+    const [loading, setLoading] = React.useState(false);
+
+    
+
+    console.log(textValue);
+    function publicPost(e) {
+        e.preventDefault();
+        console.log('You clicked submit.');
+        shareHandler();
+    }
+    function cancelPost(e) {
+        e.preventDefault();
+        console.log('You clicked cancel.');
+        setTextValue('');
+        setImage('');
+        setFile({});
+    }
 
   const [postShow, setPostshow] = useState(false);
 
-  return (
-    <>
-      <Modal opened={opened} onClose={() => setOpened(false)} />
+  const closeHandler = () => {
+    setOpened(false);
+  };
+
+  const cancelImage = () => {
+    setFile({});
+    setImage('');
+  };
+
+  const textHandler = (event) => {
+    setTextValue(event.target.value);
+  };
+
+  const onDrop = React.useCallback(async (acceptedFiles) => {
+    setFile(acceptedFiles[0]);
+    setImage(await imgToBase64(acceptedFiles[acceptedFiles.length - 1]));
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+
+    const shareHandler = async () => {
+        if(!textValue && file) {
+            alert('กรุณากรอกข้อมูลของคำถามของท่าน')
+            return
+        }
+
+        setTextValue('');
+        setImage('');
+        setFile({});
+        let data = new FormData();
+        data.append('content', textValue);
+        data.append('file', file);
+        data.append('categories',categories.join(','));
+        console.log(categories);
+        console.log(file);
+
+        try {
+            setLoading(true);
+            const host = process.env.NEXT_PUBLIC_API_URL;
+            const token = localStorage.getItem('access_token');
+            const post = await axios.post(`${host}/api/v1/discusses/post`, data, { headers: { Authorization: token, }, });
+
+            if (post.status !== 201) throw new Error('internal error');
+            console.log('Ok');
+            console.log(post)
+            setHasChange(prev => !prev)
+            setLoading(false);
+        } catch (e) {
+            console.error(e);
+            console.log('On')
+            return;
+        }
+    };
+
+  useEffect(() => {
+    const host = process.env.NEXT_PUBLIC_API_URL;
+    const tagData = async () => {
+      const tagGet = await axios.get(
+        `${host}/api/v1/utilities/categories?char`
+      );
+      setTag(tagGet.data.data.map((v) => v.categoryName));
+      console.log(tagGet.data.data.map((v) => v.categoryName));
+      setUser(JSON.parse(localStorage.getItem('user')));
+    };
+    tagData();
+  }, [categories]);
+
+    if (loading) {
+        return (
+            <>
+                <div className="flex w-full h-full justify-center items-center">
+                    <div className="loading"></div>
+                </div>
+            </>
+        );
+    }
+
+    return (
+        <>
+            {/* <Modal opened={opened} onClose={() => setOpened(false)} /> */}
+
+      <Dragfile
+        visible={opened}
+        closeHandler={closeHandler}
+        cancelImage={cancelImage}
+        getInputProps={getInputProps}
+        getRootProps={getRootProps}
+        isDragActive={isDragActive}
+        image={image}
+      />
 
       <div
         className="w-full h-[2rem] flex justify-between item-center border-[1px] 
@@ -42,11 +155,11 @@ const NewPost = () => {
           <div className="w-full h-auto  flex justify-between ">
             <div className="w-full flex items-center h-auto">
               <Avatar
-                src={'/images/profile/jammy.jpg'}
+                src={user.imageProfile}
                 radius="xl"
                 className="w-[2.5rem] md:w-[3.1rem] h-auto"
               />
-              <p className="mx-2"> {`username`} </p>
+              <p className="mx-2"> {user.username} </p>
             </div>
             <div className="w-full flex justify-end items-center text-[0.9rem]">
               <div
@@ -91,22 +204,38 @@ const NewPost = () => {
               </Button>
             </div>
 
-            <div className="my-1 border border-[#1C658C] px-2 rounded-[10px]">
-              <Autocomplete
-                placeholder="หมวดหมู่"
-                data={[
-                  'แมว',
-                  'กุ้ง',
-                  'เสือ',
-                  'ปลาดาว',
-                  'เป็ด',
-                  'ไก่',
-                  'ห่าน',
-                  'เหี้ย',
-                ]}
+            <div className="w-auto my-1 border border-[#1C658C] px-2 rounded-[10px]">
+              <MultiSelect
+                onChange={setCategories}
+                data={tag}
+                maxSelectedValues={3}
                 variant="unstyled"
+                placeholder="เลือกหมวดหมู่ที่ต้องการ"
+                searchable
+                creatable
+                getCreateLabel={(query) => `+ Create ${query}`}
+                onCreate={(query) => {
+                  const item = { value: query, label: query };
+                  setCategories((current) => [...current, query]);
+                  setTag((current) => [...current, item]);
+                  const host = process.env.NEXT_PUBLIC_API_URL;
+                  const token = localStorage.getItem('access_token');
+                  axios
+                    .post(
+                      `${host}/api/v1/utilities/categories`,
+                      { context: query },
+                      { headers: { Authorization: token } }
+                    )
+                    .then((_) => console.log('ok'))
+                    .catch((err) => console.log(err));
+                  return item;
+                }}
               />
             </div>
+          </div>
+
+          <div className="w-full h-auto my-2">
+            {!image ? <></> : <img src={image}></img>}
           </div>
 
           <div className="mb-2">
@@ -116,6 +245,8 @@ const NewPost = () => {
               autosize
               minRows={3}
               maxRows={6}
+              onChange={textHandler}
+              value={textValue}
             />
           </div>
         </div>

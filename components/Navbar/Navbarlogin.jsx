@@ -3,36 +3,53 @@ import Image from 'next/image';
 import Link from 'next/link.js';
 import Button from '../CreateBlogB.jsx';
 
-import Dropdown from './Dropdown.jsx';
+
 const Navbarlogin = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
+  const Toggle = () => open === true ? setOpen(false) : setOpen(true);
+  
 
-  const [menu, setMenu] = React.useState([
-    {
-      title: 'หน้าหลัก',
-      value: 'Home',
-      link: '/Home',
-    },
-    {
-      title: 'บล็อก',
-      value: 'Blog',
-      link: '/Blog',
-    },
-    {
-      title: 'ถกเถียง',
-      value: 'Dis',
-      link: '/Discuss',
-    },
-    {
-      title: 'ชุมชน',
-      value: 'commu',
-      link: '/Community',
-    },
-  ]);
-
-  const onClick = () => {
-    setOpen(!open);
+  const handlerLogout = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user');
+    window.location.replace('/auth');
   };
+  const menu = [
+    {
+      name: 'หน้าหลัก',
+      to: '/',
+    },
+    {
+      name: 'บล็อก',
+      to: '/Blog',
+    },
+    {
+      name: 'ถกเถียง',
+      to: '/discuss',
+    },
+    {
+      name: 'ชุมชน',
+      to: '/community',
+    },
+  ];
+
+  const usermenu = [
+    {
+      name: 'My Settings',
+      to: '/setting',
+    },
+    {
+      name: 'Log Out',
+      to: '/logout',
+    },
+  ];
+
+  const [user, setUser] = React.useState({})
+
+  React.useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem('user')))
+    console.log(localStorage.getItem('user'));
+  }, [])
 
   return (
     <>
@@ -58,8 +75,8 @@ const Navbarlogin = () => {
           </div>
         </div>
 
-        <div className="p-2  w-[40%] md:w-[15%] flex justify-center content-center items-center">
-          <Link href="/Home">
+        <div className="p-2  w-full md:w-[15%] flex justify-center content-center items-center">
+          <Link href="/">
             <Image
               src={'/images/png/2-2E.png'}
               width={160}
@@ -74,16 +91,19 @@ const Navbarlogin = () => {
             {menu.map((item, index) => (
               <div key={index}>
                 <div className="h-auto overflow-y-hidden">
-                  <Link href={item.link}>{item.title}</Link>
+                  <Link href={item.to}>{item.name}</Link>
                 </div>
               </div>
             ))}
           </div>
         </div>
+
+
         <div className="flex h-full w-auto md:w-[50%] ">
-          <div className="flex w-full ju">
+          
+          <div className="flex w-full justify-end">
             {/* search bar */}
-            <div className=" w-[full] flex justify-end content-center items-center invisible md:visible">
+            <div className=" w-[full] flex justify-end content-center items-center invisible md:visible px-2">
               <input
                 placeholder="ค้นหา"
                 type="text"
@@ -115,7 +135,7 @@ const Navbarlogin = () => {
             </div>
 
             {/* Build blog */}
-            <div className=" w-[0] md:w-[20%] invisible md:visible flex justify-center content-center items-center">
+            <div className="h-full shrink-0  w-[6rem]  hidden md:flex justify-center items-center ">
               <Link href={'/blog/newBlog'}>
                 <button className="bg-white border-2 py-2 px-3 w-auto border-[#1C658C] text-[#1C658C] text-[0.8rem] font-bold rounded-[20px]">
                   สร้างบล็อค
@@ -123,33 +143,12 @@ const Navbarlogin = () => {
               </Link>
             </div>
 
-            {/* Noti */}
-            <div className=" w-[0] md:w-[8%] flex justify-start  items-center invisible md:visible">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="icon icon-tabler icon-tabler-bell-ringing"
-                width="30"
-                height="30"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="#1C658C"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
-                <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
-                <path d="M21 6.727a11.05 11.05 0 0 0 -2.794 -3.727" />
-                <path d="M3 6.727a11.05 11.05 0 0 1 2.792 -3.727" />
-              </svg>
-            </div>
 
             {/* profile */}
-            <div className=" w-[100%] md:w-[15%] flex justify-center md:justify-start items-center pl-2">
+            <div className=" flex justify-start shrink-0  w-[5.4rem] ">
               <Image
                 src={'/images/png/2-2.png'}
-                className="rounded-[100px] border border-[#1C658C]"
+                className="rounded-[100px] border border-[#1C658C] mx-3"
                 width={45}
                 height={45}
                 alt="profile avatar"

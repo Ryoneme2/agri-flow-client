@@ -42,10 +42,7 @@ const Login_email = () => {
       .then(function (response) {
         console.log(response.data);
         localStorage.setItem('access_token', response.data.data.token);
-        localStorage.setItem(
-          'user',
-          JSON.stringify(response.data.data.user)
-        );
+        localStorage.setItem('user', JSON.stringify(response.data.data.user));
         setLoading(false);
         router.push('../');
       })
@@ -108,7 +105,7 @@ const Login_email = () => {
             value={user.password}
             onChange={handleOnChange}
             color={color.password}
-            errorText={'password should containsat least 8 characters'}
+            errorText={'password should contains at least 8 characters'}
             placeholder={'รหัสผ่าน...'}
           />
           {loading && (

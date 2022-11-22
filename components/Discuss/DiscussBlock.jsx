@@ -2,56 +2,44 @@ import React from 'react';
 import Like from './LikePost';
 import Comment from './CommentPost';
 import Header from './header';
+import axios from 'axios';
 
+const PostBlock = ({ postData }) => {
+    
 
-const PostBlock = ({ dataImage }) => {
     return (
-        <>
-            <div className='w-full h-auto shadow-lg rounded-[20px] my-3 '>
+        <div className='p-2'>
+            <div className='w-full h-auto shadow-lg rounded-[20px] my-3   border border-gray-300 '>
                 <div className='w-full h-full p-3'>
-                    <Header />
-
+                    <Header userdata={postData.author} timepost={postData.create_at} tag={postData.tag.categoryName}/>
                     {
-                        !dataImage ?
-                            <div className=' my-2'></div> :
-                            <div className=' w-full h-auto p-2 my-3 border border-[#1C658C] flex justify-center items-center rounded-[20px]'>
-                                <img src={dataImage} className='w-auto max-h-[20rem] md:max-h-[25rem]  bg-cover bg-center' />
+                        postData.post.file ==  '' ?
+                            '' :
+                            <div className=' w-full h-auto p-2 my-3 flex justify-center items-center rounded-[20px]'>
+                                <img src={postData.post.file} className='w-auto max-h-[20rem] md:max-h-[25rem]  bg-cover bg-center' />
                             </div>
                     }
 
-                    <div className='px-2 w-full h-[8.50rem] break-words'>
-                        <p className='text-[1.125rem] font-light m-0 p-0'>
-                            {`วันที่องค์กรเล็กๆแห่งนี้ก่อรูปร่างด้วยความคิดที่ต้องการ“ลดความเหลื่อมล้ำ”
-                            โดยสนับสนุนและส่งเสริมการศึกษาให้กับเด็กที่ยากจนในประเทศไทยให้พวกเขา
-                            ได้มีโอกาสศึกษาต่อจนจบการศึกษาภาคบังคับโดยไม่หวังผลตอบแทนด้วยความ
-                            มุ่งมั่นตลอดระยะเวลาที่ผ่านมาปัจจุบันได้พิสูจน์แล้วว่าความร่วมมือจากองค์กรต่าง
-                            ๆและทุกคนในสังคมที่เชื่อในวันที่องค์กรเล็กๆแห่งนี้ก่อรูปร่างด้วยความคิดที่ต้องก
-                            าร“ลดความเหลื่อมล้ำ”โดยสนับสนุนและส่งเสริมการศึกษาให้กับเด็กที่ยากจนใน
-                            ประเทศไทยให้พวกเขาได้มีโอกาสศึกษาต่อจนจบการศึกษาภาคบังคับโดยไม่หวัง
-                            ผลตอบแทนด้วยความมุ่งมั่นตลอดระยะเวลาที่ผ่านมาปัจจุบันได้พิสูจน์แล้วว่าความ
-                            ร่วมมือจากองค์กรต่างๆและทุกคนในสังคมที่เชื่อในวันที่องค์กรเล็กๆแห่งนี้ก่อรูปร่าง
-                            ด้วยความคิดที่ต้องการ“ลดความเหลื่อมล้ำ”โดยสนับสนุนและส่งเสริมการศึกษาให้
-                            ได้มีโอกาสศึกษาต่อจนจบการศึกษาภาคบังคับโดยไม่หวังผลตอบแทนด้วยความ
-                            มุ่งมั่นตลอดระยะเวลาที่ผ่านมาปัจจุบันได้พิสูจน์แล้วว่าความร่วมมือจากองค์กรต่าง
-                            ๆและทุกคนในสังคมที่เชื่อในวันที่องค์กรเล็กๆแห่งนี้ก่อรูปร่างด้วยความคิดที่ต้องก
-                            าร“ลดความเหลื่อมล้ำ”โดยสนับสนุนและส่งเสริมการศึกษาให้กับเด็กที่ยากจนใน
-                            ประเทศไทยให้พวกเขาได้มีโอกาสศึกษาต่อจนจบการศึกษาภาคบังคับโดยไม่หวัง
-                            ผลตอบแทนด้วยความมุ่งมั่นตลอดระยะเวลาที่ผ่านมาปัจจุบันได้พิสูจน์แล้วว่าความ
-                            ร่วมมือจากองค์กรต่างๆและทุกคนในสังคมที่เชื่อใน`}
-                        </p>
-                    </div>
-
+          {postData.post.content == '' ? (
+            ''
+          ) : (
+            <div className="px-2 w-full max-h-[8.50rem] break-words">
+              <p className="text-[1.125rem] font-light m-0 p-0">
+                {postData.post.content}
+              </p>
+            </div>
+          )}
 
                     <div className=''>
                         <div className='p-2 flex items-center '>
-                            <Like LikeCount={10} />
-                            <Comment CommentCount={10} />
+                            <Like postData={postData} />
+                            <Comment commentData={postData} />
                         </div>
                     </div>
 
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
