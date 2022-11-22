@@ -109,31 +109,31 @@ const LandingNonLogin = ({ contentLink }) => {
                 <LoadingBlog />
               </div>
             ) : (
-              <InfiniteScroll
-                dataLength={blogMore.items.length} //This is important field to render the next data
-                next={() => scrollMore(blogSuggest)}
-                hasMore={blogMore.hasMore}
-                loader={
-                  <div className="ml-2">
-                    <LoadingBlog />
-                  </div>
-                }
-                endMessage={
-                  <p style={{ textAlign: 'center' }}>
-                    <b>Yay! You have seen it all</b>
-                  </p>
-                }
-              >
-                {console.log('blog โว้ยย', blogSuggest)}
-                {console.log(blogMore.items.length)}
-                {blogMore.items.map((blog) => {
-                  return <Blog blog={blog} key={blog.id} />;
-                })}
-              </InfiniteScroll>
+              // <InfiniteScroll
+              //   dataLength={blogMore.items.length} //This is important field to render the next data
+              //   next={() => scrollMore(blogSuggest)}
+              //   hasMore={blogMore.hasMore}
+              //   loader={
+              //     <div className="ml-2">
+              //       <LoadingBlog />
+              //     </div>
+              //   }
+              //   endMessage={
+              //     <p style={{ textAlign: 'center' }}>
+              //       <b>Yay! You have seen it all</b>
+              //     </p>
+              //   }
+              // >
+              //   {console.log('blog โว้ยย', blogSuggest)}
+              //   {console.log(blogMore.items.length)}
+              //   {blogMore.items.map((blog) => {
+              //     return <Blog blog={blog} key={blog.id} />;
+              //   })}
+              // </InfiniteScroll>
 
-              // blogSuggest.map((blog) => {
-              //   return <Blog blog={blog} key={blog.id} />;
-              // })
+              blogSuggest.map((blog) => {
+                return <Blog blog={blog} key={blog.id} />;
+              })
             )}
           </SuggestTopic>
           {tagName ? (
