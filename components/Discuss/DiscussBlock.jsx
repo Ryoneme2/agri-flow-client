@@ -8,14 +8,13 @@ const PostBlock = ({ postData }) => {
     
 
     return (
-        <>
-            <div className='w-full h-auto shadow-lg rounded-[20px] my-3 '>
+        <div className='p-2'>
+            <div className='w-full h-auto shadow-lg rounded-[20px] my-3   border border-gray-300 '>
                 <div className='w-full h-full p-3'>
-                    <Header userdata={postData.author} timepost={postData.create_at} />
-
+                    <Header userdata={postData.author} timepost={postData.create_at} tag={postData.tag.categoryName}/>
                     {
-                        postData.post.file == [] || null || '' ?
-                            <div className=' my-2'></div> :
+                        postData.post.file ==  '' ?
+                            '' :
                             <div className=' w-full h-auto p-2 my-3 flex justify-center items-center rounded-[20px]'>
                                 <img src={postData.post.file} className='w-auto max-h-[20rem] md:max-h-[25rem]  bg-cover bg-center' />
                             </div>
@@ -37,7 +36,7 @@ const PostBlock = ({ postData }) => {
 
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

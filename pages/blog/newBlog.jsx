@@ -15,6 +15,7 @@ const NewBlog = () => {
   const [loading, setLoading] = React.useState(false);
 
   console.log(value);
+  console.log(categories);
 
   const people = useMemo(
     () => [

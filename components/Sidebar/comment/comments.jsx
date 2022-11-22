@@ -19,7 +19,7 @@ const Comments = ({ dataComment, postid }) => {
         ) : (
           <div
             ref={parent}
-            className="w-full h-[30rem] selection:border overflow-y-scroll"
+            className="w-full max-h-[30rem] selection:border overflow-y-scroll"
           >
             {dataComment.map((comment) => {
               return <Comment data={comment} key={comment.id} />;

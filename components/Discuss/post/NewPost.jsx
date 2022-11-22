@@ -6,7 +6,7 @@ import { useDropzone } from 'react-dropzone';
 import imgToBase64 from '../../utils/imgToBase64';
 import axios from 'axios';
 
-const NewPost = () => {
+const NewPost = ({setHasChange}) => {
     const [opened, setOpened] = useState(false);
     const [image, setImage] = useState();
     const [file, setFile] = useState({});
@@ -14,6 +14,8 @@ const NewPost = () => {
     const [tag, setTag] = React.useState([]);
     const [categories, setCategories] = React.useState([]);
     const [user,setUser] =React.useState('');
+
+    const [loading, setLoading] = React.useState(false);
 
     
 
@@ -55,23 +57,32 @@ const NewPost = () => {
 
 
     const shareHandler = async () => {
+        if(!textValue && file) {
+            alert('กรุณากรอกข้อมูลของคำถามของท่าน')
+            return
+        }
+
         setTextValue('');
         setImage('');
         setFile({});
         let data = new FormData();
         data.append('content', textValue);
         data.append('file', file);
-
-        console.log(textValue);
+        data.append('categories',categories.join(','));
+        console.log(categories);
         console.log(file);
 
         try {
+            setLoading(true);
             const host = process.env.NEXT_PUBLIC_API_URL;
             const token = localStorage.getItem('access_token');
             const post = await axios.post(`${host}/api/v1/discusses/post`, data, { headers: { Authorization: token, }, });
 
             if (post.status !== 201) throw new Error('internal error');
             console.log('Ok');
+            console.log(post)
+            setHasChange(prev => !prev)
+            setLoading(false);
         } catch (e) {
             console.error(e);
             console.log('On')
@@ -89,6 +100,16 @@ const NewPost = () => {
         }
         tagData();
     }, [categories]);
+
+    if (loading) {
+        return (
+            <>
+                <div className="flex w-full h-full justify-center items-center">
+                    <div className="loading"></div>
+                </div>
+            </>
+        );
+    }
 
     return (
         <>
