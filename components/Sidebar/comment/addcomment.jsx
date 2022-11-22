@@ -28,6 +28,9 @@ const Addcomment = ({ postid }) => {
           create_at: dayjs().toString(),
         },
       ]);
+
+      setContentComment('')
+      
       const res = await axios.post(
         `${host}/api/v1/blogs/p/comments/`,
         {

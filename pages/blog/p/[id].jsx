@@ -86,8 +86,8 @@ const BlogOne = () => {
               </div>
         </div>
       </div>
-      <div className=''>
-
+      <div className='sm:hidden w-full px-2'>
+        
       </div>
     </>
   );

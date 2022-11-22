@@ -5,7 +5,7 @@ import Addcomment from './Addcomment';
 const Index = ({ data }) => {
     return (
         <>
-            <div className='h-[15rem] border overflow-y-scroll'>
+            <div className='h-[15rem]  overflow-y-scroll'>
                 {
                     data.comments.map((data, index) =>
                         <div key={index}>

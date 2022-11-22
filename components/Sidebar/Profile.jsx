@@ -4,6 +4,7 @@ import { Button } from '@mantine/core';
 import Line from '../contact/iconlinepopup';
 import Facebook from '../contact/iconfacebook';
 import Mail from '../contact/mail';
+import other from '../contact/othercontact';
 
 const Proflie = ({profliedata}) => {
     return (
@@ -31,10 +32,12 @@ const Proflie = ({profliedata}) => {
                         <textarea name="bio" id="bio" placeholder="เกี่ยวกับฉัน" className='w-full h-[5rem] resize-none overflow-y-auto focus:outline-none'></textarea>
                     </div>
                     <div className='flex justify-center content-center items-center mt-2'>
-                        <Facebook DataFacebook={profliedata.socialMedia.facebook}/>
+                        {/* <Facebook DataFacebook={profliedata.socialMedia.facebook}/>
                         <Line />
-                        {/* QrLine={profliedata.socialMedia.line} */}
-                        <Mail DataMail={profliedata.socialMedia.email}/>
+                        QrLine={profliedata.socialMedia.line}
+                        <Mail DataMail={profliedata.socialMedia.email}/> 
+                        <other data ={profliedata.socialMedia.other}/>
+                        */}
                     </div>
                 </div>
             </div>
