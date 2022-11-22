@@ -1,4 +1,6 @@
 import React from 'react';
+import { Modal, Group } from '@mantine/core';
+import { CopyButton, Button } from '@mantine/core';
 
 const Othercontact = () => {
     return (

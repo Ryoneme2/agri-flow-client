@@ -1,5 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
+import { Modal, Group } from '@mantine/core';
+import { CopyButton, Button } from '@mantine/core';
 
 const Iconfacebook = ({ linkfacebook }) => {
     return (

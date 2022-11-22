@@ -29,7 +29,6 @@ const Usersidebar = ({ data ,blogcount}) => {
                         <div className='text-[1.25rem] truncate'>{data.username}</div>
 
                         {
-                            
                             <Link href='/profile/EditProfile'>
                                 <Button className='h-[1.875rem] rounded-[10px] hover:bg-[#1C658C] bg-[#1C658C] text-white my-0 md:my-2'>
                                     แก้ไขโปรไฟล์
