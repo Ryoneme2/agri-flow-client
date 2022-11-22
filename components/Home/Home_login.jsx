@@ -18,7 +18,7 @@ import SubHomeLayout from '../Layouts/SubHomeLayout';
 
 import { homeContext } from '../../context/store';
 
-const LandingNonLogin = ({ children, tag }) => {
+const HomeLogin = ({ children, tag }) => {
   const { isLogin } = useContext(homeContext);
 
   return (
@@ -41,4 +41,4 @@ const LandingNonLogin = ({ children, tag }) => {
   );
 };
 
-export default LandingNonLogin;
+export default HomeLogin;

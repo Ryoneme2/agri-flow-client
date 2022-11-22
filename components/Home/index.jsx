@@ -11,6 +11,9 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 const LandingNonLogin = ({ contentLink }) => {
   const [token, setToken] = useState('');
   const [blogSuggest, setBlogSuggest] = useState([]);
+  const [blogFollow, setBlogFollow] = useState([]);
+  const [blogRecent, setBlogRecent] = useState([]);
+  const [communities, setCommunity] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tagSuggest, setTagSuggest] = useState([]);
   const tagNum = 5;
@@ -27,16 +30,41 @@ const LandingNonLogin = ({ contentLink }) => {
       const getData = async () => {
         setLoading(true);
         const res = axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}${contentLink}`
+          `${process.env.NEXT_PUBLIC_API_URL}${contentLink}?type=suggest`
         );
         console.log(res.data);
         const res2 = axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/api/v1/utilities/categories?limit=${tagNum}`
         );
+        const res3 = !localToken
+          ? []
+          : axios.get(
+              `${process.env.NEXT_PUBLIC_API_URL}${contentLink}?type=follow`,
+              {
+                headers: {
+                  Authorization: localToken,
+                },
+              }
+            );
+        const res4 = axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}${contentLink}?type=recent`
+        );
+        const res5 = axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/communities`
+        );
 
-        const [blog, tag] = await Promise.all([res, res2]);
+        const [blog, tag, follow, recent, community] = await Promise.all([
+          res,
+          res2,
+          res3,
+          res4,
+          res5,
+        ]);
         setTagSuggest(tag.data?.data || []);
         setBlogSuggest(blog.data?.data || []);
+        setBlogFollow(follow?.data?.data || []);
+        setBlogRecent(recent?.data?.data || []);
+        setCommunity(community?.data?.data || []);
         console.log('blog ', blogSuggest);
         setLoading(false);
       };
@@ -64,31 +92,13 @@ const LandingNonLogin = ({ contentLink }) => {
   });
   console.log(blogMore);
 
-  const scrollMore = (newBlog) => {
-    if (blogMore.items.length >= 15) {
-      setBlogMore((prev) => {
-        return {
-          ...prev,
-          hasMore: false,
-        };
-      });
-    }
-    setBlogMore((prev) => {
-      console.log('newblog : ', newBlog);
-      return {
-        ...prev,
-        items: blogMore.items.concat(newBlog),
-      };
-    });
-    console.log('blog', blogSuggest);
-  };
-
   return (
     <>
       <homeContext.Provider
         value={{
           tagSuggest,
           isLogin: !localStorage.getItem('access_token') ? false : true,
+          communities,
         }}
       >
         <Home_login
@@ -109,28 +119,6 @@ const LandingNonLogin = ({ contentLink }) => {
                 <LoadingBlog />
               </div>
             ) : (
-              // <InfiniteScroll
-              //   dataLength={blogMore.items.length} //This is important field to render the next data
-              //   next={() => scrollMore(blogSuggest)}
-              //   hasMore={blogMore.hasMore}
-              //   loader={
-              //     <div className="ml-2">
-              //       <LoadingBlog />
-              //     </div>
-              //   }
-              //   endMessage={
-              //     <p style={{ textAlign: 'center' }}>
-              //       <b>Yay! You have seen it all</b>
-              //     </p>
-              //   }
-              // >
-              //   {console.log('blog โว้ยย', blogSuggest)}
-              //   {console.log(blogMore.items.length)}
-              //   {blogMore.items.map((blog) => {
-              //     return <Blog blog={blog} key={blog.id} />;
-              //   })}
-              // </InfiniteScroll>
-
               blogSuggest.map((blog) => {
                 return <Blog blog={blog} key={blog.id} />;
               })
@@ -142,8 +130,8 @@ const LandingNonLogin = ({ contentLink }) => {
             <></>
           ) : (
             <>
-              <SuggestTopic Topic={'บทความที่คุณติดตาม'} />
-              <SuggestTopic Topic={'บทความน่าสนใจ'} />
+              <SuggestTopic Topic={'บทความที่คุณติดตาม'}></SuggestTopic>
+              <SuggestTopic Topic={'บทความน่าสนใจ'}></SuggestTopic>
             </>
           )}
         </Home_login>
