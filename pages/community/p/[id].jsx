@@ -34,7 +34,7 @@ const Commu = (data) => {
                 </Tabs.List>
 
                 <Tabs.Panel value="content" pt="xs">
-                  <CommunityBlog />
+                  <CommunityBlog id={id} />
                 </Tabs.Panel>
 
                 <Tabs.Panel value="question" pt="xs">

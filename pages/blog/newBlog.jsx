@@ -5,8 +5,7 @@ import { MultiSelect } from '@mantine/core';
 const RichTextEditor = dynamic(() => import('@mantine/rte'), { ssr: false });
 import { useRouter } from 'next/router';
 
-const NewBlog = ({ postPath = '/api/v1/blogs/p' }) => {
-  const router = useRouter();
+const NewBlog = ({ postPath = '' }) => {
   const [value, onChange] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [tag, setTag] = React.useState([]);
@@ -14,8 +13,8 @@ const NewBlog = ({ postPath = '/api/v1/blogs/p' }) => {
   const editorRef = useRef();
   const [loading, setLoading] = React.useState(false);
 
-  console.log(value);
-  console.log(categories);
+  const router = useRouter();
+  console.log(router.query);
 
   const people = useMemo(
     () => [
@@ -57,6 +56,9 @@ const NewBlog = ({ postPath = '/api/v1/blogs/p' }) => {
       setLoading(true);
       const host = process.env.NEXT_PUBLIC_API_URL;
       const token = localStorage.getItem('access_token');
+      const postPath = router.query.hasOwnProperty('to')
+        ? `/api/v1/blogs/c/${router.query.to}`
+        : '/api/v1/blogs/p';
       const res = await axios.post(
         `${host}${postPath}`,
         { title, categories, content: value },
