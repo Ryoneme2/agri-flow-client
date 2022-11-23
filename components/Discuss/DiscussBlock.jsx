@@ -6,6 +6,7 @@ import Header from './header';
 import axios from 'axios';
 
 const PostBlock = ({ postData }) => {
+  if(!postData)
   return (
     <>
       <div className="flex w-screen h-screen justify-center items-center">
@@ -13,6 +14,7 @@ const PostBlock = ({ postData }) => {
       </div>
     </>
   );
+  
 
   return (
     <div className="p-2">

@@ -24,9 +24,6 @@ const MyProflie = () => {
             const token = localStorage.getItem('access_token');
             const host = process.env.NEXT_PUBLIC_API_URL;
             const user = JSON.parse(localStorage.getItem('user'))
-          // const userdata = await axios.get(`${host}/api/v1/users/${user.username}`)
-          // const postdata = await axios.get(`${host}/api/v1/blogs/p/u/${user.username}`)
-          // const discussdata = await axios.get(`${host}/api/v1/discusses/post/u/${user.username}`)
 
             const [userdata, postdata, discussdata] = await Promise.all([axios.get(`${host}/api/v1/users/${username}`), axios.get(`${host}/api/v1/blogs/p/u/${username}`), axios.get(`${host}/api/v1/discusses/post/u/${username}`)])
 
@@ -35,10 +32,6 @@ const MyProflie = () => {
             setDatapost(postdata.data.data)
             setDiscuss(discussdata.data.data)
 
-            console.log(userdata.data.data);
-            console.log(postdata.data.data);
-            console.log(discussdata.data.data);
-
         } catch (e) {
             console.log(e);
         }
@@ -46,7 +39,14 @@ const MyProflie = () => {
         dataget();
     }, [username]);
 
-    if (!datauser || !datapost || !datadiscuss) return <div className=" loading"></div>
+    if (!datauser || !datapost || !datadiscuss) 
+    return (
+        <>
+          <div className="flex w-screen h-screen justify-center items-center">
+            <div className="loading"></div>
+          </div>
+        </>
+      );
 
     return (
         <>
