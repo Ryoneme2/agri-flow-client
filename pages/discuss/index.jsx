@@ -53,7 +53,7 @@ const Discuss = () => {
       <div className=''>
         <Navbarlogin />
       </div>
-      <div className='mt-2 w-full h-auto  px-2'>
+      <div className='mt-4 w-full h-auto  px-2'>
 
         <div className='flex'>
 

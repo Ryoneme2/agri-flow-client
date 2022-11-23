@@ -1,15 +1,13 @@
-import React from 'react'
+import React from 'react';
+import dynamic from 'next/dynamic';
+const Blog = dynamic(() => import('../components/Discuss/Discussminiblock'), { ssr: false });
 
-export default function test() {
+const Test = () => {
     return (
-        <>
-            <div class="sticky inset-x-0 top-0 left-0 bg-gray-400 py-5">Menu</div>
-            <div class="inset-x-0 top-0 left-0 bg-gray-500 py-5">Menu</div>
-            <div class="inset-x-0 top-0 left-0 bg-gray-600 py-5">Menu</div>
-            <div class="inset-x-0 top-0 left-0 bg-gray-700 py-5 h-screen">Menu</div>
-
-
-
-        </>
-    )
+        <div>
+            <Blog/>
+        </div>
+    );
 }
+
+export default Test;

@@ -4,14 +4,18 @@ import { Button } from '@mantine/core';
 import Line from '../contact/iconlinepopup';
 import Facebook from '../contact/iconfacebook';
 import Mail from '../contact/mail';
+import other from '../contact/othercontact';
+import Link from 'next/link';
 
-const Proflie = ({profliedata}) => {
+const Proflie = ({ profliedata }) => {
     return (
         <>
             <div className='w-full h-auto'>
                 <div className='flex flex-col'>
                     <div className='w-[100%]  flex justify-center items-center'>
-                        <Image src={profliedata.imageProfile} className='rounded-[100px] border border-[#1C658C]' width={75} height={75} />
+                        <Link href={`/profile/u/${profliedata.username}`}>
+                            <Image src={profliedata.imageProfile} alt="profileimage" className='rounded-[100px] border border-[#1C658C]' width={75} height={75} />
+                        </Link>
                     </div>
                     <div className='flex justify-between item-center'>
                         <div className='flex justify-center items-baseline '>
@@ -24,17 +28,21 @@ const Proflie = ({profliedata}) => {
                         </div>
                     </div>
                     <div className='w-full h-auto flex flex-col lg:flex-row justify-between lg:items-center  '>
-                        <div className='text-[1.25rem] truncate'>{profliedata.username}</div>
+                        <Link href={`/profile/u/${profliedata.username}`}>
+                            <div className='text-[1.25rem] truncate'>{profliedata.username}</div>
+                        </Link>
                         <Button className='h-[1.875rem] rounded-[10px] hover:bg-[#1C658C] bg-[#1C658C] text-white my-0 md:my-2'>ติดตาม</Button>
                     </div>
                     <div className='h-[6rem] border-b-2 mt-2'>
                         <textarea name="bio" id="bio" placeholder="เกี่ยวกับฉัน" className='w-full h-[5rem] resize-none overflow-y-auto focus:outline-none'></textarea>
                     </div>
                     <div className='flex justify-center content-center items-center mt-2'>
-                        <Facebook DataFacebook={profliedata.socialMedia.facebook}/>
+                        {/* <Facebook DataFacebook={profliedata.socialMedia.facebook}/>
                         <Line />
-                        {/* QrLine={profliedata.socialMedia.line} */}
-                        <Mail DataMail={profliedata.socialMedia.email}/>
+                        QrLine={profliedata.socialMedia.line}
+                        <Mail DataMail={profliedata.socialMedia.email}/> 
+                        <other data ={profliedata.socialMedia.other}/>
+                        */}
                     </div>
                 </div>
             </div>
