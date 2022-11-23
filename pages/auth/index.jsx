@@ -45,6 +45,11 @@ const Login_SSO = () => {
     },
   });
 
+  const lineLogin = () => {
+    window.location.href =
+      'https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1657675273&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fline&state=1234551324&scope=profile%20openid';
+  };
+
   if (Object.values(person).length <= 0)
     return (
       <BoxLogin>
@@ -56,6 +61,7 @@ const Login_SSO = () => {
           <LoginButton
             context={'ลงชื่อเข้าใช้ด้วย Line'}
             icon={'/icon/87386-line-logo.png'}
+            onClick={lineLogin}
           />
           <LoginButton
             onClick={() => login()}
