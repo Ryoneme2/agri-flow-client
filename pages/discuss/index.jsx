@@ -28,6 +28,7 @@ const Community = dynamic(
 
 const Discuss = () => {
   const [datapost, setDatapost] = React.useState([]);
+  const [datacommu, setDatacummu] = React.useState([]);
   const [token, setToken] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [hasChange, setHasChange] = React.useState(false);
@@ -39,8 +40,14 @@ const Discuss = () => {
     const postData = async () => {
       setLoading(true);
       const postGet = await axios.get(`${host}/api/v1/discusses/post?limit=100`,{ headers: { Authorization: usertoken, }, })
+      const communityGet = await axios.get(`${host}/api/v1/communities/`)
+      
       setDatapost(postGet.data.data)
+      setDatacummu(communityGet.data.data)
+      
       console.log(postGet.data.data);
+      console.log(communityGet.data.data)
+
       setLoading(false);
     }
     postData();
@@ -63,7 +70,7 @@ const Discuss = () => {
             </div>
             <div className='w-[80%] mx-auto mt-5 '>
               <div>
-                <p className='text-[1.375rem] text-[#1C658C] p-0 m-0'>บุคคลที่ติดตาม</p>
+                <p className='text-[1.375rem] text-[#1C658C] p-0 m-0'></p>
               </div>
             </div>
 
@@ -95,9 +102,14 @@ const Discuss = () => {
 
           <div className=' w-[0] invisible md:w-[25%] md:visible ml-1'>
             <div className='w-full h-auto text-[#1C658C] text-[1.375rem] ml-2'>ชุมชนแนะนำ</div>
-            <Community />
-            <Community />
-            <Community />
+            {
+                  datacommu.map((data, index) =>
+                    <div key={index}>
+                      <Community data={data}/>
+                    </div>
+                  )
+                }
+
           </div>
         </div>
       </div>

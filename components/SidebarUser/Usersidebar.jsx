@@ -1,17 +1,41 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Button } from '@mantine/core';
+import { Button, Avatar, Indicator } from '@mantine/core';
 import Link from 'next/link';
 
-const Usersidebar = ({ data ,blogcount}) => {
+const Usersidebar = ({ data, blogcount }) => {
+
+    const veri = () => {
+
+    }
 
     return (
         <>
             <div className='w-full h-auto'>
                 <div className='flex flex-col'>
                     <div className='w-[100%] flex justify-center items-center'>
-                        <Image src={data?.imageProfile || ''} alt='userimage' className='rounded-[100px] border border-[#1C658C]' width={75} height={75} />
+                        <div className=' w-[70px] h-[75px] overflow-visible'>
+                            {
+                                !data.isVerify ? <Avatar src={data?.imageProfile || ''} alt='userimage' className='w-full h-full rounded-full ' />
+                                :<Indicator dot inline size={27} offset={9} label={
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-school" 
+                                    width="14" height="14" viewBox="0 0 24 24" strokeWidth="2.5" stroke="#ffffff" fill="none" 
+                                    strokeLinecap="round" strokeLinejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" />
+                                    <path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" />
+                                  </svg>
+                                  }
+                                        position="bottom-end" withBorder className='overflow-visible'>
+                                        <Avatar src={data?.imageProfile || ''} alt='userimage' className='w-full h-full rounded-full ' />
+                                    </Indicator>
+
+
+                            }
+                            
+                        </div> 
+
                     </div>
                     <div className='flex justify-between item-center'>
                         <div className='flex justify-center items-baseline '>
