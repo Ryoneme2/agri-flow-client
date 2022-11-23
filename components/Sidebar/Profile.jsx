@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from '@mantine/core';
 import Line from '../contact/iconlinepopup';
@@ -6,8 +6,37 @@ import Facebook from '../contact/iconfacebook';
 import Mail from '../contact/mail';
 import other from '../contact/othercontact';
 import Link from 'next/link';
+import axios from 'axios';
 
 const Proflie = ({ profliedata }) => {
+    const [follower, setFollower] = React.useState(false);
+    const [token, setToken] = React.useState(false);
+
+    useEffect(() => {
+        setToken(localStorage.getItem('access_token') || '');
+    }, []);
+    const onClickFollow = async () => {
+        try {
+            const token = localStorage.getItem('access_token');
+            const post = await axios.post(
+                `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/follows`,
+                { username: profliedata.username },
+                {
+                    headers: { Authorization: token },
+                }
+            );
+
+            if (post.status !== 201) throw new Error('internal error');
+            console.log('follow success');
+        } catch (e) {
+            console.error(e);
+            console.log('follow failed!');
+            return;
+        }
+    };
+
+    const user = JSON.parse(localStorage.getItem('user'))
+
     return (
         <>
             <div className='w-full h-auto'>
@@ -31,7 +60,13 @@ const Proflie = ({ profliedata }) => {
                         <Link href={`/profile/u/${profliedata.username}`}>
                             <div className='text-[1.25rem] truncate'>{profliedata.username}</div>
                         </Link>
-                        <Button className='h-[1.875rem] rounded-[10px] hover:bg-[#1C658C] bg-[#1C658C] text-white my-0 md:my-2'>ติดตาม</Button>
+                        {
+                            user.username === profliedata.username ? <div></div> :
+                                <Button className='h-[1.875rem] rounded-[10px] hover:bg-[#1C658C] bg-[#1C658C] text-white my-0 md:my-2'
+                                    onClick={onClickFollow}>ติดตาม</Button>
+                        }
+
+
                     </div>
                     <div className='h-[6rem] border-b-2 mt-2'>
                         <textarea name="bio" id="bio" placeholder="เกี่ยวกับฉัน" className='w-full h-[5rem] resize-none overflow-y-auto focus:outline-none'></textarea>
