@@ -13,6 +13,7 @@ const Sidebar = ({ data, postid }) => {
   const [same, setSame] = React.useState([]);
 
 
+
   React.useEffect(() => {
     const host = process.env.NEXT_PUBLIC_API_URL;
     const comment = async () => {
