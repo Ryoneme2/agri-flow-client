@@ -39,7 +39,7 @@ const LandingNonLogin = ({ contentLink }) => {
         const res3 = !localToken
           ? []
           : axios.get(
-              `${process.env.NEXT_PUBLIC_API_URL}${contentLink}?type=follow`,
+              `${process.env.NEXT_PUBLIC_API_URL}${contentLink}?type=follow?limit=9`,
               {
                 headers: {
                   Authorization: localToken,
@@ -130,8 +130,28 @@ const LandingNonLogin = ({ contentLink }) => {
             <></>
           ) : (
             <>
-              <SuggestTopic Topic={'บทความที่คุณติดตาม'}></SuggestTopic>
-              <SuggestTopic Topic={'บทความน่าสนใจ'}></SuggestTopic>
+              <SuggestTopic Topic={'บทความที่คุณติดตาม'}>
+                {loading ? (
+                  <div className="ml-2">
+                    <LoadingBlog />
+                  </div>
+                ) : (
+                  blogFollow.map((blog) => {
+                    return <Blog blog={blog} key={blog.id} />;
+                  })
+                )}
+              </SuggestTopic>
+              <SuggestTopic Topic={'บทความน่าสนใจ'}>
+                {loading ? (
+                  <div className="ml-2">
+                    <LoadingBlog />
+                  </div>
+                ) : (
+                  blogRecent.map((blog) => {
+                    return <Blog blog={blog} key={blog.id} />;
+                  })
+                )}
+              </SuggestTopic>
             </>
           )}
         </Home_login>
