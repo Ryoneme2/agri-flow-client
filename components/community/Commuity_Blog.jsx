@@ -12,6 +12,7 @@ const CommunityBlog = ({ id, blogSuggest, groupMember }) => {
   const tagNum = 5;
   const router = useRouter();
 
+  if (!blogSuggest) return <></>;
   return (
     <>
       {groupMember ? (
