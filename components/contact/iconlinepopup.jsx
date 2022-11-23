@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Modal, Group } from '@mantine/core';
 import Image from 'next/image';
+import { CopyButton, Button } from '@mantine/core';
 
 function Iconlinepopup({ QrLine }) {
   const [opened, setOpened] = useState(false);

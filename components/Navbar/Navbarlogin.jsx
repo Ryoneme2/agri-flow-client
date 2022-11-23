@@ -20,10 +20,6 @@ const Navbarlogin = () => {
       to: '/',
     },
     {
-      name: 'บล็อก',
-      to: '/Blog',
-    },
-    {
       name: 'ถกเถียง',
       to: '/discuss',
     },

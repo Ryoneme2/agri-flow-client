@@ -96,7 +96,7 @@ const Disscuss = () => {
                             <div className='w-full h-full flex-col my-3'>
                                 <div className='w-full h-auto border-b-2 border-[#1C658C]'>
                                     <div className='w-full h-full p-3'>
-                                        <Header userdata={data.author} timepost={data.create_at} />
+                                        <Header userdata={data.author} timepost={data.create_at}  />
 
                                         {
                                             !data.post?.image ? <></>

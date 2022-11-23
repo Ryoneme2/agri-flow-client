@@ -6,14 +6,13 @@ import Header from './header';
 import axios from 'axios';
 
 const PostBlock = ({ postData }) => {
-  if (!postData)
-    return (
-      <>
-        <div className="flex w-screen h-screen justify-center items-center">
-          <div className="loading"></div>
-        </div>
-      </>
-    );
+  return (
+    <>
+      <div className="flex w-screen h-screen justify-center items-center">
+        <div className="loading"></div>
+      </div>
+    </>
+  );
 
   return (
     <div className="p-2">

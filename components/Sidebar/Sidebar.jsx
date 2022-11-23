@@ -10,20 +10,27 @@ export const SideBarStore = createContext();
 
 const Sidebar = ({ data, postid }) => {
   const [comment, setComment] = React.useState([]);
+  const [same, setSame] = React.useState([]);
+
 
   React.useEffect(() => {
     const host = process.env.NEXT_PUBLIC_API_URL;
     const comment = async () => {
-      const commentGet = await axios.get(
-        `${host}/api/v1/blogs/p/comments/${postid}`
-      );
+      // const commentGet = await axios.get(`${host}/api/v1/blogs/p/comments/${postid}`);
+
+
+      const [commentGet, sametagData] = await Promise.all([axios.get(`${host}/api/v1/blogs/p/comments/${postid}`),
+      axios.get(`${host}/api/v1/blogs/p/tag/${data.categories?.categoryId || 10}?limit=2`)])
+
+
       setComment(commentGet.data.data);
+      setSame(sametagData.data.data);
       console.log(commentGet.data.data);
+      console.log(sametagData.data.data);
     };
     comment();
   }, []);
 
-  console.log(comment);
 
   return (
     <>
@@ -39,8 +46,14 @@ const Sidebar = ({ data, postid }) => {
                 บทความที่คล้ายกัน
               </p>
             </div>
-            <div>
-              <MiniBlog />
+            <div className='h-auto'>
+              {
+                same.map((data,id)=> {
+                  return (<div key={id}>
+                    <MiniBlog  data={data}/>
+                  </div> )
+                })
+              }
             </div>
           </div>
           <div className="w-full h-auto">

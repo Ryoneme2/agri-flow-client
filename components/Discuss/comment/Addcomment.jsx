@@ -34,6 +34,8 @@ const Addcomment = ({ postid }) => {
         }
       })
 
+      setContentComment('');
+
       const res = await axios.post(
         `${host}/api/v1/discusses/comments`,
         {
@@ -44,6 +46,8 @@ const Addcomment = ({ postid }) => {
           headers: { Authorization: token },
         }
       );
+
+      
 
 
 
