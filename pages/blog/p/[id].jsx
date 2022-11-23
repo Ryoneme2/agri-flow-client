@@ -111,7 +111,7 @@ const BlogOne = () => {
                   {
                     'h-screen': !hasAccess,
                   }
-                )}
+                )}  
                 dangerouslySetInnerHTML={{
                   __html: data?.blogContent?.content,
                 }}

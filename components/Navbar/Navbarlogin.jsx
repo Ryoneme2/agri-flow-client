@@ -7,7 +7,7 @@ import Button from '../CreateBlogB.jsx';
 const Navbarlogin = () => {
   const [open, setOpen] = React.useState(false)
   const Toggle = () => open === true ? setOpen(false) : setOpen(true);
-  
+
 
   const handlerLogout = () => {
     localStorage.removeItem('access_token');
@@ -96,7 +96,7 @@ const Navbarlogin = () => {
 
 
         <div className="flex h-full w-auto md:w-[50%] ">
-          
+
           <div className="flex w-full justify-end">
             {/* search bar */}
             <div className=" w-[full] flex justify-end content-center items-center invisible md:visible px-2">
@@ -142,13 +142,15 @@ const Navbarlogin = () => {
 
             {/* profile */}
             <div className=" flex justify-start shrink-0  w-[5.4rem] ">
-              <Image
-                src={'/images/png/2-2.png'}
-                className="rounded-[100px] border border-[#1C658C] mx-3"
-                width={45}
-                height={45}
-                alt="profile avatar"
-              />
+              <Link href={`/profile/u/${user.username}`}>
+                <Image
+                  src={user.imageProfile}
+                  className="rounded-[100px] border border-[#1C658C] mx-3"
+                  width={45}
+                  height={45}
+                  alt="profile avatar"
+                />
+              </Link>
             </div>
           </div>
         </div>

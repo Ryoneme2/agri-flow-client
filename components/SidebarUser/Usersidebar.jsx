@@ -10,7 +10,7 @@ const Usersidebar = ({ data ,blogcount}) => {
         <>
             <div className='w-full h-auto'>
                 <div className='flex flex-col'>
-                    <div className='w-[100%]  flex justify-center items-center'>
+                    <div className='w-[100%] flex justify-center items-center'>
                         <Image src={data?.imageProfile || ''} alt='userimage' className='rounded-[100px] border border-[#1C658C]' width={75} height={75} />
                     </div>
                     <div className='flex justify-between item-center'>
@@ -23,9 +23,7 @@ const Usersidebar = ({ data ,blogcount}) => {
                             <p className='pl-2 text-[1rem] font-light truncate m-0 p-0'>ผู้ติดตาม</p>
                         </div>
                     </div>
-                    <div className='w-full h-auto flex flex-col lg:flex-row justify-between lg:items-center  '>
-
-
+                    <div className='w-full h-auto flex flex-row justify-between md:items-center  '>
                         <div className='text-[1.25rem] truncate'>{data.username}</div>
 
                         {
